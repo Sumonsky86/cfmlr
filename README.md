@@ -1,6 +1,6 @@
-# CeFEM – Clínica de Especialidades Médicas
+# CFM – 
 
-Este proyecto es el sitio web oficial de **CeFEM**, una clínica enfocada en la atención médica integral y la prevención en salud.  
+Este proyecto es el sitio web oficial de **CFM**.  
 El sitio está desarrollado con **[Astro](https://astro.build/)** y **[TailwindCSS](https://tailwindcss.com/)**, optimizado para velocidad, performance y escalabilidad.  
 
 Incluye:

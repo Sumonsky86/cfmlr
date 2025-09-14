@@ -18,17 +18,7 @@ export default defineConfig({
         '@utils': path.resolve('./src/utils'),
       }
     },
-    plugins: [tailwindcss()],
-    css: {
-      preprocessorOptions: {
-        css: {
-          additionalData: `@import "aos/dist/aos.css";`
-        }
-      }
-    },
-    optimizeDeps: {
-      include: ['aos']
-    }
+    plugins: [tailwindcss()]
   },
   markdown: {
     shikiConfig: {

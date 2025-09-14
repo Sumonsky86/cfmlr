@@ -6,7 +6,6 @@ import Features from '@components/sections/Features.astro';
 import Stats from '@components/sections/Stats.astro';
 import { featureLists } from '@data/features';
 import { statsLists } from '@data/stats';
-console.log(statsLists); // esto debe mostrar { main: {...} }
 import { logoLists } from '@data/logos';
 import CtaBanner from '@components/sections/CtaBanner.astro';
 import Faqs from '@components/sections/Faqs.astro';
@@ -110,7 +109,7 @@ const sideBySideStats = {
     description: "Más de 20 años brindando atención médica confiable y personalizada.",
     variant: 'side-by-side' as const,
     background: 'dark' as const,
-    stats: statsLists?.main?.stats ?? [],
+    stats: statsLists.main?.stats || [],
     content: {
         title: 'Confianza y Experiencia',
         description: 'Nuestro equipo médico está formado por especialistas altamente capacitados.',

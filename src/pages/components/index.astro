@@ -109,7 +109,7 @@ const sideBySideStats = {
     description: "Más de 20 años brindando atención médica confiable y personalizada.",
     variant: 'side-by-side' as const,
     background: 'dark' as const,
-    stats: statsLists.main.stats, // <-- cambio aquí
+    stats: statsLists?.main?.stats ?? [],
     content: {
         title: 'Confianza y Experiencia',
         description: 'Nuestro equipo médico está formado por especialistas altamente capacitados.',

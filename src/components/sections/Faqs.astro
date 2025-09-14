@@ -44,8 +44,8 @@ const textColor = getTextColor(background);
                         background={background} 
                     />
                 )}
-                {title && <h2 data-aos="fade-up" class:list={["text-3xl font-bold mb-4", headlineColor]}>{title}</h2>}
-                {description && <p data-aos="fade-up" class:list={["text-lg", textColor]}>{description}</p>}
+                {title && <h2 class:list={["text-3xl font-bold mb-4", headlineColor]}>{title}</h2>}
+                {description && <p class:list={["text-lg", textColor]}>{description}</p>}
             </div>
         )}
         
@@ -54,8 +54,6 @@ const textColor = getTextColor(background);
                 {faqs.map(({ question, answer }, index) => (
                   <Details
                     class="py-6"
-                    data-aos="fade-up"
-                    data-aos-delay={index * 100}
                   >
                       <span slot="heading" class="pr-8 text-xl font-semibold" class:list={[headlineColor]}>{question}</span>
                       <div class="overflow-hidden">

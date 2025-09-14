@@ -1,144 +1,101 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Hero from '@components/sections/Hero.astro';
-import SplitPanel from '@components/sections/SplitPanel.astro';
 import Features from '@components/sections/Features.astro';
-import Stats from '@components/sections/Stats.astro';
 import { featureLists } from '@data/features';
-import { statsLists } from '@data/stats';
-import Logos from '@components/sections/Logos.astro';
-import { logoLists } from '@data/logos';
 import CtaBanner from '@components/sections/CtaBanner.astro';
 import Faqs from '@components/sections/Faqs.astro';
 import { faqLists } from '@data/faqs';
 import RecentPosts from '@components/sections/RecentPosts.astro';
-import heroImage from '../assets/images/home/default-hero-2.jpg';
-import styleGuideImage from '../assets/images/home/developer.jpg';
+import ContactInfo from '@components/sections/ContactInfo.astro'; 
+import heroImage from '../assets/images/home/default-hero-2.png';
 
-const seoTitle = "Modern, High-Performance Astro Theme";
-const seoDescription = "A modern, high-performance Astro theme for developer portfolios and documentation sites.";
+const seo = {
+    title: "Centro Médico CeFEM | Las Rosas, Santa Fe",
+    description: "Centro Médico CeFEM en Boulevard Kemmis 843, Las Rosas. Pediatría, ginecología, obstetricia, traumatología, urología, ecografías doppler y nutrición.",
+    image: "/og-image.png" 
+}
 
 const heroContent = {
-    title: 'The Foundation for Beautiful Astro JS Websites',
-    description: 'Titan Core is a minimal, performance-focused Astro JS theme that serves as the perfect foundation for your next web project. Built with clean code and modern best practices, it\'s designed to be extended and customized to your specific needs.',
+    title: 'Centro familiar de especialidades médicas',
+    description: 'Atención confiable y cercana en Las Rosas desde el año 2000.',
+    imageAlt: "Sala de espera de la clínica CeFEM",
     buttons: [
         {
-            text: 'Get Started',
-            link: '/contact',
+            text: 'Nuestras Especialidades',
+            link: '/especialidades',
+            variant: 'primary' as const,
+            size: 'lg' as const,
             target: '_self'
-        },
-        {
-            text: 'View on GitHub',
-            link: 'https://github.com/rspisarski/titan-core',
-            target: '_blank'
         }
     ],
     backgroundImage: heroImage,
-    overlayOpacity: 0.2
+    overlayOpacity: 0.2,
+    highlightWord: 'especialidades' 
 }
 
 const featuresSection = {
-    eyebrow: "CORE FEATURES",
-    title: "Everything You Need, Nothing You Don't",
-    description: "Titan Core gives you a solid foundation with essential features while staying lightweight and customizable. Start with a clean slate and build exactly what you need without the bloat.",
+    id: "especialidades", 
+    eyebrow: "Servicios",
+    title: "Nuestras Especialidades",
+    description: "Contamos con un equipo de profesionales para brindarte una atención integral, coordinada y en un mismo lugar.",
     features: featureLists.main.features,
-    button: {
-        text: "View Theme Info",
-        link: "/theme-info",
-        variant: "primary" as const
-    }
 }
 
-const FooterCta = {
-    eyebrow: "Join The Community",
-    title: ' Start Building With Titan Core Today',
-    description: 'Titan Core is open-source and constantly improving. Join our community of developers to contribute, get support, or showcase what you\'ve built.',
-    hideCta: false,
-    button: {
-        text: 'Download Titan Core',
-        link: 'https://github.com/rspisarski/titan-core',
-        target: '_blank'
-    }
-}
-
-const styleGuideSection = {
-    eyebrow: "Design System",
-    headline: "Consistent & Beautiful Components",
-    description: "Titan Core comes with a complete style guide to ensure your projects maintain visual consistency. From typography to interactive elements, we've carefully crafted each component.",
-    image: {
-        src: styleGuideImage,
-        alt: "Featured image"
-    },
-    buttons: [
-        {
-            text: "Explore Style Guide",
-            link: "/style-guide",
-            variant: "primary" as const
-        }
-    ]
-}
-
-const sideBySideStats = {
-    eyebrow: "Stats",
-    title: "Built for Speed and Flexibility",
-    description: "Titan Core is designed with performance and developer experience in mind. Our lightweight theme gives you all the essentials without the bloat, letting you build exactly what you need with impressive speed.",
-    variant: 'side-by-side' as const,
-    stats: statsLists.withContent.stats,
-    content: {
-        title: "Built for Speed and Flexibility",
-        description: "Titan Core is designed with performance and developer experience in mind. Our lightweight theme gives you all the essentials without the bloat, letting you build exactly what you need with impressive speed.",
-        button: {
-            text: "Discover Titan Core",
-            link: "/theme-info",
-            variant: "primary" as const
-        }
-    }
-};
-
-const mainCta = {
-    eyebrow: "Build Blocks",
-    title: "Ready-to-Use Components",
-    description: "Save development time with our pre-built, accessible components. Each one is designed to integrate seamlessly with your projects while maintaining excellent performance.",
-    button: {
-        text: "View All Components",
-        link: "/components",
-        variant: "primary" as const,
-        target: "_self" as const
-    }
-};
-
-
-const logosSection = {
-    eyebrow: "Our Clients",
-    logos: logoLists.main.logos
+const contactSection = { 
+    eyebrow: "Contacto",
+    title: "Encontranos en Las Rosas",
+    description: "Nuestro centro está ubicado en el corazón de la ciudad. Aquí te esperamos para brindarte la mejor atención."
 }
 
 const faqsSection = {
-    eyebrow: "FAQs",
-    title: 'Frequently Asked Questions',
-    description: 'Find answers to common questions about our platform and services.',
+    eyebrow: "Preguntas Frecuentes",
+    title: 'Todo lo que necesitas saber',
+    description: 'Respondemos a las dudas más comunes sobre nuestros turnos, estudios y horarios de atención.',
     faqs: faqLists.main.faqs
 }
 
 const recentPostsSection = {
-    eyebrow: "LATEST INSIGHTS",
-    title: " Learn From Our Experience",
-    description: "Explore our latest articles on Astro JS development, theme customization tips, and web performance best practices.",
+    eyebrow: "Blog CeFEM",
+    title: "Novedades y Consejos de Salud",
+    description: "Artículos escritos por nuestros profesionales para mantenerte informado y cuidar tu bienestar.",
     button: {
-            text: "View All Posts",
-            link: "/blog",
+        text: "Ver todos los artículos",
+        link: "/blog",
         variant: "primary" as const
     }
 }
+
+const mainCta = {
+    title: "¿Necesitas un turno?",
+    description: "Estamos disponibles para responder tus consultas y ayudarte a gestionar tu próxima cita.",
+    button: {
+        text: "Contactanos por WhatsApp",
+        link: "https://wa.me/543471341461",
+        variant: "primary" as const,
+        target: "_blank" as const
+    }
+};
+
 ---
 
-<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
+    <Layout 
+    title={seo.title} 
+    description={seo.description} 
+    footerCta={{
+        title: "",
+        description: "",
+        hideCta: true,
+        button: {
+        text: "",
+        link: "#"
+        }
+    }}
+    >
     <Hero content={heroContent} />
-    <Features content={featuresSection} padding="base" background="light" />
-    <RecentPosts content={recentPostsSection} background="base" padding="base" postsToShow={3} category="Theme Usage"/>
-    <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="base" />
-    <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="base" />
-    <Logos content={logosSection} background="base" padding='small'/>
-    <Stats content={sideBySideStats} background='dark' padding="base"/>
+    <Features content={featuresSection} background="light" padding="base" />
+    <RecentPosts content={recentPostsSection} background="base" padding="base" postsToShow={3} />
+    <ContactInfo content={contactSection} background="light" padding="base" />
     <Faqs content={faqsSection} background="base" padding="base" />
+    <CtaBanner content={mainCta} variant="contained" background="light" paddingTop="base" paddingBottom="base" />
 </Layout>

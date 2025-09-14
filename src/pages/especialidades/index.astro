@@ -1,0 +1,38 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import Features from "@components/sections/Features.astro";
+import CtaBanner from "@components/sections/CtaBanner.astro";
+import { featureLists } from "@data/features";
+
+const heroContent = {
+    title: "Nuestras Especialidades",
+    description: "En CeFEM, hemos reunido a un equipo de profesionales en diversas áreas para brindarte un cuidado integral y coordinado sin que tengas que desplazarte.",
+    imageAlt: "Equipo médico de CeFEM", 
+    overlayOpacity: 0.2 
+}
+
+const featuresSection = {
+  
+    features: featureLists.main.features,
+}
+
+const mainCta = {
+    title: "Agenda tu consulta",
+    description: "Contactate con nosotros por WhatsApp para solicitar un turno con el especialista que necesites.",
+    button: {
+        text: "Escribinos por WhatsApp",
+        link: "https://wa.me/543471341461",
+        variant: "primary" as const,
+        target: "_blank" as const
+    }
+};
+---
+
+<Layout title="Especialidades Médicas | CeFEM" description="Conoce todas las especialidades y servicios que ofrecemos en CeFEM: Ginecología, Pediatría, Traumatología, Urología, Nutrición y Diagnóstico por Imágenes.">
+    <InnerHero content={heroContent} />
+    <div class="py-12 md:py-20">
+        <Features content={featuresSection} />
+    </div>
+    <CtaBanner content={mainCta} variant="contained" background="light" paddingTop="base" paddingBottom="base" />
+</Layout>

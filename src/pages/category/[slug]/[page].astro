@@ -5,26 +5,26 @@ import { categories } from '../../../data/categories';
 import { blogSetting } from '../../../data/config';
 
 export async function getStaticPaths() {
-    // Get all blog posts
+    
     const allPosts = await getCollection('blog', ({ data }) => {
         return import.meta.env.DEV || data.publish !== false;
     });
 
-    // Get categories that have at least one post
+    
     const activeCategories = categories.filter(category => 
         allPosts.some(post => post.data.categories?.includes(category.name))
     );
 
-    // Generate paths for each category and its pages
+     
     return activeCategories.flatMap((category) => {
-        // Get posts for this category
+    
         const categoryPosts = allPosts.filter(post => {
             const isPublished = import.meta.env.DEV || post.data.publish !== false;
             const hasCategory = post.data.categories?.includes(category.name);
             return isPublished && hasCategory;
         });
 
-        // Sort posts by date
+     
         const sortedPosts = categoryPosts.sort((a, b) => 
             b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
         );
@@ -32,9 +32,9 @@ export async function getStaticPaths() {
         const totalPosts = sortedPosts.length;
         const totalPages = Math.ceil(totalPosts / blogSetting.postsPerPage);
 
-        // Create paths for all pages except page 1 (which is handled by [...slug].astro)
+         
         return Array.from({ length: totalPages - 1 }, (_, i) => {
-            const page = i + 2; // Start from page 2
+            const page = i + 2;  
             const start = (page - 1) * blogSetting.postsPerPage;
             const end = start + blogSetting.postsPerPage;
             
@@ -56,7 +56,7 @@ export async function getStaticPaths() {
 
 const { category, page, totalPages, posts } = Astro.props;
 
-// Redirect page 1 to the main category page
+ 
 if (page === 1) {
     return Astro.redirect(`/category/${category.slug}`);
 }

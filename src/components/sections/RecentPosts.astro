@@ -27,7 +27,7 @@ export interface Props {
 
 const { content, background = 'base', postsToShow = 3, category } = Astro.props;
 
-// Get background and text colors
+  
 const bgColor = getBackgroundColor(background);
 const textColor = getTextColor(background);
 const paddingClass = getPaddingClass({
@@ -36,12 +36,12 @@ const paddingClass = getPaddingClass({
     paddingBottom: Astro.props.paddingBottom,
 });
 
-// Fetch posts
+  
 const allPosts = await getCollection('blog', ({ data }) => {
     return import.meta.env.DEV || data.publish !== false;
 });
 
-// Filter and sort posts
+  
 let filteredPosts = allPosts
     .filter((post) => !category || post.data.categories.includes(category))
     .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
@@ -55,17 +55,17 @@ let filteredPosts = allPosts
                 <div class="max-w-2xl mb-12">
                     {content?.eyebrow && <Eyebrow text={content.eyebrow} background={background} />}
                     {content?.title && (
-                        <h2 class:list={[textColor]} data-aos="fade-up">
+                        <h2 class:list={[textColor]}>
                             {content.title}
                         </h2>
                     )}
                     {content?.description && (
-                        <p class:list={['mt-4', textColor, 'opacity-90']} data-aos="fade-up" data-aos-delay="100">
+                        <p class:list={['mt-4', textColor, 'opacity-90']}>
                             {content.description}
                         </p>
                     )}
                     {content?.button && (
-                        <div class="mt-8" data-aos="fade-up" data-aos-delay="200">
+                        <div class="mt-8">
                             <Button href={content.button.link} variant={content.button.variant || 'primary'}>
                                 {content.button.text}
                             </Button>
@@ -78,7 +78,7 @@ let filteredPosts = allPosts
         <div class="posts-grid">
             {
                 filteredPosts.map((post, index) => (
-                    <div>
+                    <div class="animate-on-scroll">
                         <BlogPost
                             title={post.data.title}
                             excerpt={post.data.excerpt}

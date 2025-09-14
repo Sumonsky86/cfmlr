@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets';
-import logo from '../assets/astro.svg';
+import logo from '../assets/cefem.png';
 interface Props {
     variant?: 'header' | 'footer' | 'dark';
 }
 
 const { variant = 'header' } = Astro.props;
 
-// Determine the appropriate CSS class based on the variant
+  
 const getLogoClass = () => {
     switch (variant) {
         case 'header':
@@ -24,10 +24,8 @@ const getLogoClass = () => {
 
 <a href="/" class:list={['logo uppercase font-logo transition-colors duration-200 font-light', getLogoClass()]}>
     {
-        // If image is the only element in this link, its alt attribute should be a textual representation.
-        // Please, use something like your company name or “Home”, not “logo.”
-        // If there is link text, leave alt empty.
+
     }
-    <Image src={logo} alt="" class="hidden" />
-    <span class="font-bold">Titan</span> Core
+    <Image src={logo} alt="" class="inline-block w-auto" />CeFEM
+    
 </a>

@@ -13,23 +13,23 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-
-// Use SEO data from frontmatter if available, fallback to regular entry data
+ 
 const seoTitle = entry.data.seo?.title || entry.data.title;
 const seoDescription = entry.data.seo?.description || '';
 
-// Format the last updated date
+ 
 const formattedDate = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
 }).format(entry.data.lastUpdated);
 
-// Hero content
+ 
 const heroContent = {
     title: entry.data.title,
     description: '',
     overlayOpacity: 0.8,
+    imageAlt: entry.data.title || 'Hero image',  
 };
 ---
 

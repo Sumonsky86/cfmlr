@@ -4,21 +4,19 @@ import { blogSetting } from '../../data/config';
 import PaginatedBlogLayout from '../../components/blog/PaginatedBlogLayout.astro';
 export const prerender = true;
 
-// Get current page from URL, default to 1
+ 
 const currentPage = parseInt(Astro.url.searchParams.get('page') || '1');
 
-// Get all posts without any filtering
+ 
 const allPosts = await getCollection('blog');
 
-// Then apply filters if needed
+ 
 const filteredPosts = allPosts.filter((post) => {
     return import.meta.env.DEV || post.data.publish !== false;
 });
 
-// Sort posts by date
+ 
 const sortedPosts = filteredPosts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
-
-// Calculate pagination
 const totalPosts = sortedPosts.length;
 const totalPages = Math.ceil(totalPosts / blogSetting.postsPerPage);
 const start = (currentPage - 1) * blogSetting.postsPerPage;
@@ -32,5 +30,5 @@ const paginatedPosts = sortedPosts.slice(start, end);
     {totalPages}
     baseUrl="/blog"
     title="Blog"
-    subtitle="Latest articles and news from the team"
+    subtitle="Artículos, novedades y consejos de salud."
 />

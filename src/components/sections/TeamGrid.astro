@@ -17,7 +17,7 @@ const teamMembers = await getCollection('team', ({ data }) => {
     return data.publish !== false;
 });
 
-// Sort team members by order
+  
 const sortedTeamMembers = teamMembers.sort((a, b) => a.data.order - b.data.order);
 ---
 

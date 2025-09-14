@@ -21,6 +21,7 @@
         "astro": "^5.5.3",
         "lucide-astro": "^0.483.0",
         "prettier": "^3.5.3",
-        "prettier-plugin-astro": "^0.14.1"
+        "prettier-plugin-astro": "^0.14.1",
+        "tslib": "^2.8.1"
     }
 }

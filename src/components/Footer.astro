@@ -22,13 +22,13 @@ interface Props {
 const { footerCta } = Astro.props;
 
 const defaultCta = {
-  title: "Ready to get started?",
-  description: "Join us today and transform your digital presence with our innovative solutions.",
+  title: "¿Necesitás un turno médico?",
+  description: "Solicitá tu turno fácilmente por WhatsApp y recibí atención confiable en Boulevard Kemmis 843, Las Rosas.",
   hideCta: false,
   button: {
-    text: "Contact Us",
-    link: "/contact",
-    target: "_self"
+    text: "Escribinos por WhatsApp",
+    link: "https://wa.me/5493471341461",
+    target: "_blank"
   }
 };
 
@@ -57,29 +57,58 @@ const currentYear = new Date().getFullYear();
       </div>
     )}
 
+
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-background-light">
+
       <div class="col-span-1">
         <Logo variant="footer" />
         <p class="mt-4 text-white">
-          Empowering your digital journey with innovative solutions.
+          Centro Familiar de Especialidades Médicas.  
+          Atención en pediatría, traumatología, ginecología, obstetricia, urología, nutrición y ecografías en Las Rosas, Santa Fe.
         </p>
       </div>
-      
+
+
       <div class="col-span-1">
-        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-        <nav>
-          <ul class="space-y-2">
-            {footerMenu.map(item => (
-              <li><a href={item.link} class="text-body-dark hover:text-white transition-colors">{item.name}</a></li>
-            ))}
-          </ul>
-        </nav>
+        <h3 class="text-lg font-semibold mb-4">Especialidades</h3>
+        <ul class="space-y-2">
+          <li>Pediatría</li>
+          <li>Traumatología</li>
+          <li>Ginecología y Obstetricia</li>
+          <li>Urología</li>
+          <li>Nutrición</li>
+          <li>Ecografías</li>
+        </ul>
+      </div>
+
+
+      <div class="col-span-1">
+        <h3 class="text-lg font-semibold mb-4">Solicitá tu turno</h3>
+        <p class="text-white mb-4">
+          Recibí atención rápida y segura por WhatsApp. Ideal para coordinar turnos sin esperas.
+        </p>
+        <Button href="https://wa.me/549471341461" variant="ghostLight" size="md" target="_blank">
+          Escribinos por WhatsApp
+        </Button>
+      </div>
+
+
+      <div class="col-span-1">
+        <h3 class="text-lg font-semibold mb-4">Enlaces rápidos</h3>
+        <ul class="space-y-2">
+          {footerMenu.map(item => (
+            <li>
+              <a href={item.link} class="text-body-dark hover:text-white transition-colors">{item.name}</a>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
 
+
     <div class="mt-8 flex flex-col md:flex-row justify-between items-center">
       <div class="text-body-dark text-sm">
-        © {currentYear} {siteConfig.companyName}. All rights reserved.
+        © {currentYear} CeFEM Las Rosas. Todos los derechos reservados.
       </div>
       
       <nav class="mt-4 md:mt-0">

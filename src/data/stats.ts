@@ -24,45 +24,23 @@ export const statsLists: Record<string, StatsList> = {
         id: 'main',
         stats: [
             {
-                value: 10,
-                label: 'Theme Configurations',
+                value: 15,
+                label: 'Años de Experiencia',
+                prefix: '+',
             },
             {
-                value: 11,
-                label: 'Pre-Built Components',
+                value: 7,
+                label: 'Especialistas',
             },
             {
-                value: 48,
-                label: 'Team Members',
+                value: 5000,
+                label: 'Pacientes Atendidos',
+                prefix: '+',
             },
             {
-                value: 500000,
-                label: 'Lines of Code',
-                prefix: '+'
-            }
-        ]
-    },
-    withContent: {
-        id: 'withContent',
-        stats: [
-            {
-                value: 10,
-                label: 'Color Schemes',
-            },
-            {
-                value: 14.53,
-                label: 'Core Bundle Size',
-                suffix: 'KB'
-            },
-            {
-                value: 11,
-                label: 'Pre-Built Components',
-            },
-            {
-                value: 10,
-                label: 'Build Time',
-                prefix: '<100',
-                suffix: 's'
+                value: 98,
+                label: 'Satisfacción',
+                suffix: '%'
             }
         ]
     }

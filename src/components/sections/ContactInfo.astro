@@ -1,24 +1,24 @@
 ---
-import Contact from "@components/forms/Contact.astro"
 import { getBackgroundColor, getTextColor, getPaddingClass } from '@utils/styleUtils';
 import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
 import { siteConfig } from '@data/config';
 import { Mail, Phone, MapPin } from 'lucide-astro';
+import { Image } from 'astro:assets';
+
+  
+import mapImage from '../../assets/images/map.jpg';
+
 export interface Props {
     content?: {
         title?: string;
         description?: string;
-        contactInfo?: {
-            email?: string;
-            phone?: string;
-            address?: string;
-        };
     };
     background?: ThemeColor;
     padding?: PaddingSize;
     paddingTop?: PaddingSize;
     paddingBottom?: PaddingSize;
 }
+
 const {
     content,
     background = 'base',
@@ -31,27 +31,49 @@ const bgColor = getBackgroundColor(background);
 const textColor = getTextColor(background);
 const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
+const mapUrl = `https://www.google.com/maps/place/Cefem/@-32.4783728,-61.5730778,17z`;
 ---
 
-<section class:list={[bgColor, paddingClass]}>
-    <div class="site-container px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-                <h2 class:list={[textColor]}>Contact Information</h2>
-                <p class:list={[textColor]}>
-                    We're here to help you with your questions and concerns.
+<section class:list={[bgColor, paddingClass, "flex items-center py-12 md:py-20"]}>
+    <div class="site-container px-4 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Información de contacto -->
+            <div class="space-y-6">
+                <h2 class:list={[textColor, "text-4xl font-bold"]}>
+                    {content?.title || "Contacto y Ubicación"}
+                </h2>
+                <p class:list={[textColor, "text-lg"]}>
+                    {content?.description || "Estamos disponibles para responder tus consultas y ayudarte con tus turnos médicos."}
                 </p>
-                <p class:list={[textColor]}>
-                    You can contact us via email or phone.
-                </p>
-                <div class:list={["flex flex-col gap-2 mt-4", textColor]}>
-                    <div class:list={["flex items-center gap-2"]}><Mail aria-hidden="true" /> <a href={`mailto:${siteConfig.Socials.Email}`}>{siteConfig.Socials.Email}</a></div>
-                    <div class:list={["flex items-center gap-2"]}><Phone aria-hidden="true" /> <a href={`tel:${siteConfig.Socials.Phone}`}>{siteConfig.Socials.Phone}</a></div>
-                    <div class:list={["flex items-center gap-2"]}><MapPin aria-hidden="true" /> <a href={`https://maps.google.com/?q=${siteConfig.Socials.Location}`}>{siteConfig.Socials.Location}</a></div>
+                <div class:list={["flex flex-col gap-4 mt-4", textColor]}>
+                    <div class="flex items-center gap-3 text-lg">
+                        <Mail aria-hidden="true" class="w-6 h-6" /> 
+                        <a href={`mailto:${siteConfig.Socials.Email}`} class="underline hover:text-primary">{siteConfig.Socials.Email}</a>
+                    </div>
+                    <div class="flex items-center gap-3 text-lg">
+                        <Phone aria-hidden="true" class="w-6 h-6" /> 
+                        <a href={`tel:${siteConfig.Socials.Phone}`} class="underline hover:text-primary">{siteConfig.Socials.Phone}</a>
+                    </div>
+                    <div class="flex items-center gap-3 text-lg">
+                        <MapPin aria-hidden="true" class="w-6 h-6" /> 
+                        <a href={mapUrl} target="_blank" rel="noopener" class="underline hover:text-primary">
+                            {siteConfig.Socials.Location}
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div>
-                <Contact />
+
+            <!-- Mapa Estático Clickeable -->
+            <div class="w-full h-auto rounded-lg overflow-hidden shadow-lg">
+                <a href={mapUrl} target="_blank" rel="noopener noreferrer" aria-label="Ver ubicación en Google Maps">
+                    <Image 
+                        src={mapImage} 
+                        alt={`Mapa de la ubicación de ${siteConfig.companyName}`}
+                        format="webp"
+                        quality={80}
+                        class="hover:scale-105 transition-transform duration-300 w-full h-full object-cover"
+                    />
+                </a>
             </div>
         </div>
     </div>

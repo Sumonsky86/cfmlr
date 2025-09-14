@@ -1,12 +1,13 @@
-import { Zap, Shield, Heart, Coffee, Smile, Type, TabletSmartphone, CodeXml } from 'lucide-astro';
+import { Stethoscope, Users, Heart, Waves, Sparkles, Baby, Bone, Leaf, Droplets } from 'lucide-astro';
 
-// Define the LucideIcon type based on the structure of Lucide icons
-type LucideIcon = typeof Zap;
+
+type LucideIcon = typeof Stethoscope;
 
 export interface Feature {
     icon: LucideIcon;
     title: string;
     description: string;
+    isMain?: boolean; 
 }
 
 export interface FeatureList {
@@ -14,61 +15,58 @@ export interface FeatureList {
     features: Feature[];
 }
 
-// Example feature lists
 export const featureLists: Record<string, FeatureList> = {
     main: {
         id: 'main',
         features: [
             {
-                icon: Zap,
-                title: 'Lightning Fast Performance',
-                description: 'Optimized for speed and performance'
+                icon: Waves,
+                title: 'Ecografías',
+                description: 'Equipamiento de última generación para ecografías generales, obstétricas (5D), doppler y urológicas. Diagnósticos precisos y seguros.',
+                isMain: true,
             },
             {
-                icon: Shield,
-                title: 'SEO Optimized Structure',
-                description: 'Built with SEO best practices in mind'
+                icon: Bone,
+                title: 'Traumatología',
+                description: 'Atención de lesiones, fracturas y dolencias del sistema locomotor. Tratamientos para recuperar tu movilidad y bienestar.',
+                isMain: true,
             },
             {
-                icon: TabletSmartphone,
-                title: 'Responsive by Default',
-                description: 'Mobile-friendly out of the box'
+                icon: Baby,
+                title: 'Pediatría',
+                description: 'Cuidado integral de la salud de los más pequeños, desde el nacimiento hasta la adolescencia. Controles y seguimiento.',
+                isMain: true,
             },
             {
-                icon: Smile,
-                title: 'Easy Customization',
-                description: 'Customize the theme to your liking'
+                icon: Droplets,
+                title: 'Urología',
+                description: 'Diagnóstico y tratamiento de enfermedades del sistema urinario y del aparato reproductor masculino. Cuidado especializado.',
+                isMain: true,
             },
-            {
-                icon: Type,
-                title: 'TypeScript Support',
-                description: 'Built with TypeScript in mind'
-            },
-            {
-                icon: CodeXml,
-                title: 'Minimal Dependencies',
-                description: 'Keep your project lightweight'
-            }
-        ]
-    },
-    secondary: {
-        id: 'secondary',
-        features: [
             {
                 icon: Heart,
-                title: 'Made with Love',
-                description: 'Crafted with attention to detail'
+                title: 'Ginecología y Obstetricia',
+                description: 'Acompañamiento en todas las etapas de la vida de la mujer, controles anuales, seguimiento de embarazo y planificación familiar.',
+                isMain: true,
             },
             {
-                icon: Coffee,
-                title: 'Always Fresh',
-                description: 'Regular updates and improvements'
+                icon: Leaf,
+                title: 'Nutrición',
+                description: 'Planes de alimentación personalizados para mejorar hábitos, controlar peso y como soporte en diversas patologías.',
+                isMain: false,
             },
             {
-                icon: Smile,
-                title: 'User Friendly',
-                description: 'Intuitive and easy to use'
-            }
+                icon: Stethoscope,
+                title: 'Clínica Médica',
+                description: 'Atención primaria, diagnóstico y tratamiento de patologías comunes en adultos. Tu médico de cabecera de confianza.',
+                isMain: false,
+            },
+            {
+                icon: Sparkles,
+                title: 'Depilación Definitiva',
+                description: 'Servicio de depilación con tecnología de vanguardia para resultados duraderos, seguros y efectivos.',
+                isMain: false,
+            },
         ]
     }
 };

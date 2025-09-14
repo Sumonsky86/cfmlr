@@ -5,10 +5,10 @@ import InnerHero from '../../components/sections/InnerHero.astro';
 
 const legalEntries = await getCollection('legal');
 
-// Sort entries by title
+ 
 const sortedEntries = legalEntries.sort((a, b) => a.data.title.localeCompare(b.data.title));
 
-// Hero content
+ 
 const heroContent = {
     title: 'Legal Information',
     description: 'Important policies and terms governing the use of our services',
@@ -24,7 +24,7 @@ const heroContent = {
             <div class="space-y-6">
                 {
                     sortedEntries.map((entry) => {
-                        // Format the last updated date
+         
                         const formattedDate = new Intl.DateTimeFormat('en-US', {
                             year: 'numeric',
                             month: 'long',

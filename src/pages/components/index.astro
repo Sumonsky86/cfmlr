@@ -6,7 +6,6 @@ import Features from '@components/sections/Features.astro';
 import Stats from '@components/sections/Stats.astro';
 import { featureLists } from '@data/features';
 import { statsLists } from '@data/stats';
-import Logos from '@components/sections/Logos.astro';
 import { logoLists } from '@data/logos';
 import CtaBanner from '@components/sections/CtaBanner.astro';
 import Faqs from '@components/sections/Faqs.astro';
@@ -15,162 +14,157 @@ import RecentPosts from '@components/sections/RecentPosts.astro';
 import InnerHero from '@components/sections/InnerHero.astro';
 import TeamGrid from '@components/sections/TeamGrid.astro';
 import defaultHero from '@assets/images/home/default-hero.jpg';
-import defaultHero2 from '@assets/images/home/default-hero-2.jpg';
+import defaultHero2 from '@assets/images/home/default-hero-2.png';
 import developerImg from '@assets/images/home/developer.jpg';
 
-const seoTitle = "Component Library - Titan Core";
-const seoDescription = "Explore the complete component library of Titan Core, a modern, high-performance Astro theme for developer portfolios and documentation sites.";
+const seoTitle = "CeFEM Las Rosas - Centro Médico Familiar";
+const seoDescription = "Centro de Especialidades Médicas en Las Rosas, Santa Fe. Atención en pediatría, traumatología, ginecología, obstetricia, urología, nutrición y ecografías.";
 
-// Define the component sections for the navigation
+ 
 const componentSections = [
     { id: 'hero', name: 'Hero', icon: 'layout' },
     { id: 'innerHero', name: 'Inner Hero', icon: 'layout-template' },
-    { id: 'features', name: 'Features', icon: 'package' },
-    { id: 'recentPosts', name: 'Recent Posts', icon: 'file-text' },
-    { id: 'splitPanel', name: 'Split Panel', icon: 'columns' },
-    { id: 'ctaBanner', name: 'CTA Banner', icon: 'megaphone' },
-    { id: 'logos', name: 'Logos', icon: 'briefcase' },
-    { id: 'stats', name: 'Stats', icon: 'bar-chart' },
-    { id: 'faqs', name: 'FAQs', icon: 'help-circle' },
-    { id: 'teamGrid', name: 'Team Grid', icon: 'users' }
+    { id: 'features', name: 'Especialidades', icon: 'package' },
+    { id: 'recentPosts', name: 'Blog', icon: 'file-text' },
+    { id: 'splitPanel', name: 'Información', icon: 'columns' },
+    { id: 'ctaBanner', name: 'Turnos', icon: 'megaphone' },
+    { id: 'logos', name: 'Credenciales', icon: 'briefcase' },
+    { id: 'stats', name: 'Números', icon: 'bar-chart' },
+    { id: 'faqs', name: 'Preguntas', icon: 'help-circle' },
+    { id: 'teamGrid', name: 'Equipo', icon: 'users' }
 ];
 
-// Hero Component Content
+ 
 const heroContent = {
-    title: 'Create Stunning Hero Sections',
-    description: 'The Hero component is perfect for creating impactful first impressions. It supports background images, overlay opacity control, and multiple call-to-action buttons to drive user engagement.',
+    title: 'Bienvenido a CeFEM Las Rosas',
+    description: 'Solicitá tu turno fácilmente por WhatsApp y recibí atención médica confiable en Boulevard Kemmis 843, Las Rosas, Santa Fe.',
     buttons: [
         {
-            text: 'Primary Action',
-            link: '/contact',
-            target: '_self'
-        },
-        {
-            text: 'Secondary Action',
-            link: 'https://github.com/titan-studio-themes/titan-core',
-            target: '_blank'
+            text: 'Solicitar Turno',
+            link: 'https://wa.me/5493471341461',
+            target: '_blank',
+            imageAlt: 'WhatsApp'
         }
     ],
     backgroundImage: defaultHero2,
-    overlayOpacity: 0.2
-}
+    overlayOpacity: 0.2,
+    imageAlt: 'Imagen de fondo de CeFEM Las Rosas'
+};
 
-// Inner Hero Component Content
+ 
 const innerHeroContent = {
-    title: 'Inner Hero for Secondary Pages',
-    description: 'A more compact hero component designed specifically for inner pages, providing consistent branding while taking up less vertical space.',
+    title: 'CeFEM Las Rosas',
+    description: 'Atención médica especializada en pediatría, traumatología, ginecología, obstetricia, urología, nutrición y ecografías.',
     backgroundImage: defaultHero,
-    overlayOpacity: 0.5
-}
+    overlayOpacity: 0.5,
+    imageAlt: 'Imagen de fondo de CeFEM Las Rosas'
+};
 
-// Features Component Content
+ 
 const featuresSection = {
-    eyebrow: "COMPONENT FEATURES",
-    title: "Showcase Product Features & Benefits",
-    description: "The Features component is ideal for highlighting key features, benefits, or services in a visually appealing grid layout with icons and descriptions.",
-    features: featureLists.main.features,
+    eyebrow: "NUESTRAS ESPECIALIDADES",
+    title: "Atención Médica Integral",
+    description: "Brindamos servicios en pediatría, traumatología, ginecología, obstetricia, urología, nutrición y ecografías.",
+    features: featureLists.main.features,  
     button: {
-        text: "View All Features",
-        link: "/features",
+        text: "Ver Todas las Especialidades",
+        link: "/especialidades",
         variant: "primary" as const
     }
-}
+};
 
-// Footer CTA Content
+ 
 const FooterCta = {
-    eyebrow: "GET STARTED TODAY",
-    title: 'Start Building With Titan Core',
-    description: 'Titan Core is open-source and constantly improving. Join our community of developers to contribute, get support, or showcase what you\'ve built.',
+    eyebrow: "SOLICITÁ TU TURNO",
+    title: 'Turnos rápidos y confiables',
+    description: 'Completá tu solicitud de turno por WhatsApp y coordiná tu visita al Centro Médico.',
     hideCta: false,
     button: {
-        text: 'Download Titan Core',
-        link: 'https://github.com/titan-studio-themes/titan-core',
+        text: 'Escribinos por WhatsApp',
+        link: 'https://wa.me/5493471341461',
         target: '_blank'
     }
-}
+};
 
-// Split Panel Component Content
+ 
 const styleGuideSection = {
-    eyebrow: "FLEXIBLE LAYOUTS",
-    headline: "Text & Image Combinations",
-    description: "The SplitPanel component allows you to create beautiful side-by-side layouts with text on one side and images on the other. Perfect for product showcases, about sections, or feature highlights.",
+    eyebrow: "INFORMACIÓN DEL CENTRO",
+    headline: "Conocé más sobre CeFEM Las Rosas",
+    description: "Contamos con infraestructura moderna y profesionales especializados para brindar la mejor atención médica a nuestra comunidad.",
     image: {
         src: developerImg,
-        alt: "Developer working on code"
+        alt: "Equipo médico trabajando"
     },
     buttons: [
         {
-            text: "Learn More",
-            link: "/split-panel",
+            text: "Conocé el Centro",
+            link: "/centro",
             variant: "primary" as const
         }
     ]
-}
+};
 
-// Stats Component Content
+ 
 const sideBySideStats = {
-    eyebrow: "IMPRESSIVE NUMBERS",
-    title: "Showcase Key Metrics & Achievements",
-    description: "The Stats component helps you highlight important metrics, achievements, or growth numbers in a visually compelling way that draws attention to your success.",
+    eyebrow: "NUESTROS NÚMEROS",
+    title: "Pacientes y Experiencia",
+    description: "Más de 20 años brindando atención médica confiable y personalizada.",
     variant: 'side-by-side' as const,
     background: 'dark' as const,
     stats: statsLists.withContent.stats,
     content: {
-        title: 'Performance Metrics',
-        description: 'Titan Core is designed for speed and efficiency. Our lightweight framework ensures fast load times and smooth user experiences.',
+        title: 'Confianza y Experiencia',
+        description: 'Nuestro equipo médico está formado por especialistas altamente capacitados.',
         button: {
-            text: 'Learn More',
-            link: '/performance',
+            text: 'Conocé al equipo',
+            link: '/equipo',
             variant: 'primary' as const
         }
     }
-}
-
-// CTA Banner Component Content
+};
+ 
 const mainCta = {
-    eyebrow: "CALL TO ACTION",
-    title: "Drive User Engagement",
-    description: "The CTA Banner component is designed to convert visitors into customers with compelling headlines, persuasive copy, and prominent call-to-action buttons.",
+    eyebrow: "RESERVÁ TU TURNO",
+    title: "Coordiná tu visita en minutos",
+    description: "Nuestro sistema vía WhatsApp te permite solicitar tu turno de manera rápida y segura.",
     button: {
-        text: "Take Action Now",
-        link: "/contact",
+        text: "Solicitar Turno",
+        link: "https://wa.me/5493471341461",
         variant: "primary" as const,
-        target: "_self" as const
+        target: "_blank" as const
     }
 };
-
-// Logos Component Content
+ 
 const logosSection = {
-    eyebrow: "SOCIAL PROOF",
-    headline: "Build Trust With Brand Logos",
-    subheadline: "The Logos component displays partner or client logos to build credibility and trust with your visitors.",
+    eyebrow: "CONFIANZA",
+    headline: "Instituciones y acreditaciones",
+    subheadline: "Nos respaldan socios y acreditaciones que garantizan calidad en la atención.",
     logos: logoLists.main.logos
-}
+};
 
-// FAQs Component Content
+ 
 const faqsSection = {
-    eyebrow: "COMMON QUESTIONS",
-    title: 'Answer Customer Questions',
-    description: 'The FAQs component helps address common questions and concerns, reducing support inquiries while building trust and confidence in your product or service.',
+    eyebrow: "PREGUNTAS FRECUENTES",
+    title: 'Consultas Comunes',
+    description: 'Respondemos las dudas más frecuentes sobre nuestros servicios y turnos.',
     faqs: faqLists.main.faqs
-}
+};
 
-// Recent Posts Component Content
+ 
 const recentPostsSection = {
-    eyebrow: "CONTENT MARKETING",
-    title: "Showcase Your Latest Content",
-    description: "The RecentPosts component automatically displays your latest blog posts or articles, helping drive traffic to your content and keeping your site fresh and engaging.",
+    eyebrow: "BLOG",
+    title: "Últimas publicaciones",
+    description: "Mantente informado sobre salud, tips y novedades de CeFEM Las Rosas.",
     button: {
-        text: "View All Posts",
+        text: "Ver Todas las Publicaciones",
         link: "/blog",
         variant: "primary" as const
     }
-}
+};
 
 ---
 
 <Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
-    <!-- Floating Side Navigation -->
     <div class="fixed left-4 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
         <div class="bg-white rounded-lg shadow-xl p-3 w-52">
             <div class="flex items-center mb-3 pb-2 border-b">
@@ -255,7 +249,6 @@ const recentPostsSection = {
             <div class="component-label hidden absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-primary text-white py-1 px-3 rounded-md text-xs font-medium z-10 shadow-md">
                 Logos Component
             </div>
-            <Logos content={logosSection} background="base" padding='base'/>
         </div>
     </section>
     
@@ -288,51 +281,51 @@ const recentPostsSection = {
 </Layout>
 
 <script>
-    // Wait for the document to be fully loaded
+    
     document.addEventListener('DOMContentLoaded', () => {
-        // Get all section elements
+         
         const sections = document.querySelectorAll('.component-section');
         const navLinks = document.querySelectorAll('.component-nav-link');
         const componentWrappers = document.querySelectorAll('.component-wrapper');
         const componentLabels = document.querySelectorAll('.component-label');
         
-        // Initialize Lucide icons
+   
         // @ts-ignore - Lucide is loaded globally but TypeScript doesn't know about it
         if (typeof window.lucide !== 'undefined') {
             // @ts-ignore
             window.lucide.createIcons();
         }
         
-        // Function to update active navigation link and component
+ 
         const updateActiveLink = () => {
-            // Get current scroll position
+ 
             const scrollPosition = window.scrollY;
             
-            // Find the current section
+   
             sections.forEach((section, index) => {
                 const sectionTop = section.getBoundingClientRect().top + window.scrollY;
                 const sectionHeight = section.getBoundingClientRect().height;
                 const sectionId = section.getAttribute('id');
                 
                 if (sectionId && scrollPosition >= sectionTop - 200 && scrollPosition < sectionTop + sectionHeight - 200) {
-                    // Remove active class from all links
+ 
                     navLinks.forEach(link => {
                         link.classList.remove('bg-primary', 'text-white');
                     });
                     
-                    // Reset all component wrappers
+             
                     componentWrappers.forEach((wrapper, i) => {
                         wrapper.classList.remove('border-4', 'border-primary', 'shadow-lg', 'bg-white');
                         componentLabels[i].classList.add('hidden');
                     });
                     
-                    // Add active class to current section link
+             
                     const activeLink = document.querySelector(`.component-nav-link[data-section="${sectionId}"]`);
                     if (activeLink) {
                         activeLink.classList.add('bg-primary', 'text-white');
                     }
                     
-                    // Highlight active component
+                
                     const activeWrapper = componentWrappers[index];
                     const activeLabel = componentLabels[index];
                     if (activeWrapper) {
@@ -343,13 +336,13 @@ const recentPostsSection = {
             });
         };
         
-        // Add scroll event listener
+     
         window.addEventListener('scroll', updateActiveLink);
         
-        // Initial call to set active link on page load
+       
         updateActiveLink();
         
-        // Add smooth scrolling for navigation links
+        
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();

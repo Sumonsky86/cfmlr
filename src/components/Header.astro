@@ -1,18 +1,23 @@
 ---
 import { headerMenu } from '@data/menu';
+import { siteConfig } from '@data/config';
 import Logo from '@components/Logo.astro';
-import { Menu, X, ChevronDown } from 'lucide-astro';
+import { Menu, X, Phone, MapPin, MessageSquare } from 'lucide-astro';
 import Button from '@components/ui/Button.astro';
 
-const ctaButton = {
-    name: 'Contact Us',
+  
+const misEstudiosButton = {
+    name: "Mis Estudios",
+    link: "#",   
+};
+
+const contactButton = {
+    name: "Contacto",
     link: '/contact',
 };
 
-// Get the current path to determine active menu item
 const currentPath = Astro.url.pathname;
 
-// Function to check if a link is the current page or a parent of the current page
 const isCurrentPage = (link: string) => {
     if (link === '/') {
         return currentPath === '/';
@@ -21,298 +26,111 @@ const isCurrentPage = (link: string) => {
 };
 ---
 
-<header class="fixed top-0 z-50 w-full left-0">
-    <div class="site-container mx-auto px-4 mt-4">
-        <div class="flex justify-between items-center bg-white py-4 rounded-lg px-4 border-black border">
-            <Logo />
-            <nav class="relative flex items-center gap-2 lg:gap-8" aria-label="Site Navigation">
-                {/* Desktop Menu */}
-                <ul class="hidden lg:flex lg:gap-8 items-center">
-                    {
-                        headerMenu.map((item, index) => (
-                            <li class="relative group">
-                                <div class="flex items-center gap-1">
+<div class="fixed top-0 left-0 w-full z-50">
+     
+    <div class="hidden md:block bg-gray-100 text-gray-800 py-1 text-xs">
+        <div class="site-container mx-auto px-4 flex justify-end items-center gap-4">
+            <div class="flex items-center gap-2">
+                <MapPin size={14} />
+                <span>{siteConfig.Socials.Location}</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href={`https://wa.me/${siteConfig.Socials.Phone}`} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-primary">
+                    <MessageSquare size={14} />
+                    <span>{siteConfig.Socials.Phone} (WhatsApp)</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href={`tel:+54${siteConfig.Socials.Phone2}`} class="flex items-center gap-1 hover:text-primary">
+                    <Phone size={14} />
+                    <span>{siteConfig.Socials.Phone2} (Llamadas)</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <header class="relative w-full">
+        <div class="site-container mx-auto px-4 md:mt-2">
+            <div class="flex justify-between items-center bg-white py-3 px-4 rounded-lg border-gray-200 border shadow-md">
+                <Logo />
+                <nav class="relative flex items-center gap-2 lg:gap-4" aria-label="Site Navigation">
+                    {/* Menú de Escritorio */}
+                    <ul class="hidden lg:flex lg:gap-4 items-center">
+                        {
+                            headerMenu.map((item) => (
+                                <li>
                                     <a
                                         href={item.link}
                                         class:list={[
-                                            'text-small font-medium rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-nav-text-active',
+                                            'text-sm font-medium rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary',
                                             isCurrentPage(item.link)
-                                                ? 'text-nav-text-current font-semibold'
-                                                : 'text-nav-text hover:text-nav-text-hover',
+                                                ? 'text-primary font-semibold'
+                                                : 'text-gray-700 hover:text-primary',
                                         ]}
                                         aria-current={isCurrentPage(item.link) ? 'page' : undefined}
                                     >
                                         {item.name}
-                                        {item.children && item.showArrow && (
-                                            <ChevronDown
-                                                size={16}
-                                                class="transform transition-transform inline-block ml-1"
-                                                aria-hidden="true"
-                                            />
-                                        )}
                                     </a>
-                                    {item.children && (
-                                        <button
-                                            type="button"
-                                            class="sr-only"
-                                            aria-expanded="false"
-                                            aria-label={item.name}
-                                        />
-                                    )}
-                                </div>
-                                {item.children && (
-                                    <ul
-                                        class:list={[
-                                            'submenu absolute mt-2 bg-nav-submenu-bg border-black border rounded-md min-w-[200px] transition-all duration-200 opacity-0 invisible overflow-hidden z-50',
-                                            index === headerMenu.length - 1 ? 'right-0' : 'left-0',
-                                        ]}
-                                    >
-                                        {item.children.map((child) => (
-                                            <li>
-                                                <a
-                                                    href={child.link}
-                                                    class:list={[
-                                                        'block px-4 text-small py-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nav-text-active',
-                                                        isCurrentPage(child.link)
-                                                            ? 'text-nav-text-current font-semibold'
-                                                            : 'text-nav-text hover:text-nav-text-hover',
-                                                    ]}
-                                                    aria-current={isCurrentPage(child.link) ? 'page' : undefined}
-                                                >
-                                                    {child.name}
-                                                </a>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </li>
-                        ))
-                    }
-                </ul>
-
-                <Button href={ctaButton.link} variant="primary">{ctaButton.name}</Button>
-
-                {/* Mobile Menu Button */}
-                <button
-                    class="mobile-menu-button relative z-30 p-2 border-none cursor-pointer bg-transparent lg:hidden"
-                    aria-label="Toggle Menu"
-                    aria-expanded="false"
-                >
-                    <span class="menu-icon block">
-                        <Menu size={24} class="text-body-base" />
-                    </span>
-                    <span class="close-icon hidden">
-                        <X size={24} class="text-white" />
-                    </span>
-                </button>
-
-                {/* Mobile Menu Panel */}
-                <div
-                    class="mobile-menu fixed inset-0 z-20 px-8 pt-20 bg-primary lg:hidden hidden opacity-0 scale-95 transform transition-all duration-200 ease-out overflow-y-auto"
-                >
-                    <ul class="flex flex-col gap-4">
-                        {
-                            headerMenu.map((item) => (
-                                <li>
-                                    <div class="text-white">
-                                        <div class="flex items-center justify-between">
-                                            <a
-                                                href={item.link}
-                                                class:list={[
-                                                    'py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-nav-mobile-text-active',
-                                                    isCurrentPage(item.link)
-                                                        ? 'text-nav-mobile-text-current font-semibold'
-                                                        : 'text-nav-mobile-text hover:text-nav-mobile-text-hover',
-                                                ]}
-                                                aria-current={isCurrentPage(item.link) ? 'page' : undefined}
-                                            >
-                                                {item.name}
-                                            </a>
-                                            {item.children && (
-                                                <button
-                                                    class:list={[
-                                                        'mobile-submenu-button p-2 -mr-2 rounded-md focus:outline-none focus:ring-2 focus:ring-nav-mobile-text-active',
-                                                        isCurrentPage(item.link)
-                                                            ? 'text-nav-mobile-text-current'
-                                                            : 'text-nav-mobile-text hover:text-nav-mobile-text-hover',
-                                                    ]}
-                                                    aria-label={`Toggle ${item.name} submenu`}
-                                                    aria-expanded="false"
-                                                >
-                                                    <ChevronDown
-                                                        size={16}
-                                                        class="transform transition-transform duration-200"
-                                                    />
-                                                </button>
-                                            )}
-                                        </div>
-                                        {item.children && (
-                                            <ul class="mobile-submenu ml-4 mt-2 space-y-2 hidden" role="menu">
-                                                {item.children.map((child) => (
-                                                    <li role="none">
-                                                        <a
-                                                            href={child.link}
-                                                            class:list={[
-                                                                'block py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-nav-mobile-text-active',
-                                                                isCurrentPage(child.link)
-                                                                    ? 'text-nav-mobile-text-current font-semibold'
-                                                                    : 'text-nav-mobile-text hover:text-nav-mobile-text-hover',
-                                                            ]}
-                                                            role="menuitem"
-                                                            aria-current={
-                                                                isCurrentPage(child.link) ? 'page' : undefined
-                                                            }
-                                                        >
-                                                            {child.name}
-                                                        </a>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </div>
                                 </li>
                             ))
                         }
                     </ul>
 
-                    {/* Updated mobile CTA button styling */}
-                    <div class="mt-8 pb-8">
-                        <Button href={ctaButton.link} variant="ghostLight">{ctaButton.name} </Button>
+                    <div class="hidden lg:flex items-center gap-2">
+                        <Button href={misEstudiosButton.link} variant="secondary" size="sm">{misEstudiosButton.name}</Button>
+                        <Button href={contactButton.link} variant="primary" size="sm">{contactButton.name}</Button>
                     </div>
-                </div>
-            </nav>
+
+                    {/* Botón Menú Móvil */}
+                    <button
+                        class="mobile-menu-button relative z-30 p-2 border-none cursor-pointer bg-transparent lg:hidden"
+                        aria-label="Toggle Menu"
+                        aria-expanded="false"
+                    >
+                        <span class="menu-icon block">
+                            <Menu size={24} class="text-body-base" />
+                        </span>
+                        <span class="close-icon hidden">
+                            <X size={24} class="text-white" />
+                        </span>
+                    </button>
+
+                    {/* Panel Menú Móvil */}
+                    <div
+                        class="mobile-menu fixed inset-0 z-20 px-8 pt-20 bg-primary lg:hidden hidden opacity-0 scale-95 transform transition-all duration-200 ease-out overflow-y-auto"
+                    >
+                        <ul class="flex flex-col gap-4 text-lg">
+                            {
+                                headerMenu.map((item) => (
+                                    <li>
+                                        <a
+                                            href={item.link}
+                                            class:list={[
+                                                'py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-white text-white hover:underline',
+                                                isCurrentPage(item.link) && 'font-bold'
+                                            ]}
+                                            aria-current={isCurrentPage(item.link) ? 'page' : undefined}
+                                        >
+                                            {item.name}
+                                        </a>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+
+                        <div class="mt-8 pb-8 flex flex-col gap-4">
+                            <Button href={misEstudiosButton.link} variant="ghostLight" size="md">{misEstudiosButton.name}</Button>
+                            <Button href={contactButton.link} variant="ghostLight" size="md">{contactButton.name}</Button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
+</div>
 
 <script>
-    // Desktop Menu
-    const desktopMenuItems = document.querySelectorAll('.group');
-
-    desktopMenuItems.forEach((item) => {
-        const link = item.querySelector('a');
-        const button = item.querySelector('button');
-        const submenu = item.querySelector('.submenu');
-        const submenuLinks = submenu?.querySelectorAll('a');
-
-        if (submenu && link && button) {
-            // Handle hover
-            item.addEventListener('mouseenter', () => {
-                showSubmenu(submenu as HTMLElement, button as HTMLElement);
-            });
-
-            item.addEventListener('mouseleave', () => {
-                hideSubmenu(submenu as HTMLElement, button as HTMLElement);
-            });
-
-            // Handle keyboard navigation
-            link.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowDown' && item.children) {
-                    e.preventDefault();
-                    showSubmenu(submenu as HTMLElement, button as HTMLElement);
-                    submenuLinks?.[0]?.focus();
-                }
-            });
-
-            button.addEventListener('click', (e) => {
-                if (item.children) {
-                    e.preventDefault();
-                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
-                    if (isExpanded) {
-                        hideSubmenu(submenu as HTMLElement, button as HTMLElement);
-                    } else {
-                        showSubmenu(submenu as HTMLElement, button as HTMLElement);
-                        submenuLinks?.[0]?.focus();
-                    }
-                }
-            });
-
-            button.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowDown' && item.children) {
-                    e.preventDefault();
-                    showSubmenu(submenu as HTMLElement, button as HTMLElement);
-                    submenuLinks?.[0]?.focus();
-                }
-            });
-
-            // Don't show submenu on focus, only on hover or arrow key
-            link.addEventListener('focus', () => {
-                hideSubmenu(submenu as HTMLElement, button as HTMLElement);
-            });
-
-            // Keyboard navigation within submenu
-            submenuLinks?.forEach((submenuLink, index) => {
-                submenuLink.addEventListener('keydown', (e) => {
-                    const lastIndex = submenuLinks.length - 1;
-
-                    switch (e.key) {
-                        case 'ArrowDown':
-                            e.preventDefault();
-                            if (index < lastIndex) {
-                                submenuLinks[index + 1].focus();
-                            }
-                            break;
-                        case 'ArrowUp':
-                            e.preventDefault();
-                            if (index > 0) {
-                                submenuLinks[index - 1].focus();
-                            } else {
-                                link.focus();
-                                hideSubmenu(submenu as HTMLElement, button as HTMLElement);
-                            }
-                            break;
-                        case 'Escape':
-                            e.preventDefault();
-                            hideSubmenu(submenu as HTMLElement, button as HTMLElement);
-                            link.focus();
-                            break;
-                        case 'Tab':
-                            // Allow normal tab behavior but close submenu
-                            hideSubmenu(submenu as HTMLElement, button as HTMLElement);
-                            break;
-                    }
-                });
-            });
-
-            // Close submenu when focus leaves
-            document.addEventListener('focusin', (e) => {
-                if (item && !item.contains(e.target as Node)) {
-                    hideSubmenu(submenu as HTMLElement, button as HTMLElement);
-                }
-            });
-        }
-    });
-
-    // Helper functions
-    function showSubmenu(submenu: HTMLElement, button: HTMLElement) {
-        submenu.classList.remove('invisible', 'opacity-0');
-        submenu.classList.add('visible', 'opacity-100');
-        button.setAttribute('aria-expanded', 'true');
-    }
-
-    function hideSubmenu(submenu: HTMLElement, button: HTMLElement) {
-        submenu.classList.add('invisible', 'opacity-0');
-        submenu.classList.remove('visible', 'opacity-100');
-        button.setAttribute('aria-expanded', 'false');
-    }
-
-    // Simple mobile submenu toggle
-    document.querySelectorAll('.mobile-submenu-button').forEach((button) => {
-        button.addEventListener('click', () => {
-            const submenu = button.parentElement?.nextElementSibling as HTMLElement;
-            const chevron = button.querySelector('svg');
-
-            // Toggle submenu
-            if (submenu) {
-                submenu.classList.toggle('hidden');
-                chevron?.classList.toggle('rotate-180');
-                const isExpanded = submenu.classList.contains('hidden') ? 'false' : 'true';
-                button.setAttribute('aria-expanded', isExpanded);
-            }
-        });
-    });
-
-    // Mobile menu toggle with scroll lock
+     
     const mobileMenuButton = document.querySelector('.mobile-menu-button');
     const mobileMenu = document.querySelector('.mobile-menu');
     const menuIcon = document.querySelector('.menu-icon');

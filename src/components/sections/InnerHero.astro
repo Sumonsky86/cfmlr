@@ -4,8 +4,9 @@ import { Image } from 'astro:assets';
 interface HeroContent {
     title: string;
     description: string;
-    backgroundImage?: any;
-    overlayOpacity?: number; // Value between 0 and 1
+    imageAlt: string;
+    backgroundImage?: string | any; 
+    overlayOpacity?: number; 
 }
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
 }
 
 const { content } = Astro.props;
-const opacity = content.overlayOpacity ?? 1;
+const opacity = content.overlayOpacity ?? 0.2
 ---
 
 <section class="w-full border-b pt-38 pb-18 relative">
@@ -21,7 +22,7 @@ const opacity = content.overlayOpacity ?? 1;
             {content.backgroundImage && (
                 <Image
                     src={content.backgroundImage}
-                    alt=""
+                    alt={content.imageAlt}
                     width={1920}
                     height={1080}
                     class="w-full h-full object-cover"
@@ -37,8 +38,8 @@ const opacity = content.overlayOpacity ?? 1;
 
     <div class="site-container mx-auto px-4 relative z-10">
         <div>
-            <h1 class="text-white" data-aos="fade-up">{content.title}</h1>
-            {content.description && <p class="subtitle text-white" data-aos="fade-up" data-aos-delay="100">{content.description}</p>}
+            <h1 class="text-white">{content.title}</h1>
+            {content.description && <p class="subtitle text-white">{content.description}</p>}
         </div>
     </div>
 </section>

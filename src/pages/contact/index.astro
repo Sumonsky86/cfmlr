@@ -4,12 +4,14 @@ import InnerHero from "@components/sections/InnerHero.astro"
 import ContactInfo from "@components/sections/ContactInfo.astro"
 
 const heroContent = {
-    title: "Contact Us",
-    description: "Contact us for more information"
+    title: "Contacto",
+    description: "Estamos para ayudarte. Encuentra aquí nuestros datos de contacto y ubicación.",
+    imageAlt: "Mapa de la ubicación de la clínica CeFEM en Las Rosas",
+    overlayOpacity: 0.2 
 }
 ---
 
-<Layout title="Contact Us" description="Contact us for more information">
+<Layout title="Contacto | CeFEM" description="Contacta con CeFEM en Las Rosas. Encuentra nuestro teléfono, email y dirección. Estamos en Boulevard Kemmis 843.">
     <InnerHero content={heroContent} />
     <ContactInfo background="base" padding="base" />
 </Layout>

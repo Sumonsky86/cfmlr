@@ -2,7 +2,7 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { categories } from '@data/categories';
 
-// Extract category names for the enum
+
 const categoryNames = categories.map((category) => category.name);
 
 const blog = defineCollection({
@@ -25,25 +25,6 @@ const blog = defineCollection({
         }),
 });
 
-const team = defineCollection({
-    loader: glob({ base: './src/content/team', pattern: '**/*.md' }),
-    schema: ({ image }) =>
-        z.object({
-            name: z.string(),
-            headshot: image().optional(),
-            jobTitle: z.string(),
-            email: z.string().optional(),
-            linkedin: z.string().url().optional(),
-            linkedinUsername: z.string().optional(),
-            xSocial: z.string().url().optional(),
-            xSocialUsername: z.string().optional(),
-            github: z.string().url().optional(),
-            githubUsername: z.string().optional(),
-            order: z.number().default(999),
-            publish: z.boolean().default(true),
-        }),
-});
-
 const legal = defineCollection({
     loader: glob({ base: './src/content/legal', pattern: '**/*.md' }),
     schema: z.object({
@@ -58,4 +39,4 @@ const legal = defineCollection({
     }),
 });
 
-export const collections = { blog, team, legal };
+export const collections = { blog, legal };

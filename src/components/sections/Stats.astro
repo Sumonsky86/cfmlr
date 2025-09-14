@@ -132,7 +132,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
             const prefix = stat.textContent?.match(/^[^0-9]*/)?.[0] || '';
             const suffix = stat.textContent?.match(/[^0-9]*$/)?.[0] || '';
             let current = 0;
-            const increment = target / 50; // Adjust for animation speed
+            const increment = target / 50;  
             
             const updateCounter = () => {
                 if (current < target) {
@@ -147,17 +147,17 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
         });
     }
 
-    // Create an Intersection Observer
+  
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 animateStats();
-                observer.disconnect(); // Only animate once
+                observer.disconnect();  
             }
         });
     });
 
-    // Observe the stats section
+     
     const statsSection = document.querySelector('.stat-number');
     if (statsSection) {
         observer.observe(statsSection);

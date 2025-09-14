@@ -37,7 +37,7 @@ const textColor = getTextColor(background);
 const headlineColor = getHeadlineColor(background);
 const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
-// Only this is specific to CtaBanner
+  
 const containerBgColors = {
     white: 'bg-background-alt',
     alt: 'bg-white',
@@ -66,7 +66,6 @@ const containerBgColor = containerBgColors[background as keyof typeof containerB
             
             <h2 
                 class:list={[headlineColor]}
-                data-aos="fade-up"
             >
                 {title}
             </h2>
@@ -74,8 +73,6 @@ const containerBgColor = containerBgColors[background as keyof typeof containerB
             {description && (
                 <p 
                     class:list={["mt-4", textColor, "opacity-90"]}
-                    data-aos="fade-up"
-                    data-aos-delay="100"
                 >
                     {description}
                 </p>
@@ -84,8 +81,6 @@ const containerBgColor = containerBgColors[background as keyof typeof containerB
             {button && (
                 <div 
                     class="mt-8"
-                    data-aos="fade-up"
-                    data-aos-delay="200"
                 >
                     <Button
                         href={button.link}

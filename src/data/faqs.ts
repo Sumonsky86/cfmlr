@@ -13,24 +13,28 @@ export const faqLists: Record<string, FaqList> = {
         id: 'main',
         faqs: [
             {
-                question: "Is Titan Core completely free to use?",
-                answer: "Yes, Titan Core is 100% free and open-source. You can use it for personal and commercial projects without any licensing fees."
+                question: "¿Dónde está ubicado CeFEM?",
+                answer: "Nos encontramos en Boulevard Kemmis 843, Las Rosas, Santa Fe, a pocos metros del centro de la ciudad."
             },
             {
-                question: "How do I customize the color schemes?",
-                answer: "Titan Core comes with 10 pre-built color schemes that can be easily switched through the theme configuration file. For custom colors, you can modify the CSS variables in the `src/styles/global.css` file to match your brand identity."
+                question: "¿Cómo puedo sacar un turno?",
+                answer: "Podés solicitar tu turno fácilmente por WhatsApp haciendo clic en los botones de la web o comunicándote al número oficial del centro."
             },
             {
-                question: "Do I need to know Astro JS to use this theme?",
-                answer: "Basic familiarity with Astro JS is helpful, but not required. The component-based architecture makes it easy to understand and modify even if you're new to Astro."
+                question: "¿Qué especialidades médicas ofrecen?",
+                answer: "Contamos con pediatría, traumatología, ginecología, obstetricia, urología, nutrición y servicio de ecografías generales, obstétricas y urológicas."
             },
             {
-                question: "Can I use Titan Core as a starting point for client projects?",
-                answer: "Absolutely! Titan Core is designed to be a foundation theme that you can build upon for client projects. Its clean architecture and minimal approach make it perfect as a starting point for customized websites."
+                question: "¿Realizan ecografías doppler en embarazos?",
+                answer: "Sí, realizamos ecografías doppler obstétricas para el control del bebé y estudios específicos de embarazo."
             },
             {
-                question: "How often is Titan Core updated?",
-                answer: "We aim to update Titan Core regularly to keep it compatible with the latest Astro JS releases and web standards. Major updates are released quarterly, with smaller fixes and improvements added more frequently. You can star our GitHub repository to stay informed about updates."
+                question: "¿Atienden con obras sociales?",
+                answer: "Sí, trabajamos con diversas obras sociales y prepagas. Te recomendamos consultarnos por WhatsApp para confirmar tu cobertura."
+            },
+            {
+                question: "¿Cuál es el horario de atención?",
+                answer: "Atendemos de lunes a viernes de 8 a 12 hs y de 16 a 20 hs, siempre con turnos programados para evitar esperas."
             }
         ]
     }

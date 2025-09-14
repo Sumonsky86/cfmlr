@@ -6,44 +6,43 @@ interface Category {
 
 export const categories: Category[] = [
   {
-    name: 'Tech',
-    slug: 'tech',
-    description: 'Latest in technology and software development'
+    name: 'Ginecología',
+    slug: 'ginecologia',
+    description: 'Artículos sobre salud femenina y ginecología.'
   },
   {
-    name: 'Web Development',
-    slug: 'web-development',
-    description: 'Tips and insights for better web development'
+    name: 'Salud Preventiva',
+    slug: 'salud-preventiva',
+    description: 'Consejos y guías para la prevención de enfermedades.'
   },
   {
-    name: 'Design',
-    slug: 'design',
-    description: 'Exploring design and user experience'
+    name: 'Institucional',
+    slug: 'institucional',
+    description: 'Información sobre nuestra clínica y equipo.'
   },
   {
-    name: 'Accessibility',
-    slug: 'accessibility',
-    description: 'Exploring accessibility and user experience'
+    name: 'Especialidades',
+    slug: 'especialidades',
+    description: 'Conoce más sobre nuestras áreas de especialización.'
   },
   {
-    name: 'Theme Usage',
-    slug: 'theme-usage',
-    description: 'Learn how to use the theme'
+    name: 'Nutrición',
+    slug: 'nutricion',
+    description: 'Artículos sobre alimentación y hábitos saludables.'
   },
   {
-    name: 'Astro JS',
-    slug: 'astro-js',
-    description: 'Everything about Astro JS framework and development'
+    name: 'Guías',
+    slug: 'guias',
+    description: 'Guías prácticas para nuestros pacientes.'
   },
   {
-    name: 'SEO',
-    slug: 'seo',
-    description: 'Search engine optimization strategies and best practices'
+    name: 'Medicina General',
+    slug: 'medicina-general',
+    description: 'Temas de salud general para toda la familia.'
   },
-  
 ];
 
-// Helper function to get category by slug
+  
 export function getCategoryBySlug(slug: string): Category | undefined {
   return categories.find(category => category.slug === slug);
 }

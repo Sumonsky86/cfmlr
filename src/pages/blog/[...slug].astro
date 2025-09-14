@@ -16,22 +16,19 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
-// Use SEO data from frontmatter if available, fallback to regular post data
+ 
 const seoTitle = post.data.seo?.title || post.data.title;
 const seoDescription = post.data.seo?.description || post.data.excerpt;
-
-// For SEO image, use the seo.image if provided, otherwise use the featured image
-// The Layout component expects a string for the image, so we need to handle that
+ 
 let seoImage: string | undefined = post.data.seo?.image;
-
-// If seoImage is provided but not an absolute URL, make it absolute
+ 
 if (seoImage && !seoImage.startsWith('http')) {
     const siteUrl = import.meta.env.SITE || 'https://titan-core.vercel.app';
     seoImage = new URL(seoImage.startsWith('/') ? seoImage : `/${seoImage}`, siteUrl).toString();
 }
-// If no SEO image is specified, but we have a featured image, use its URL
+ 
 else if (!seoImage && post.data.featuredImage) {
-    // For Astro image objects, we need to create an absolute URL
+    
     const siteUrl = import.meta.env.SITE || 'https://titan-core.vercel.app';
     seoImage = new URL(post.data.featuredImage.src, siteUrl).toString();
 }

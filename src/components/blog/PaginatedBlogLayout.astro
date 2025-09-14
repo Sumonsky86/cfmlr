@@ -14,7 +14,7 @@ interface Props {
     posts: any[];
     currentPage: number;
     totalPages: number;
-    baseUrl: string;  // e.g., '/blog' or '/category/some-category'
+    baseUrl: string;    
     title: string;
     subtitle: string;
     currentCategory?: string;
@@ -30,7 +30,7 @@ const {
     currentCategory 
 } = Astro.props;
 
-    // Generate pagination URLs
+      
 const nextPage = currentPage < totalPages ? `${baseUrl}/${currentPage + 1}` : null;
 const prevPage = currentPage > 1 
 ? currentPage - 1 === 1 
@@ -42,7 +42,8 @@ const heroContent = {
     title: title,
     description: subtitle,
     backgroundImage: blogHeroImage,
-    overlayOpacity: 0.2
+    overlayOpacity: 0.2,
+    imageAlt: "Hero image for blog section"
 }
 ---
 <Layout title={seoTitle} description={seoDescription}>

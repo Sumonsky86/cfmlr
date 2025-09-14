@@ -11,12 +11,12 @@ interface Props {
 
 const { posts, currentCategory } = Astro.props;
 
-// Get all posts to determine active categories
+  
 const allPosts = await getCollection('blog', ({ data }) => {
     return import.meta.env.DEV || data.publish !== false;
 });
 
-// Filter to only show categories that have posts
+  
 const activeCategories = categories.filter((category) =>
     allPosts.some((post) => post.data.categories?.includes(category.name)),
 );

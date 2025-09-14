@@ -12,7 +12,6 @@ import Faqs from '@components/sections/Faqs.astro';
 import { faqLists } from '@data/faqs';
 import RecentPosts from '@components/sections/RecentPosts.astro';
 import InnerHero from '@components/sections/InnerHero.astro';
-import TeamGrid from '@components/sections/TeamGrid.astro';
 import defaultHero from '@assets/images/home/default-hero.jpg';
 import defaultHero2 from '@assets/images/home/default-hero-2.png';
 import developerImg from '@assets/images/home/developer.jpg';
@@ -31,7 +30,6 @@ const componentSections = [
     { id: 'logos', name: 'Credenciales', icon: 'briefcase' },
     { id: 'stats', name: 'Números', icon: 'bar-chart' },
     { id: 'faqs', name: 'Preguntas', icon: 'help-circle' },
-    { id: 'teamGrid', name: 'Equipo', icon: 'users' }
 ];
 
  
@@ -111,7 +109,7 @@ const sideBySideStats = {
     description: "Más de 20 años brindando atención médica confiable y personalizada.",
     variant: 'side-by-side' as const,
     background: 'dark' as const,
-    stats: statsLists.withContent.stats,
+    stats: statsLists.main.stats, // <-- cambio aquí
     content: {
         title: 'Confianza y Experiencia',
         description: 'Nuestro equipo médico está formado por especialistas altamente capacitados.',
@@ -122,7 +120,7 @@ const sideBySideStats = {
         }
     }
 };
- 
+
 const mainCta = {
     eyebrow: "RESERVÁ TU TURNO",
     title: "Coordiná tu visita en minutos",
@@ -267,15 +265,6 @@ const recentPostsSection = {
                 FAQs Component
             </div>
             <Faqs content={faqsSection} background="base" padding="base" />
-        </div>
-    </section>
-    
-    <section id="teamGrid" class="component-section relative mb-16">
-        <div class="component-wrapper relative transition-all duration-500">
-            <div class="component-label hidden absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-primary text-white py-1 px-3 rounded-md text-xs font-medium z-10 shadow-md">
-                Team Grid Component
-            </div>
-            <TeamGrid padding="base" />
         </div>
     </section>
 </Layout>

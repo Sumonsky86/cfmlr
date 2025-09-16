@@ -1,7 +1,9 @@
 ---
 title: "¿Cómo Sacar un Turno en CeFEM? Guía Paso a Paso"
 excerpt: "Agendar tu cita en CeFEM es rápido y sencillo. Te explicamos cómo puedes solicitar tu turno por WhatsApp para cualquiera de nuestras especialidades."
-featuredImage: "./images/update-categories.jpg"
+featuredImage:
+  src: "./images/update-categories.jpg"
+  alt: "Guía paso a paso para sacar un turno médico por WhatsApp."
 publishDate: "2025-02-22"
 publish: true
 categories: ["Institucional", "Guías"]

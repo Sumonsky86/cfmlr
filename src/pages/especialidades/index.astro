@@ -4,11 +4,13 @@ import InnerHero from "@components/sections/InnerHero.astro";
 import Features from "@components/sections/Features.astro";
 import CtaBanner from "@components/sections/CtaBanner.astro";
 import { featureLists } from "@data/features";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
 
 const heroContent = {
     title: "Nuestras Especialidades",
     description: "En CeFEM, hemos reunido a un equipo de profesionales en diversas áreas para brindarte un cuidado integral y coordinado sin que tengas que desplazarte.",
     imageAlt: "Equipo médico de CeFEM", 
+    backgroundImage: heroImage,
     overlayOpacity: 0.2 
 }
 
@@ -22,14 +24,26 @@ const mainCta = {
     description: "Contactate con nosotros por WhatsApp para solicitar un turno con el especialista que necesites.",
     button: {
         text: "Escribinos por WhatsApp",
-        link: "https://wa.me/543471341461",
+        link: "https://wa.me/5493471341461",
         variant: "primary" as const,
         target: "_blank" as const
     }
 };
 ---
 
-<Layout title="Especialidades Médicas | CeFEM" description="Conoce todas las especialidades y servicios que ofrecemos en CeFEM: Ginecología, Pediatría, Traumatología, Urología, Nutrición y Diagnóstico por Imágenes.">
+<Layout 
+    title="Pediatría, Ginecología, Traumatología y Más en Las Rosas | CeFEM" 
+    description="Encontrá pediatras, ginecólogos, traumatólogos y más especialistas en Las Rosas, Santa Fe. Ofrecemos atención en clínica médica, nutrición y control de niño sano. Solicitá tu consulta."
+    footerCta={{
+        title: "",
+        description: "",
+        hideCta: true,
+        button: {
+            text: "",
+            link: "#"
+        }
+    }}
+>
     <InnerHero content={heroContent} />
     <div class="py-12 md:py-20">
         <Features content={featuresSection} />

@@ -1,7 +1,9 @@
 ---
 title: "Conoce a CeFEM: Nuestro Compromiso con tu Salud"
 excerpt: "Descubre la misión y los valores de CeFEM, tu centro de salud integral en Las Rosas. Un equipo de profesionales dedicados a tu bienestar."
-featuredImage: "./images/titan-studio-themes.jpg"
+featuredImage:
+  src: "./images/titan-studio-themes.jpg"
+  alt: "Interior de la clínica CeFEM, mostrando el compromiso con la salud del paciente."
 publishDate: "2023-11-15"
 publish: true
 categories: ["Institucional"]

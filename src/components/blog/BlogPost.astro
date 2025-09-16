@@ -34,8 +34,8 @@ const validCategories = postCategories.filter((categoryName: string) =>
         {
             featuredImage && (
                 <Image
-                    src={featuredImage}
-                    alt={title || 'Blog post image'}
+                    src={featuredImage.src}
+                    alt={featuredImage.alt}
                     width={600}
                     height={338}
                     class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"

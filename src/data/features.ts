@@ -22,7 +22,7 @@ export const featureLists: Record<string, FeatureList> = {
             {
                 icon: Waves,
                 title: 'Ecografías',
-                description: 'Equipamiento de última generación para ecografías generales, obstétricas (5D), doppler y urológicas. Diagnósticos precisos y seguros.',
+                description: 'Equipamiento de última generación para ecografías generales, obstétricas, doppler y urológicas. Diagnósticos precisos y seguros.',
                 isMain: true,
             },
             {

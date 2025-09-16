@@ -7,7 +7,7 @@ export const siteConfig = {
       Instagram: '',
       Facebook: 'https://www.facebook.com/cefem1',
       Email: 'cefem.lasrosas@gmail.com',
-      Phone: '+543471341461',
+      Phone: '+5493471341461',
       Phone2: '3471594801',
       Location: 'Boulevard Kemmis 843, Las Rosas, Santa Fe, Argentina',
   }
@@ -16,7 +16,7 @@ export const siteConfig = {
 export const SEO = {
   Separator: '|',
   SiteName: 'CeFEM',
-  defaultDescription: 'CeFEM: Centro de Especialidades Médicas en Las Rosas, Santa Fe. Ginecología, pediatría, traumatología, urología y ecografías. Tu clínica de confianza.',
+  defaultDescription: 'Cefem es un centro médico en Las Rosas, Santa Fe. Ofrecemos consultorios, estudios y atención profesional.',
 };
   
 export const blogSetting = {

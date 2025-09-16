@@ -28,28 +28,32 @@ interface Props {
 
 const { title, description, image, footerCta, canonicalUrl } = Astro.props;
 
-const pageTitle = title ? `${title} ${Separator} ${SiteName}` : SiteName;
+const pageTitle = title ? (title.toLowerCase().includes(SiteName.toLowerCase()) ? title : `${title} ${Separator} ${SiteName}`) : SiteName;
 const pageDescription = description || defaultDescription || '';
 const pageImage = image || '';
 const canonicalPath = canonicalUrl || Astro.url.pathname;
 const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
   
 const schema = {
-  "@context": "https://schema.org",
-  "@type": "MedicalClinic",
-  "name": "CeFEM - Centro de Especialidades Médicas",
-  "description": defaultDescription,
-  "url": siteConfig.siteUrl,
-  "telephone": [siteConfig.Socials.Phone, siteConfig.Socials.Phone2],
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Boulevard Kemmis 843",
-    "addressLocality": "Las Rosas",
-    "addressRegion": "Santa Fe",
-    "postalCode": "S2520",
-    "addressCountry": "AR"
+  "@context":"https://schema.org",
+  "@type":"MedicalBusiness",
+  "name":"cefem - Centro Familiar de Especialidades Médicas",
+  "description":"Centro médico en Las Rosas. Pediatría, Clínica médica, Ginecología y Obstetricia, Traumatología y Nutrición.",
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"Boulevard Kemmis 843",
+    "addressLocality":"Las Rosas",
+    "addressRegion":"Santa Fe",
+    "postalCode":"2520",
+    "addressCountry":"AR"
   },
-  "image": new URL("/og-image.png", siteConfig.siteUrl).toString(),   
+  "telephone":"+5493471341461",
+  "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"12:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"16:00","closes":"20:00"}
+  ],
+  "url": siteConfig.siteUrl,
+  "image": new URL("/og-image.png", siteConfig.siteUrl).toString(),
   "sameAs": [
     siteConfig.Socials.Facebook
   ]
@@ -58,7 +62,7 @@ const schema = {
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang="es-AR" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -103,7 +107,7 @@ const schema = {
 
 		<!-- Floating WhatsApp Button -->
 		<a
-			href="https://wa.me/543471341461"
+			href="https://wa.me/5493471341461"
 			target="_blank"
 			rel="noopener noreferrer"
 			aria-label="Contactar por WhatsApp"

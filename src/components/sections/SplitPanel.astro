@@ -12,7 +12,7 @@ interface Content {
     description?: string;
     image: {
         src: string | any;
-        alt?: string;
+        alt: string;
     };
     buttons?: {
         text: string;
@@ -43,7 +43,7 @@ const {
 } = Astro.props;
 
 const { eyebrow, headline, subheadline, description, image, buttons = [] } = content;
-const { src, alt = '' } = image;
+const { src, alt } = image;
 
 const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 const bgColor = getBackgroundColor(background);

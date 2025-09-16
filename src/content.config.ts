@@ -11,7 +11,10 @@ const blog = defineCollection({
         z.object({
             title: z.string(),
             excerpt: z.string(),
-            featuredImage: image().optional(),
+            featuredImage: z.object({
+                src: image(),
+                alt: z.string()
+            }).optional(),
             publishDate: z.string().transform((str) => new Date(str)),
             publish: z.boolean().optional(),
             categories: z.array(z.enum(categoryNames as [string, ...string[]])),

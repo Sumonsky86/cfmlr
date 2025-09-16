@@ -1,7 +1,9 @@
 ---
 title: "Guía para tu Primera Visita al Ginecólogo en CeFEM"
 excerpt: "Prepara tu primera consulta ginecológica con confianza. Te damos los mejores consejos para una experiencia cómoda y productiva en CeFEM."
-featuredImage: "./images/edit-posts.jpg"
+featuredImage:
+  src: "./images/edit-posts.jpg"
+  alt: "Una joven paciente conversando con su ginecóloga en un consultorio de CeFEM."
 publishDate: "2025-02-22"
 publish: true
 categories: ["Ginecología", "Salud Preventiva"]

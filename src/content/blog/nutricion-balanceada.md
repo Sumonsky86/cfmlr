@@ -1,7 +1,9 @@
 ---
 title: "5 Beneficios Clave de una Nutrición Balanceada"
 excerpt: "Tu alimentación es el pilar de tu salud. Descubre cómo una dieta equilibrada puede transformar tu energía, prevenir enfermedades y mejorar tu calidad de vida."
-featuredImage: "./images/page-speed-seo.jpg"
+featuredImage:
+  src: "./images/page-speed-seo.jpg"
+  alt: "Plato con alimentos saludables que representan una nutrición balanceada."
 publishDate: "2025-04-05"
 publish: true
 categories: ["Nutrición", "Salud Preventiva"]

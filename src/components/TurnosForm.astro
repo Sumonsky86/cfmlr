@@ -1,0 +1,83 @@
+---
+import { featureLists } from "@data/features";
+import Button from "@components/ui/Button.astro";
+
+const specialties = featureLists.main.features.map(feature => feature.title);
+---
+
+<form id="turnos-form" class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md border border-gray-200">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="md:col-span-2">
+            <label for="name" class="block text-sm font-medium text-gray-700">Nombre y Apellido</label>
+            <input type="text" id="name" name="name" required class="mt-1 block w-full px-3 py-2 bg-input-light border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-input-text-light">
+        </div>
+
+        <div>
+            <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" required class="mt-1 block w-full px-3 py-2 bg-input-light border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-input-text-light">
+        </div>
+
+        <div>
+            <label for="especialidad" class="block text-sm font-medium text-gray-700">Especialidad</label>
+            <select id="especialidad" name="especialidad" required class="mt-1 block w-full px-3 py-2 bg-input-light border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-input-text-light">
+                <option value="" disabled selected>Seleccione una especialidad</option>
+                {specialties.map(specialty => <option value={specialty}>{specialty}</option>)}
+            </select>
+        </div>
+
+        <div class="md:col-span-2">
+            <label for="motivo" class="block text-sm font-medium text-gray-700">Motivo de la Consulta</label>
+            <textarea id="motivo" name="motivo" rows="4" class="mt-1 block w-full px-3 py-2 bg-input-light border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-input-text-light"></textarea>
+        </div>
+
+        <div>
+            <label for="fecha-preferida" class="block text-sm font-medium text-gray-700">Fecha Preferida</label>
+            <input type="date" id="fecha-preferida" name="fecha-preferida" class="mt-1 block w-full px-3 py-2 bg-input-light border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-input-text-light">
+        </div>
+    </div>
+
+    <div class="mt-8 text-center">
+        <Button type="submit" variant="primary" size="lg">Enviar Solicitud</Button>
+    </div>
+    <p id="form-message" class="text-center mt-4"></p>
+</form>
+
+<script>
+    document.getElementById('turnos-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const form = event.target as HTMLFormElement;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // Placeholder for backend submission
+        console.log('Form data submitted:', data);
+        
+        // Placeholder for GA4 event
+        console.log('Simulating GA4 event: generate_lead');
+
+        // TODO: Replace console.log with actual fetch() call to your webhook endpoint
+        // fetch('/api/turnos', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(data),
+        // })
+        // .then(response => response.json())
+        // .then(result => {
+        //     console.log('Success:', result);
+        //     document.getElementById('form-message').textContent = '¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto a la brevedad.';
+        //     form.reset();
+        // })
+        // .catch(error => {
+        //     console.error('Error:', error);
+        //     document.getElementById('form-message').textContent = 'Hubo un error al enviar tu solicitud. Por favor, intentá de nuevo.';
+        // });
+
+        // Mock success message for now
+        document.getElementById('form-message').textContent = '¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto a la brevedad.';
+        document.getElementById('form-message').style.color = 'green';
+        form.reset();
+    });
+</script>

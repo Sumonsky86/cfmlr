@@ -30,7 +30,7 @@ if (seoImage && !seoImage.startsWith('http')) {
 else if (!seoImage && post.data.featuredImage) {
     
     const siteUrl = import.meta.env.SITE || 'https://titan-core.vercel.app';
-    seoImage = new URL(post.data.featuredImage.src, siteUrl).toString();
+    seoImage = new URL(post.data.featuredImage.src.src, siteUrl).toString();
 }
 ---
 
@@ -40,7 +40,7 @@ else if (!seoImage && post.data.featuredImage) {
             post.data.featuredImage && (
                 <>
                     <Image
-                        src={post.data.featuredImage}
+                        src={post.data.featuredImage.src}
                         alt=""
                         width={1920}
                         height={1080}
@@ -73,8 +73,8 @@ else if (!seoImage && post.data.featuredImage) {
         {
             post.data.featuredImage && (
                 <Image
-                    src={post.data.featuredImage}
-                    alt=""
+                    src={post.data.featuredImage.src}
+                    alt={post.data.featuredImage.alt}
                     width={1200}
                     height={675}
                     class="w-full h-auto rounded-lg border mb-12 border-black"

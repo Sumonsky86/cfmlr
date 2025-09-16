@@ -11,6 +11,11 @@ const misEstudiosButton = {
     link: "#",   
 };
 
+const turnosButton = {
+    name: "Solicitar Turno",
+    link: '/turnos',
+};
+
 const contactButton = {
     name: "Contacto",
     link: '/contact',
@@ -78,7 +83,8 @@ const isCurrentPage = (link: string) => {
 
                     <div class="hidden lg:flex items-center gap-2">
                         <Button href={misEstudiosButton.link} variant="secondary" size="sm">{misEstudiosButton.name}</Button>
-                        <Button href={contactButton.link} variant="primary" size="sm">{contactButton.name}</Button>
+                        <Button href={turnosButton.link} variant="primary" size="sm">{turnosButton.name}</Button>
+                        <Button href={contactButton.link} variant="secondary" size="sm">{contactButton.name}</Button>
                     </div>
 
                     {/* Botón Menú Móvil */}
@@ -120,6 +126,7 @@ const isCurrentPage = (link: string) => {
 
                         <div class="mt-8 pb-8 flex flex-col gap-4">
                             <Button href={misEstudiosButton.link} variant="ghostLight" size="md">{misEstudiosButton.name}</Button>
+                            <Button href={turnosButton.link} variant="ghostLight" size="md">{turnosButton.name}</Button>
                             <Button href={contactButton.link} variant="ghostLight" size="md">{contactButton.name}</Button>
                         </div>
                     </div>

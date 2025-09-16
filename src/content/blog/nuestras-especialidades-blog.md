@@ -1,7 +1,9 @@
 ---
 title: "Nuestras Especialidades: Un Cuidado Integral para Ti"
 excerpt: "Conoce las diferentes especialidades médicas que CeFEM pone a tu disposición. Un equipo coordinado para ofrecerte una atención completa y personalizada."
-featuredImage: "./images/building-pages.jpg"
+featuredImage:
+  src: "./images/building-pages.jpg"
+  alt: "Imágenes de las especialidades médicas de CeFEM."
 publishDate: "2025-02-22"
 publish: true
 categories: ["Institucional", "Especialidades"]
@@ -35,7 +37,7 @@ Brindamos atención especializada para la salud del sistema urinario en hombres 
 Nuestra licenciada en nutrición te ayudará a crear planes de alimentación personalizados, ya sea para mejorar hábitos, controlar tu peso o como apoyo en el tratamiento de diversas patologías.
 
 ### Diagnóstico por Imágenes
-Contamos con un servicio de ecografías de última generación para estudios generales, ginecológicos, obstétricos (incluyendo 5D y Doppler) y urológicos, brindando un diagnóstico preciso y rápido.
+Contamos con un servicio de ecografías de última generación para estudios generales, ginecológicos, obstétricos (incluyendo Doppler) y urológicos, brindando un diagnóstico preciso y rápido.
 
 ## ¿Cómo Agendar un Turno?
 

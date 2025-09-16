@@ -1,7 +1,9 @@
 ---
 title: "La Importancia del Chequeo Anual de Salud"
 excerpt: "Prevenir es cuidar. Descubre por qué realizar un chequeo médico anual es una de las mejores inversiones que puedes hacer por tu bienestar y el de tu familia."
-featuredImage: "./images/astro-marketing.jpg"
+featuredImage:
+  src: "./images/astro-marketing.jpg"
+  alt: "Persona realizando un chequeo médico anual con un profesional de la salud."
 publishDate: "2025-03-15"
 publish: true
 categories: ["Salud Preventiva", "Medicina General"]

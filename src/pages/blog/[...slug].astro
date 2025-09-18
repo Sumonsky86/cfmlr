@@ -16,6 +16,12 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+const allPosts = await getCollection('blog');
+const relatedPosts = allPosts.filter(p => {
+    if (p.id === post.id) return false;
+    return p.data.categories.some(cat => post.data.categories.includes(cat));
+}).slice(0, 3);
+
  
 const seoTitle = post.data.seo?.title || post.data.title;
 const seoDescription = post.data.seo?.description || post.data.excerpt;
@@ -88,4 +94,29 @@ else if (!seoImage && post.data.featuredImage) {
             <Content />
         </div>
     </article>
+
+    {relatedPosts.length > 0 &&
+        <section class="site-container--small mx-auto px-4 py-16">
+            <h2 class="text-3xl font-bold mb-8">Artículos Relacionados</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {relatedPosts.map(relatedPost => (
+                    <a href={`/blog/${relatedPost.slug}/`} class="border border-black rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                        {relatedPost.data.featuredImage && 
+                            <Image 
+                                src={relatedPost.data.featuredImage.src} 
+                                alt={relatedPost.data.featuredImage.alt} 
+                                width={400} 
+                                height={225} 
+                                class="w-full h-auto object-cover"
+                            />
+                        }
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">{relatedPost.data.title}</h3>
+                            <p class="text-gray-600 text-sm">{relatedPost.data.excerpt}</p>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </section>
+    }
 </Layout>

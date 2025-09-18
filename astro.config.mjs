@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import sitemap from '@astrojs/sitemap';
 
-const site = process.env.PUBLIC_SITE_URL || 'http://localhost:4321';
+const site = 'https://www.cefem.ar';
 
 export default defineConfig({
   site,

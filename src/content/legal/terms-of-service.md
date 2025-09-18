@@ -1,9 +1,9 @@
 ---
-title: "Terms of Service"
+title: "Términos y Condiciones"
 lastUpdated: "2024-03-04"
 seo:
-  title: "Terms of Service - Rules for Using Our Platform"
-  description: "Our terms of service outline the rules, guidelines, and legal agreements between you and our company."
+  title: "Términos y Condiciones | CeFEM"
+  description: "Leé nuestros términos y condiciones para entender las reglas y directrices de uso de nuestra plataforma y servicios médicos en CeFEM."
 ---
 
 ## Introduction
@@ -70,5 +70,5 @@ These Terms shall be governed by and construed in accordance with the laws of [Y
 
 If you have any questions about these Terms, please contact us at:
 
-- Email: legal@example.com
+- Email: info@cefem.com.ar
 - Address: 123 Legal Avenue, Terms City, 12345 

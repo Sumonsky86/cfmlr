@@ -3,7 +3,7 @@ title: "Nuestras Especialidades: Un Cuidado Integral para Ti"
 excerpt: "Conoce las diferentes especialidades médicas que CeFEM pone a tu disposición. Un equipo coordinado para ofrecerte una atención completa y personalizada."
 featuredImage:
   src: "./images/building-pages.jpg"
-  alt: "Imágenes de las especialidades médicas de CeFEM."
+  alt: "Iconos representativos de las especialidades médicas de CeFEM: ginecología, pediatría y más."
 publishDate: "2025-02-22"
 publish: true
 categories: ["Institucional", "Especialidades"]

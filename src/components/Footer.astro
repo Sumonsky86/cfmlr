@@ -3,6 +3,7 @@ import { footerMenu, legalMenu } from '@data/menu';
 import Logo from '@components/Logo.astro';
 import Button from '@components/ui/Button.astro';
 import { siteConfig } from '@data/config';
+import { categories } from '@data/categories';
 
 interface ButtonProps {
   text: string;
@@ -70,14 +71,13 @@ const currentYear = new Date().getFullYear();
 
 
       <div class="col-span-1">
-        <h3 class="text-lg font-semibold mb-4">Especialidades</h3>
+        <h3 class="text-lg font-semibold mb-4">Categorías del Blog</h3>
         <ul class="space-y-2">
-          <li>Pediatría</li>
-          <li>Traumatología</li>
-          <li>Ginecología y Obstetricia</li>
-          <li>Urología</li>
-          <li>Nutrición</li>
-          <li>Ecografías</li>
+          {categories.map(category => (
+            <li>
+              <a href={`/category/${category.slug}`} class="text-body-dark hover:text-white transition-colors">{category.name}</a>
+            </li>
+          ))}
         </ul>
       </div>
 

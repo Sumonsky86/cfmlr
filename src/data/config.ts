@@ -6,7 +6,7 @@ export const siteConfig = {
       Github: '',
       Instagram: '',
       Facebook: 'https://www.facebook.com/cefem1',
-      Email: 'cefem.lasrosas@gmail.com',
+      Email: 'info@cefem.com.ar',
       Phone: '+5493471341461',
       Phone2: '3471594801',
       Location: 'Boulevard Kemmis 843, Las Rosas, Santa Fe, Argentina',

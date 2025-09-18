@@ -1,11 +1,14 @@
 ---
+import { slugify } from '@utils/textUtils';
+
 interface Props {
   category: string;
 }
 
 const { category } = Astro.props;
+const categorySlug = slugify(category);
 ---
 
-<span class="px-2 py-1 text-sm rounded-sm bg-primary/10 text-primary border-primary border flex items-center justify-center leading-none font-medium">
+<a href={`/category/${categorySlug}`} class="px-2 py-1 text-sm rounded-sm bg-primary/10 text-primary border-primary border flex items-center justify-center leading-none font-medium hover:bg-primary/20">
   {category}
-</span> 
+</a>

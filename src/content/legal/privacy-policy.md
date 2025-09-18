@@ -1,9 +1,9 @@
 ---
-title: "Privacy Policy"
+title: "Política de Privacidad"
 lastUpdated: "2024-03-04"
 seo:
-  title: "Privacy Policy - Your Rights and Our Responsibilities"
-  description: "Learn how we collect, use, and protect your personal information in compliance with data protection regulations."
+  title: "Política de Privacidad | CeFEM"
+  description: "Conocé cómo CeFEM recolecta, usa y protege tu información personal. Respetamos tu privacidad y cumplimos con las regulaciones de protección de datos."
 ---
 
 ## Introduction
@@ -80,5 +80,5 @@ We may update this Privacy Policy from time to time. We will notify you of any s
 
 If you have any questions about this Privacy Policy, please contact us at:
 
-- Email: privacy@example.com
+- Email: info@cefem.com.ar
 - Address: 123 Privacy Street, Data City, 12345 

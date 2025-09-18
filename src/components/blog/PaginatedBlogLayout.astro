@@ -4,11 +4,9 @@ import BlogList from './BlogList.astro';
 import InnerHero from '../sections/InnerHero.astro';
 import Button from '../ui/Button.astro';
 import { ChevronLeft, ChevronRight } from 'lucide-astro';
+import { siteConfig } from '@data/config';
 
 import blogHeroImage from '@assets/images/blog-hero-2.jpg';
-
-const seoTitle = "Blog";
-const seoDescription = "Our blog is where we share our thoughts and ideas about the latest trends in the web development industry.";
 
 interface Props {
     posts: any[];
@@ -30,6 +28,8 @@ const {
     currentCategory 
 } = Astro.props;
 
+const seoTitle = `${title} | ${siteConfig.companyName}`;
+const seoDescription = subtitle;
       
 const nextPage = currentPage < totalPages ? `${baseUrl}/${currentPage + 1}` : null;
 const prevPage = currentPage > 1 

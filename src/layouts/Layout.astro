@@ -37,8 +37,8 @@ const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
 const schema = {
   "@context":"https://schema.org",
   "@type":"MedicalBusiness",
-  "name":"cefem - Centro Familiar de Especialidades Médicas",
-  "description":"Centro médico en Las Rosas. Pediatría, Clínica médica, Ginecología y Obstetricia, Traumatología y Nutrición.",
+  "name": siteConfig.companyName,
+  "description": SEO.defaultDescription,
   "address":{
     "@type":"PostalAddress",
     "streetAddress":"Boulevard Kemmis 843",

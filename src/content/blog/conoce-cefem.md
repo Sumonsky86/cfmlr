@@ -1,25 +1,25 @@
 ---
-title: "Conoce a CeFEM: Nuestro Compromiso con tu Salud"
-excerpt: "Descubre la misión y los valores de CeFEM, tu centro de salud integral en Las Rosas. Un equipo de profesionales dedicados a tu bienestar."
+title: "Conoce a Cefem: Nuestro Compromiso con tu Salud"
+excerpt: "Descubre la misión y los valores de Cefem, tu centro de salud integral en Las Rosas. Un equipo de profesionales dedicados a tu bienestar."
 featuredImage:
-  src: "./images/titan-studio-themes.jpg"
-  alt: "Interior de la clínica CeFEM, mostrando el compromiso con la salud del paciente."
+  src: "/src/assets/images/Blog-3.webp"
+  alt: "Fachada o sala de espera del centro médico Cefem, transmitiendo profesionalismo y confianza."
 publishDate: "2023-11-15"
 publish: true
 categories: ["Institucional"]
 
 seo:
-  title: "CeFEM | Nuestro Centro de Salud y Equipo de Profesionales"
-  description: "Conoce la historia, misión y valores de CeFEM. Estamos comprometidos con ofrecer una atención médica de calidad, cercana y humana para toda la familia."
+  title: "Cefem | Nuestro Centro de Salud y Equipo de Profesionales"
+  description: "Conoce la historia, misión y valores de Cefem. Estamos comprometidos con ofrecer una atención médica de calidad, cercana y humana para toda la familia."
 ---
 
 ## Nuestra Misión: Tu Bienestar
 
-En CeFEM, nacimos con la vocación de ser un centro de salud de referencia en Las Rosas y sus alrededores. Nuestra misión es ofrecer una atención médica integral, accesible y de alta calidad, centrada siempre en el paciente y su familia. Creemos en una medicina cercana, donde la confianza y el profesionalismo van de la mano.
+En Cefem, nacimos con la vocación de ser un centro de salud de referencia en Las Rosas y sus alrededores. Nuestra misión es ofrecer una atención médica integral, accesible y de alta calidad, centrada siempre en el paciente y su familia. Creemos en una medicina cercana, donde la confianza y el profesionalismo van de la mano.
 
 ## Un Equipo Multidisciplinario
 
-El corazón de CeFEM es nuestro equipo de profesionales. Contamos con especialistas en diversas áreas que trabajan de forma coordinada para asegurar el mejor cuidado para tu salud:
+El corazón de Cefem es nuestro equipo de profesionales. Contamos con especialistas en diversas áreas que trabajan de forma coordinada para asegurar el mejor cuidado para tu salud:
 
 - **Ginecología y Obstetricia**: Acompañándote en cada etapa de tu vida.
 - **Pediatría**: Cuidando la salud de los más pequeños.

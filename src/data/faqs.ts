@@ -13,7 +13,7 @@ export const faqLists: Record<string, FaqList> = {
         id: 'main',
         faqs: [
             {
-                question: "¿Dónde está ubicado CeFEM?",
+                question: "¿Dónde está ubicado Cefem?",
                 answer: "Nos encontramos en Boulevard Kemmis 843, Las Rosas, Santa Fe, a pocos metros del centro de la ciudad."
             },
             {

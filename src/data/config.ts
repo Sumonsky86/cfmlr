@@ -1,5 +1,5 @@
 export const siteConfig = {
-  companyName: 'CeFEM',
+  companyName: 'Cefem – Centro Familiar de Especialidades Médicas',
   siteUrl: 'https://cefem.ar',
   Socials: {
       xSocial: '',
@@ -15,8 +15,8 @@ export const siteConfig = {
 
 export const SEO = {
   Separator: '|',
-  SiteName: 'CeFEM',
-  defaultDescription: 'Cefem es un centro médico en Las Rosas, Santa Fe. Ofrecemos consultorios, estudios y atención profesional.',
+  SiteName: 'Cefem',
+  defaultDescription: 'Cefem – Centro Familiar de Especialidades Médicas en Las Rosas, Santa Fe. Especialidades en pediatría, urología, ginecología y más. Atención integral para toda la familia.',
 };
   
 export const blogSetting = {

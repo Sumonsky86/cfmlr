@@ -1,21 +1,21 @@
----
+--- 
 title: "Nuestras Especialidades: Un Cuidado Integral para Ti"
-excerpt: "Conoce las diferentes especialidades médicas que CeFEM pone a tu disposición. Un equipo coordinado para ofrecerte una atención completa y personalizada."
+excerpt: "Conoce las diferentes especialidades médicas que Cefem pone a tu disposición. Un equipo coordinado para ofrecerte una atención completa y personalizada."
 featuredImage:
-  src: "./images/building-pages.jpg"
-  alt: "Iconos representativos de las especialidades médicas de CeFEM: ginecología, pediatría y más."
+  src: "/src/assets/images/Blog-5.webp"
+  alt: "Collage de imágenes o íconos representando diversas especialidades médicas como pediatría, urología y ginecología."
 publishDate: "2025-02-22"
 publish: true
 categories: ["Institucional", "Especialidades"]
 
 seo:
-  title: "Especialidades Médicas en CeFEM | Ginecología, Pediatría y Más"
+  title: "Especialidades Médicas en Cefem | Ginecología, Pediatría y Más"
   description: "Explora todas las especialidades médicas que ofrecemos en nuestro centro en Las Rosas: pediatría, traumatología, ginecología, urología, nutrición y ecografías."
 ---
 
 ## Un Equipo, Múltiples Especialidades
 
-En CeFEM, entendemos que la salud es multifacética. Por eso, hemos reunido a un equipo de profesionales en diversas áreas para brindarte un cuidado integral sin que tengas que desplazarte. Nuestro enfoque colaborativo asegura que recibas la mejor atención posible.
+En Cefem, entendemos que la salud es multifacética. Por eso, hemos reunido a un equipo de profesionales en diversas áreas para brindarte un cuidado integral sin que tengas que desplazarte. Nuestro enfoque colaborativo asegura que recibas la mejor atención posible.
 
 ## Conoce Nuestras Áreas de Especialización
 
@@ -43,4 +43,4 @@ Contamos con un servicio de ecografías de última generación para estudios gen
 
 Para consultar con cualquiera de nuestros especialistas, puedes solicitar un turno fácilmente a través de WhatsApp o llamando a nuestra línea de atención. Nuestro personal administrativo te guiará para encontrar el profesional adecuado para tus necesidades.
 
-En CeFEM, tu salud está en buenas manos.
+En Cefem, tu salud está en buenas manos.

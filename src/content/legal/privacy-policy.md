@@ -1,84 +1,56 @@
 ---
 title: "Política de Privacidad"
-lastUpdated: "2024-03-04"
+lastUpdated: "2025-09-19"
 seo:
-  title: "Política de Privacidad | CeFEM"
-  description: "Conocé cómo CeFEM recolecta, usa y protege tu información personal. Respetamos tu privacidad y cumplimos con las regulaciones de protección de datos."
+  title: "Política de Privacidad | Cefem"
+  description: "Conocé cómo Cefem recolecta, usa y protege tu información personal. Respetamos tu privacidad y cumplimos con las regulaciones de protección de datos."
 ---
 
-## Introduction
+En **Cefem – Centro Familiar de Especialidades Médicas** ("Cefem", "nosotros"), respetamos tu privacidad y nos comprometemos a proteger tu información personal. Esta política explica cómo recolectamos, usamos y cuidamos tus datos cuando utilizás nuestro sitio web.
 
-Welcome to our Privacy Policy. This document explains how we collect, use, and protect your personal information when you use our website and services.
+*Última actualización: 19 de Septiembre de 2025*
 
-## Information We Collect
+### 1. ¿Qué información recolectamos?
 
-### Personal Information
+Podemos recolectar información personal que nos proporcionás directamente, como:
 
-We may collect the following types of personal information:
+- **Datos de Contacto:** Nombre, correo electrónico y número de teléfono al completar nuestros formularios.
+- **Información Técnica:** Dirección IP, tipo de navegador y dispositivo que utilizás para visitar nuestro sitio, a través de cookies y tecnologías similares para mejorar tu experiencia.
 
-- **Contact Information**: Name, email address, phone number, and mailing address.
-- **Account Information**: Username, password, and account preferences.
-- **Technical Information**: IP address, browser type, device information, and cookies.
-- **Usage Information**: Pages visited, time spent on site, and interaction with content.
+### 2. ¿Cómo usamos tu información?
 
-### How We Collect Information
+Utilizamos los datos recolectados para:
 
-Information is collected through:
+- **Prestar nuestros servicios:** Gestionar turnos y responder a tus consultas.
+- **Mejorar nuestro sitio:** Entender cómo los usuarios interactúan con nuestro contenido para optimizarlo.
+- **Comunicarnos con vos:** Enviarte información relevante sobre nuestros servicios, siempre con tu consentimiento.
 
-- Direct submission via forms
-- Cookies and tracking technologies
-- Third-party services and analytics
+### 3. ¿Compartimos tus datos?
 
-## How We Use Your Information
+No vendemos ni alquilamos tu información personal. Solo la compartimos con proveedores de servicios que nos ayudan a operar nuestro sitio (como servicios de análisis web) o cuando la ley nos lo exige.
 
-We use your information to:
+### 4. Seguridad de tu información
 
-- Provide and improve our services
-- Communicate with you about our products and services
-- Process transactions and fulfill orders
-- Personalize your experience
-- Comply with legal obligations
+Implementamos medidas de seguridad para proteger tus datos contra el acceso no autorizado o la alteración. Sin embargo, ningún método de transmisión por Internet es 100% seguro.
 
-## Data Sharing and Disclosure
+### 5. Tus derechos
 
-We may share your information with:
+Tenés derecho a acceder, corregir o solicitar la eliminación de tu información personal. Para ejercer estos derechos, podés contactarnos a través de los medios proporcionados a continuación.
 
-- Service providers who help us operate our business
-- Legal authorities when required by law
-- Business partners with your consent
+### 6. Cookies
 
-We do not sell your personal information to third parties.
+Nuestro sitio utiliza cookies para personalizar y mejorar tu visita. Podés gestionar tus preferencias de cookies a través de la configuración de tu navegador.
 
-## Your Rights
+### 7. Cambios en esta política
 
-Depending on your location, you may have the right to:
+Nos reservamos el derecho de modificar esta política de privacidad. Cualquier cambio será publicado en esta página con la fecha de actualización correspondiente.
 
-- Access your personal information
-- Correct inaccurate information
-- Delete your information
-- Object to certain processing activities
-- Data portability
-- Withdraw consent
+### Contacto
 
-## Data Security
+Si tenés alguna pregunta sobre esta política, no dudes en contactarnos:
 
-We implement appropriate technical and organizational measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction.
+- **Email:** info@cefem.com.ar
+- **Dirección:** Boulevard Kemmis 843, Las Rosas, Santa Fe, Argentina
 
-## Cookies and Tracking Technologies
-
-Our website uses cookies and similar technologies to enhance your browsing experience. You can manage your cookie preferences through your browser settings.
-
-## Children's Privacy
-
-Our services are not intended for children under 13. We do not knowingly collect information from children under 13.
-
-## Changes to This Privacy Policy
-
-We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
-
-## Contact Us
-
-If you have any questions about this Privacy Policy, please contact us at:
-
-- Email: info@cefem.com.ar
-- Address: 123 Privacy Street, Data City, 12345 
+---
+*Este documento es un resumen informativo. Para una comprensión legal completa, se recomienda consultar a un profesional.*

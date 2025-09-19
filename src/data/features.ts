@@ -21,8 +21,8 @@ export const featureLists: Record<string, FeatureList> = {
         features: [
             {
                 icon: Waves,
-                title: 'Ecografías',
-                description: 'Equipamiento de última generación para ecografías generales, obstétricas, doppler y urológicas. Diagnósticos precisos y seguros.',
+                title: 'Ecografías en Las Rosas – Cefem',
+                description: 'Ecografías generales, obstétricas, Doppler y urológicas con tecnología avanzada y atención personalizada.',
                 isMain: true,
             },
             {
@@ -33,20 +33,20 @@ export const featureLists: Record<string, FeatureList> = {
             },
             {
                 icon: Baby,
-                title: 'Pediatría',
-                description: 'Cuidado integral de la salud de los más pequeños, desde el nacimiento hasta la adolescencia. Controles y seguimiento.',
+                title: 'Pediatría en Las Rosas – Cefem',
+                description: 'Atención integral infantil en Cefem, con especialistas que acompañan el desarrollo y salud de tus hijos.',
                 isMain: true,
             },
             {
                 icon: Droplets,
-                title: 'Urología',
-                description: 'Diagnóstico y tratamiento de enfermedades del sistema urinario y del aparato reproductor masculino. Cuidado especializado.',
+                title: 'Urología en Las Rosas – Cefem',
+                description: 'Diagnóstico y tratamiento urológico profesional para hombres y mujeres en Cefem.',
                 isMain: true,
             },
             {
                 icon: Heart,
-                title: 'Ginecología y Obstetricia',
-                description: 'Acompañamiento en todas las etapas de la vida de la mujer, controles anuales, seguimiento de embarazo y planificación familiar.',
+                title: 'Ginecología y Obstetricia – Cefem',
+                description: 'Controles y seguimiento de embarazos con especialistas de confianza.',
                 isMain: true,
             },
             {
@@ -57,8 +57,8 @@ export const featureLists: Record<string, FeatureList> = {
             },
             {
                 icon: Stethoscope,
-                title: 'Clínica Médica',
-                description: 'Atención primaria, diagnóstico y tratamiento de patologías comunes en adultos. Tu médico de cabecera de confianza.',
+                title: 'Clínica Médica – Cefem',
+                description: 'Atención primaria y seguimiento de enfermedades comunes para toda la familia.',
                 isMain: false,
             },
             {

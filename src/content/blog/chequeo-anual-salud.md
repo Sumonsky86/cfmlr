@@ -2,15 +2,15 @@
 title: "La Importancia del Chequeo Anual de Salud"
 excerpt: "Prevenir es cuidar. Descubre por qué realizar un chequeo médico anual es una de las mejores inversiones que puedes hacer por tu bienestar y el de tu familia."
 featuredImage:
-  src: "./images/astro-marketing.jpg"
-  alt: "Persona realizando un chequeo médico anual con un profesional de la salud."
+  src: "/src/assets/images/Blog-1.webp"
+  alt: "Instrumentos médicos como un estetoscopio y un monitor de presión arterial, representando un chequeo de salud anual."
 publishDate: "2025-03-15"
 publish: true
 categories: ["Salud Preventiva", "Medicina General"]
 
 seo:
-  title: "¿Por Qué es Clave el Chequeo Médico Anual? | CeFEM"
-  description: "Beneficios de la medicina preventiva y por qué un chequeo anual en CeFEM puede ayudarte a detectar problemas a tiempo y mantener un estilo de vida saludable."
+  title: "¿Por Qué es Clave el Chequeo Médico Anual? | Cefem"
+  description: "Beneficios de la medicina preventiva y por qué un chequeo anual en Cefem puede ayudarte a detectar problemas a tiempo y mantener un estilo de vida saludable."
 ---
 
 ## El Desafío de la Rutina Diaria
@@ -35,9 +35,9 @@ Un control periódico te brinda una visión clara de tus indicadores clave de sa
 
 Las visitas regulares fomentan un vínculo de confianza con tu médico. Esto es fundamental para que te sientas cómodo compartiendo cualquier preocupación sobre tu salud, por pequeña que parezca.
 
-## ¿Qué Incluye un Chequeo General en CeFEM?
+## ¿Qué Incluye un Chequeo General en Cefem?
 
-En CeFEM, adaptamos el chequeo a tu edad, sexo e historial médico. Generalmente, incluye:
+En Cefem, adaptamos el chequeo a tu edad, sexo e historial médico. Generalmente, incluye:
 
 - **Entrevista médica completa**: Para conocer tus antecedentes y estilo de vida.
 - **Examen físico**: Evaluación de signos vitales y exploración general.
@@ -46,6 +46,6 @@ En CeFEM, adaptamos el chequeo a tu edad, sexo e historial médico. Generalmente
 
 ## Tu Salud es tu Prioridad
 
-No esperes a sentirte mal para consultar a un profesional. El chequeo anual es un acto de amor propio y una inversión en tu futuro. En CeFEM, te ofrecemos un ambiente cálido y un equipo de profesionales listos para acompañarte.
+No esperes a sentirte mal para consultar a un profesional. El chequeo anual es un acto de amor propio y una inversión en tu futuro. En Cefem, te ofrecemos un ambiente cálido y un equipo de profesionales listos para acompañarte.
 
 Agenda tu chequeo anual hoy mismo y toma el control de tu salud.

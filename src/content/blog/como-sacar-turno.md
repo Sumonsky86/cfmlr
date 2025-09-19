@@ -1,16 +1,16 @@
 ---
-title: "¿Cómo Sacar un Turno en CeFEM? Guía Paso a Paso"
-excerpt: "Agendar tu cita en CeFEM es rápido y sencillo. Te explicamos cómo puedes solicitar tu turno por WhatsApp para cualquiera de nuestras especialidades."
+title: "¿Cómo Sacar un Turno en Cefem? Guía Paso a Paso"
+excerpt: "Agendar tu cita en Cefem es rápido y sencillo. Te explicamos cómo puedes solicitar tu turno por WhatsApp para cualquiera de nuestras especialidades."
 featuredImage:
-  src: "./images/update-categories.jpg"
-  alt: "Guía paso a paso para sacar un turno médico por WhatsApp."
+  src: "/src/assets/images/Blog-2.webp"
+  alt: "Una persona usando un smartphone para agendar una cita online, simbolizando la facilidad de sacar un turno."
 publishDate: "2025-02-22"
 publish: true
 categories: ["Institucional", "Guías"]
 
 seo:
-  title: "Cómo Pedir un Turno en CeFEM | Guía Fácil por WhatsApp"
-  description: "Aprende a agendar tu turno en CeFEM de forma rápida y directa. Sigue estos simples pasos para comunicarte con nosotros y reservar tu cita."
+  title: "Cómo Pedir un Turno en Cefem | Guía Fácil por WhatsApp"
+  description: "Aprende a agendar tu turno en Cefem de forma rápida y directa. Sigue estos simples pasos para comunicarte con nosotros y reservar tu cita."
 ---
 
 En CeFEM, queremos que el acceso a la salud sea lo más simple posible. Por eso, hemos optimizado nuestro sistema de turnos para que puedas agendar tu cita de manera rápida y directa a través de WhatsApp.
@@ -45,4 +45,4 @@ Una vez confirmado, ¡tu turno quedará agendado!
 
 Si por algún motivo no puedes asistir a tu cita, te pedimos que nos avises por el mismo medio (WhatsApp) con la mayor antelación posible. De esta manera, podremos ofrecerle ese horario a otro paciente que lo necesite.
 
-¡Así de fácil es cuidar de tu salud en CeFEM!
+¡Así de fácil es cuidar de tu salud en Cefem!

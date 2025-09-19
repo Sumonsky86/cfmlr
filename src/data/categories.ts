@@ -40,6 +40,16 @@ export const categories: Category[] = [
     slug: 'medicina-general',
     description: 'Temas de salud general para toda la familia.'
   },
+  {
+    name: 'Pediatría',
+    slug: 'pediatria',
+    description: 'Artículos sobre salud infantil y pediatría.'
+  },
+  {
+    name: 'Urología',
+    slug: 'urologia',
+    description: 'Artículos sobre salud urológica.'
+  },
 ];
 
   

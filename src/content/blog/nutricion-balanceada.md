@@ -2,14 +2,14 @@
 title: "5 Beneficios Clave de una Nutrición Balanceada"
 excerpt: "Tu alimentación es el pilar de tu salud. Descubre cómo una dieta equilibrada puede transformar tu energía, prevenir enfermedades y mejorar tu calidad de vida."
 featuredImage:
-  src: "./images/page-speed-seo.jpg"
-  alt: "Plato con alimentos saludables que representan una nutrición balanceada."
+  src: "/src/assets/images/Blog-6.webp"
+  alt: "Un plato colorido con frutas, verduras y granos, representando una nutrición balanceada y saludable."
 publishDate: "2025-04-05"
 publish: true
 categories: ["Nutrición", "Salud Preventiva"]
 
 seo:
-  title: "Beneficios de una Dieta Saludable y Equilibrada | CeFEM"
+  title: "Beneficios de una Dieta Saludable y Equilibrada | Cefem"
   description: "Aprende cómo una buena nutrición impacta tu salud. Te explicamos 5 beneficios clave de comer balanceado y cómo nuestro servicio de nutrición puede ayudarte."
 ---
 
@@ -37,8 +37,10 @@ Adoptar hábitos alimenticios saludables es la forma más efectiva y sostenible 
 
 El consumo adecuado de fibra, presente en cereales integrales, frutas, verduras y legumbres, es fundamental para el buen funcionamiento del sistema digestivo. Una buena salud intestinal no solo previene el estreñimiento, sino que también influye positivamente en tu sistema inmune y bienestar general.
 
-## Asesoramiento Profesional en CeFEM
+## Asesoramiento Profesional en Cefem
 
-Cambiar de hábitos no siempre es fácil. Por eso, en CeFEM contamos con una Licenciada en Nutrición que puede guiarte en este proceso. Ya sea que busques mejorar tu alimentación, controlar una patología o simplemente aprender a comer mejor, una consulta nutricional es el primer paso.
+Cambiar de hábitos no siempre es fácil. Por eso, en Cefem contamos con una Licenciada en Nutrición que puede guiarte en este proceso. Ya sea que busques mejorar tu alimentación, controlar una patología o simplemente aprender a comer mejor, una consulta nutricional es el primer paso.
 
 No subestimes el poder de la nutrición. ¡Invertir en tu alimentación es invertir en tu salud a largo plazo!
+
+[Conocé más sobre nuestra especialidad de Nutrición](/especialidades).

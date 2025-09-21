@@ -1,0 +1,121 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import CtaBanner from "@components/sections/CtaBanner.astro";
+import Faqs from "@components/sections/Faqs.astro";
+import type { FaqItem } from "@data/faqs";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+    title: "Nutrición y hábitos saludables en Las Rosas",
+    description: "Planes personalizados para todas las etapas de la vida: control de peso, patologías crónicas y nutrición en el embarazo.",
+    imageAlt: "Consulta de nutrición en CeFEM Las Rosas",
+    backgroundImage: heroImage,
+    overlayOpacity: 0.35,
+};
+
+const nutritionApproach = [
+    "Evaluación inicial completa: historia clínica, hábitos alimentarios y antropometría",
+    "Planes de alimentación equilibrados y adaptados a la rutina de cada paciente",
+    "Educación nutricional para toda la familia y acompañamiento semanal o quincenal",
+    "Coordinación con ginecología, pediatría y clínica médica para tratamientos integrales",
+];
+
+const programAreas = [
+    {
+        title: "Control de peso saludable",
+        description: "Diseñamos planes graduales que priorizan la salud metabólica, la relación con la comida y el mantenimiento a largo plazo.",
+    },
+    {
+        title: "Nutrición en el embarazo y lactancia",
+        description: "Acompañamos las demandas nutricionales de la madre y el bebé, coordinando con obstetricia y ecografías para un control completo.",
+    },
+    {
+        title: "Patologías crónicas",
+        description: "Planes para diabetes, hipertensión, colesterol elevado, enfermedad celíaca y trastornos gastrointestinales, con seguimiento interdisciplinario.",
+    },
+    {
+        title: "Nutrición infantil y deportiva",
+        description: "Orientamos a familias con niños selectivos, adolescentes deportistas y pacientes que requieren soporte nutricional específico.",
+    },
+];
+
+const faqItems: FaqItem[] = [
+    {
+        question: "¿Cada cuánto se realizan los controles nutricionales?",
+        answer: "Depende del objetivo. En planes de descenso de peso trabajamos con controles semanales o quincenales, mientras que en patologías crónicas se coordinan visitas mensuales.",
+    },
+    {
+        question: "¿Debo llevar estudios o análisis de laboratorio?",
+        answer: "Si tenés análisis recientes ayudan a personalizar el plan. También podemos solicitar estudios específicos y coordinarlos con el resto de las especialidades de CeFEM.",
+    },
+    {
+        question: "¿Trabajan con planes para niños y adolescentes?",
+        answer: "Sí. Diseñamos propuestas lúdicas y educativas que involucran a toda la familia para generar hábitos duraderos y saludables.",
+    },
+];
+
+const ctaContent = {
+    eyebrow: "BIENESTAR INTEGRAL",
+    title: "Solicitá tu turno con nutrición",
+    description: "Coordiná una consulta para mejorar tus hábitos, acompañar tratamientos médicos o preparar tu embarazo con el equipo de CeFEM.",
+    button: {
+        text: "Escribir por WhatsApp",
+        link: "https://wa.me/5493471341461",
+        variant: "primary" as const,
+        target: "_blank" as const,
+    },
+};
+---
+
+<Layout
+    title="Nutrición en Las Rosas con planes personalizados | CeFEM"
+    description="Consultas de nutrición clínica, embarazo, deporte y patologías crónicas en CeFEM Las Rosas. Planes alimentarios sostenibles y coordinación con otras especialidades."
+    canonicalUrl="/nutricion/"
+>
+    <InnerHero content={heroContent} />
+
+    <section class="py-16 md:py-20 bg-background">
+        <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-[3fr_2fr] items-start">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Planes de alimentación adaptados a tu realidad</h2>
+                <p class="text-lg text-body-base mb-6">
+                    El enfoque nutricional de CeFEM se basa en escuchar tus necesidades, entender tu rutina y acompañarte con herramientas prácticas. Creamos estrategias alcanzables que mejoran tu bienestar, sin dietas extremas ni restricciones innecesarias.
+                </p>
+                <div class="grid gap-6 md:grid-cols-2">
+                    {programAreas.map((area) => (
+                        <article class="p-6 rounded-xl border border-primary/20 bg-white shadow-sm">
+                            <h3 class="text-xl font-semibold text-primary mb-3">{area.title}</h3>
+                            <p class="text-body-base leading-relaxed">{area.description}</p>
+                        </article>
+                    ))}
+                </div>
+            </div>
+            <aside class="p-6 rounded-2xl bg-primary/10 border border-primary/20">
+                <h3 class="text-2xl font-semibold text-primary mb-4">Cómo trabajamos en cada sesión</h3>
+                <ul class="space-y-3 text-body-base">
+                    {nutritionApproach.map((item) => (
+                        <li class="flex items-start gap-3">
+                            <span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-primary"></span>
+                            <span>{item}</span>
+                        </li>
+                    ))}
+                </ul>
+            </aside>
+        </div>
+    </section>
+
+    <Faqs
+        content={{
+            eyebrow: "PREGUNTAS FRECUENTES",
+            title: "Consultas sobre el servicio de nutrición",
+            description: "Resolvemos dudas sobre la frecuencia de las consultas, los estudios necesarios y el acompañamiento familiar.",
+            faqs: faqItems,
+        }}
+        background="base"
+        paddingTop="large"
+        paddingBottom="large"
+    />
+
+    <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+</Layout>

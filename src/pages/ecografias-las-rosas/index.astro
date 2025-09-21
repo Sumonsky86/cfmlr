@@ -1,0 +1,146 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import CtaBanner from "@components/sections/CtaBanner.astro";
+import Faqs from "@components/sections/Faqs.astro";
+import type { FaqItem } from "@data/faqs";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+    title: "Ecografías en Las Rosas – CeFEM",
+    description: "Estudios ecográficos generales, obstétricos, doppler y ginecológicos con médicos especialistas y equipamiento digital de alta resolución.",
+    imageAlt: "Equipo médico realizando una ecografía en CeFEM",
+    backgroundImage: heroImage,
+    overlayOpacity: 0.35,
+};
+
+const examSections = [
+    {
+        title: "Ecografías generales",
+        description: "Evaluamos abdomen, partes blandas, tiroides, riñones y estudios vasculares periféricos para un diagnóstico preciso en menos tiempo.",
+    },
+    {
+        title: "Ecografías obstétricas",
+        description: "Control integral del embarazo: ecografías del primer trimestre, morfológicas, doppler obstétrico y seguimiento del crecimiento fetal.",
+    },
+    {
+        title: "Ecografía ginecológica",
+        description: "Valoramos útero, ovarios y piso pélvico para acompañar diagnósticos y tratamientos ginecológicos en articulación con nuestras especialistas.",
+    },
+    {
+        title: "Ecografías doppler",
+        description: "Estudios doppler color y pulsado para valorar flujo sanguíneo en embarazadas, arterias y venas, permitiendo detectar alteraciones tempranas.",
+    },
+];
+
+const preparationTips = [
+    "Presentate 10 minutos antes del turno para coordinar la preparación junto al equipo.",
+    "Llevá órdenes médicas, estudios previos y credencial de la obra social si corresponde.",
+    "Para estudios abdominales se recomienda ayuno de 6 a 8 horas; para pelvis, beber 1 litro de agua una hora antes.",
+    "En ecografías obstétricas traé tus controles anteriores para comparar la evolución del embarazo.",
+];
+
+const differentiators = [
+    "Médicos especialistas en diagnóstico por imágenes con trato cercano y cálido.",
+    "Equipamiento digital de última generación con entrega rápida de informes.",
+    "Coordinación directa con ginecología, obstetricia y otras especialidades del centro.",
+    "Turnos por WhatsApp para agilizar la gestión y evitar esperas innecesarias.",
+];
+
+const faqItems: FaqItem[] = [
+    {
+        question: "¿Qué estudios ecográficos puedo hacer en CeFEM?",
+        answer: "Realizamos ecografías generales, obstétricas, ginecológicas, mamarias, renales y doppler color. Consultanos si necesitás un estudio específico.",
+    },
+    {
+        question: "¿Cuánto demora el estudio y cómo recibo los resultados?",
+        answer: "La mayoría de las ecografías dura entre 15 y 30 minutos. Entregamos un informe digital o impreso en el día, acompañado por imágenes y recomendaciones médicas.",
+    },
+    {
+        question: "¿Atienden con obras sociales para ecografías?",
+        answer: "Sí, trabajamos con diferentes coberturas y también ofrecemos tarifas particulares. Escribinos por WhatsApp para validar tu obra social o coordinar formas de pago.",
+    },
+];
+
+const ctaContent = {
+    eyebrow: "RESERVÁ TU ESTUDIO",
+    title: "Coordiná tu ecografía en Las Rosas",
+    description: "Escribinos por WhatsApp y recibí asesoramiento para elegir el tipo de ecografía que necesitás y conocer la preparación adecuada.",
+    button: {
+        text: "Solicitar turno por WhatsApp",
+        link: "https://wa.me/5493471341461",
+        variant: "primary" as const,
+        target: "_blank" as const,
+    },
+};
+---
+
+<Layout
+    title="Ecografías en Las Rosas con Doppler y Obstétricas | CeFEM"
+    description="Ecografías generales, obstétricas, doppler y ginecológicas en CeFEM Las Rosas. Turnos rápidos, informes confiables y especialistas en diagnóstico por imágenes."
+    canonicalUrl="/ecografias-las-rosas/"
+>
+    <InnerHero content={heroContent} />
+
+    <section class="py-16 md:py-24 bg-background">
+        <div class="site-container mx-auto px-4 grid gap-12 lg:grid-cols-[3fr_2fr] items-start">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Estudios ecográficos realizados en CeFEM</h2>
+                <p class="text-lg text-body-base mb-8">
+                    Nuestro servicio de diagnóstico por imágenes combina equipos digitales de alta definición con médicos especialistas que interpretan cada estudio con precisión. Coordinamos los turnos con las diferentes áreas del centro para brindarte un seguimiento integral y sin traslados innecesarios.
+                </p>
+                <div class="grid gap-6 md:grid-cols-2">
+                    {examSections.map((item) => (
+                        <article class="p-6 rounded-xl border border-primary/30 bg-white shadow-sm">
+                            <h3 class="text-xl font-semibold text-primary mb-3">{item.title}</h3>
+                            <p class="text-body-base leading-relaxed">{item.description}</p>
+                        </article>
+                    ))}
+                </div>
+            </div>
+            <aside class="p-6 bg-primary/10 border border-primary/20 rounded-2xl">
+                <h3 class="text-2xl font-semibold text-primary mb-4">Preparación para tu turno</h3>
+                <ul class="space-y-3 text-body-base">
+                    {preparationTips.map((tip) => (
+                        <li class="flex items-start gap-3">
+                            <span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-primary"></span>
+                            <span>{tip}</span>
+                        </li>
+                    ))}
+                </ul>
+            </aside>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-20 bg-background-alt">
+        <div class="site-container mx-auto px-4">
+            <div class="max-w-3xl mb-10">
+                <h2 class="text-3xl md:text-4xl font-semibold mb-4">¿Por qué elegir CeFEM para tus ecografías?</h2>
+                <p class="text-lg text-body-base">
+                    Somos el único centro de Las Rosas que integra diagnóstico por imágenes con ginecología, obstetricia, pediatría y clínica médica. Eso nos permite compartir resultados de forma inmediata, coordinar interconsultas y acompañarte en cada etapa del tratamiento.
+                </p>
+            </div>
+            <div class="grid gap-6 md:grid-cols-2">
+                {differentiators.map((value) => (
+                    <div class="p-6 rounded-xl bg-white border border-background-light shadow-sm">
+                        <p class="text-body-base text-lg">{value}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <Faqs
+        content={{
+            eyebrow: "PREGUNTAS FRECUENTES",
+            title: "Consultas comunes sobre ecografías en CeFEM",
+            description: "Respondemos las dudas más habituales para que llegues preparado a tu estudio y aproveches al máximo la consulta.",
+            faqs: faqItems,
+        }}
+        background="base"
+        paddingTop="large"
+        paddingBottom="large"
+    />
+
+    <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+</Layout>

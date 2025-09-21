@@ -1,0 +1,121 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import CtaBanner from "@components/sections/CtaBanner.astro";
+import Faqs from "@components/sections/Faqs.astro";
+import type { FaqItem } from "@data/faqs";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+    title: "Ginecología y Obstetricia en Las Rosas",
+    description: "Controles preventivos, seguimiento del embarazo y acompañamiento integral de la salud femenina en CeFEM.",
+    imageAlt: "Consulta de ginecología en CeFEM Las Rosas",
+    backgroundImage: heroImage,
+    overlayOpacity: 0.35,
+};
+
+const careHighlights = [
+    "Consultas ginecológicas de rutina, papanicolau y colposcopía",
+    "Control preconcepcional y planificación familiar",
+    "Seguimiento del embarazo con ecografías en el mismo centro",
+    "Menopausia y climaterio: tratamiento de síntomas y controles complementarios",
+];
+
+const services = [
+    {
+        title: "Prevención y controles anuales",
+        description: "Realizamos chequeos completos con papanicolau, exámenes clínicos mamarios y estudios complementarios según la edad de cada paciente.",
+    },
+    {
+        title: "Salud sexual y planificación",
+        description: "Brindamos asesoramiento en anticoncepción, colocación de DIU, implantes subdérmicos y acompañamiento en decisiones reproductivas informadas.",
+    },
+    {
+        title: "Embarazo cuidado",
+        description: "Acompañamos cada trimestre con ecografías obstétricas, laboratorio y coordinación con nutrición, clínica médica y pediatría.",
+    },
+    {
+        title: "Atención de patologías",
+        description: "Tratamos infecciones ginecológicas, trastornos hormonales, dolores pélvicos y realizamos controles postquirúrgicos.",
+    },
+];
+
+const faqItems: FaqItem[] = [
+    {
+        question: "¿Cada cuánto debo realizarme un control ginecológico?",
+        answer: "Recomendamos un chequeo anual, incluso si no presentás síntomas. Nos permite detectar a tiempo cambios en el cuello uterino, mamas y hormonas.",
+    },
+    {
+        question: "¿Puedo coordinar estudios en el mismo turno?",
+        answer: "Sí. Integramos consultorio ginecológico con el servicio de ecografías y laboratorio cercano para que resuelvas todo en una sola visita.",
+    },
+    {
+        question: "¿Atienden embarazos de alto riesgo?",
+        answer: "Trabajamos en equipo con obstetras y especialistas externos. Si tu embarazo requiere seguimiento específico, articulamos interconsultas y controles doppler.",
+    },
+];
+
+const ctaContent = {
+    eyebrow: "CUIDADO INTEGRAL",
+    title: "Agendá tu consulta ginecológica",
+    description: "Solicitá un turno para controles preventivos, asesoramiento anticonceptivo o seguimiento del embarazo en CeFEM Las Rosas.",
+    button: {
+        text: "Solicitar turno por WhatsApp",
+        link: "https://wa.me/5493471341461",
+        variant: "primary" as const,
+        target: "_blank" as const,
+    },
+};
+---
+
+<Layout
+    title="Ginecología y Obstetricia en Las Rosas | CeFEM"
+    description="Consultas ginecológicas, planificación familiar y seguimiento del embarazo en CeFEM Las Rosas. Equipo médico cercano y ecografías en el mismo centro."
+    canonicalUrl="/ginecologia/"
+>
+    <InnerHero content={heroContent} />
+
+    <section class="py-16 md:py-20 bg-background">
+        <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-[3fr_2fr] items-start">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Acompañamiento ginecológico en cada etapa</h2>
+                <p class="text-lg text-body-base mb-6">
+                    Nuestros consultorios están diseñados para brindar contención y privacidad. Escuchamos tus inquietudes, explicamos cada estudio y elaboramos planes personalizados, ya sea para controles preventivos, planificación familiar o seguimiento del embarazo.
+                </p>
+                <div class="grid gap-6 md:grid-cols-2">
+                    {services.map((service) => (
+                        <article class="p-6 rounded-xl border border-primary/20 bg-white shadow-sm">
+                            <h3 class="text-xl font-semibold text-primary mb-3">{service.title}</h3>
+                            <p class="text-body-base leading-relaxed">{service.description}</p>
+                        </article>
+                    ))}
+                </div>
+            </div>
+            <aside class="p-6 rounded-2xl bg-primary/10 border border-primary/20">
+                <h3 class="text-2xl font-semibold text-primary mb-4">Cómo preparamos tu consulta</h3>
+                <ul class="space-y-3 text-body-base">
+                    {careHighlights.map((item) => (
+                        <li class="flex items-start gap-3">
+                            <span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-primary"></span>
+                            <span>{item}</span>
+                        </li>
+                    ))}
+                </ul>
+            </aside>
+        </div>
+    </section>
+
+    <Faqs
+        content={{
+            eyebrow: "PREGUNTAS FRECUENTES",
+            title: "Consultas habituales de ginecología",
+            description: "Respondemos las dudas que más escuchamos en consultorio para que llegues tranquila a tu turno.",
+            faqs: faqItems,
+        }}
+        background="base"
+        paddingTop="large"
+        paddingBottom="large"
+    />
+
+    <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+</Layout>

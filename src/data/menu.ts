@@ -12,12 +12,12 @@ export const headerMenu: MenuItem[] = [
 ];
 
 export const footerMenu: MenuItem[] = [
-  { name: 'Ecografías en Las Rosas', link: '/especialidades' },
-  { name: 'Pediatría', link: '/especialidades' },
+  { name: 'Ecografías en Las Rosas', link: '/ecografias-las-rosas/' },
+  { name: 'Pediatría', link: '/pediatria/' },
   { name: 'Traumatología', link: '/especialidades' },
-  { name: 'Ginecología y Obstetricia', link: '/especialidades' },
+  { name: 'Ginecología y Obstetricia', link: '/ginecologia/' },
   { name: 'Urología', link: '/especialidades' },
-  { name: 'Nutrición', link: '/especialidades' },
+  { name: 'Nutrición', link: '/nutricion/' },
   { name: 'Depilación', link: '/especialidades' },
   { name: 'Solicitar Turno por WhatsApp', link: 'https://wa.me/5493471341461' },
 ];

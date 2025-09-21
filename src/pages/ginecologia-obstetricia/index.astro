@@ -1,0 +1,167 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import CtaBanner from "@components/sections/CtaBanner.astro";
+import Faqs from "@components/sections/Faqs.astro";
+import YoutubeLite from "@components/YoutubeLite.astro";
+import type { FaqItem } from "@data/faqs";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+  title: "Ginecología y Obstetricia Integral en Las Rosas – Cefem",
+  description:
+    "Controles preventivos, salud sexual, seguimiento del embarazo y ecografías obstétricas en Cefem – Centro Familiar de Especialidades Médicas.",
+  imageAlt: "Consulta ginecológica en Cefem Las Rosas",
+  backgroundImage: heroImage,
+  overlayOpacity: 0.35,
+};
+
+const services = [
+  {
+    title: "Controles ginecológicos",
+    description:
+      "Chequeos anuales, PAP, colposcopía, asesoramiento en anticoncepción y seguimiento de patologías ginecológicas.",
+  },
+  {
+    title: "Acompañamiento del embarazo",
+    description:
+      "Controles prenatales, ecografías obstétricas y coordinación con nutrición y pediatría para cada etapa.",
+  },
+  {
+    title: "Salud sexual y climaterio",
+    description:
+      "Consultas personalizadas sobre planificación familiar, fertilidad y cuidados durante la menopausia.",
+  },
+];
+
+const faqItems: FaqItem[] = [
+  {
+    question: "¿Cada cuánto realizar un control ginecológico?",
+    answer: "Recomendamos al menos una vez al año o según lo indique tu profesional de confianza.",
+  },
+  {
+    question: "¿Puedo realizar la ecografía obstétrica en Cefem?",
+    answer:
+      "Sí. Contamos con ecógrafos propios y coordinamos el estudio durante la consulta para evitar traslados.",
+  },
+  {
+    question: "¿Qué cobertura aceptan?",
+    answer:
+      "Trabajamos con obras sociales y planes particulares. Escribinos por WhatsApp para confirmar la tuya.",
+  },
+];
+
+const ctaContent = {
+  eyebrow: "SALUD FEMENINA",
+  title: "Reservá tu turno ginecológico",
+  description:
+    "Coordiná controles preventivos, asesoramiento anticonceptivo o seguimiento del embarazo en Cefem Las Rosas.",
+  button: {
+    text: "Solicitar turno",
+    link: "https://wa.me/5493471341461",
+    variant: "primary" as const,
+    target: "_blank" as const,
+  },
+};
+
+const video = {
+  id: "eruZqiTysJA",
+  name: "Doppler en embarazo y controles prenatales – Dr. Alfonso Álamo",
+  description:
+    "El Dr. Alfonso Álamo (Cefem) comparte recomendaciones sobre ecografías y cuidados durante el embarazo en Las Rosas.",
+  uploadDate: "2022-04-10",
+};
+
+const videoJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name: video.name,
+  description: video.description,
+  thumbnailUrl: [`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`],
+  uploadDate: video.uploadDate,
+  publisher: {
+    "@type": "Organization",
+    name: "Cefem – Centro Familiar de Especialidades Médicas",
+  },
+  contentUrl: `https://www.youtube.com/watch?v=${video.id}`,
+  embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
+};
+---
+<Layout
+  title="Ginecología y Obstetricia en Las Rosas | Cefem"
+  description="Consultas ginecológicas, planificación familiar y seguimiento del embarazo en Cefem Las Rosas. Equipo cercano con ecografías obstétricas y controles integrados."
+  canonicalUrl="/ginecologia-obstetricia/"
+>
+  <script type="application/ld+json" is:inline>{JSON.stringify(videoJsonLd)}</script>
+  <InnerHero content={heroContent} />
+
+  <section class="py-16 md:py-24 bg-background">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-[3fr_2fr] items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Salud integral para cada etapa</h2>
+        <p class="text-lg text-body-base mb-6">
+          En Cefem acompañamos a mujeres y familias con controles preventivos, planificación familiar y seguimiento obstétrico completo.
+          Coordinamos estudios complementarios como <a href="/ecografias-doppler-embarazo-las-rosas/" class="text-primary underline">Doppler obstétrico</a> y <a href="/ecografias-abdominales-las-rosas/" class="text-primary underline">ecografías abdominales</a> dentro del mismo edificio.
+        </p>
+        <div class="grid gap-6 md:grid-cols-2">
+          {services.map((service) => (
+            <article class="p-6 bg-white border border-primary/10 rounded-xl shadow-sm">
+              <h3 class="text-xl font-semibold text-primary mb-3">{service.title}</h3>
+              <p class="text-body-base leading-relaxed">{service.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Cómo prepararte para tu turno</h3>
+        <ul class="space-y-3 text-body-base">
+          <li>Traé estudios previos y resultados de laboratorio.</li>
+          <li>Anotá dudas sobre anticoncepción, fertilidad o síntomas para conversarlas durante la consulta.</li>
+          <li>Si estás embarazada, acercá tu libreta prenatal para actualizar los controles.</li>
+        </ul>
+        <p class="mt-6 text-sm text-body-dark">
+          También articulamos con <a href="/pediatria/" class="text-primary underline">pediatría</a> y <a href="/nutricion/" class="text-primary underline">nutrición</a> para acompañar a la familia en cada etapa.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20 bg-background-alt">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-2 items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-4">Video: controles prenatales en Cefem</h2>
+        <p class="text-lg text-body-base mb-6">
+          Conocé cómo planificamos las ecografías Doppler y los chequeos obstétricos para garantizar el bienestar del bebé y la mamá en Las Rosas.
+        </p>
+        <div class="rounded-2xl overflow-hidden shadow-lg">
+          <YoutubeLite id={video.id} title={video.name} />
+        </div>
+        <p class="mt-6 text-body-base">
+          Reforzá tus controles leyendo la guía sobre <a href="/blog/doppler-embarazo-cuando-hacerlo" class="text-primary underline">cuándo realizar el Doppler en el embarazo</a> y programando ecografías complementarias en Cefem.
+        </p>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Beneficios de atenderte en Cefem</h3>
+        <ul class="space-y-3 text-body-base">
+          <li>Profesionales cercanos con enfoque familiar.</li>
+          <li>Interconsulta inmediata con diagnóstico por imágenes.</li>
+          <li>Turnos coordinados por WhatsApp sin largas esperas.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <Faqs
+    content={{
+      eyebrow: "PREGUNTAS FRECUENTES",
+      title: "Consultas ginecológicas habituales",
+      description: "Aclaramos dudas sobre controles preventivos, embarazo y cobertura en Cefem.",
+      faqs: faqItems,
+    }}
+    background="base"
+    paddingTop="large"
+    paddingBottom="large"
+  />
+
+  <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+</Layout>

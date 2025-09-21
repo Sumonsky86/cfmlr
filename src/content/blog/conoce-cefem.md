@@ -39,6 +39,6 @@ Nuestra práctica diaria se guía por un conjunto de valores que nos definen:
 
 ## Únete a Nuestra Comunidad
 
-Te invitamos a conocernos y a confiar en nosotros para el cuidado de tu salud y la de tu familia. En CeFEM, encontrarás más que un centro médico; encontrarás un equipo de personas dedicadas a tu bienestar.
+Te invitamos a conocernos y a confiar en nosotros para el cuidado de tu salud y la de tu familia. En Cefem, encontrarás más que un centro médico; encontrarás un equipo de personas dedicadas a tu bienestar.
 
 ¿Listo para dar el primer paso? Agenda tu turno con nosotros.

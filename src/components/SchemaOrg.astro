@@ -1,0 +1,20 @@
+---
+import { siteConfig } from "@data/config";
+
+const schemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "MedicalOrganization",
+  name: siteConfig.companyName,
+  alternateName: "Cefem",
+  url: siteConfig.siteUrl,
+  logo: new URL("/cefem.png", siteConfig.siteUrl).toString(),
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Las Rosas",
+    addressRegion: "Santa Fe",
+    addressCountry: "AR",
+  },
+  sameAs: [siteConfig.Socials.Facebook].filter(Boolean),
+});
+---
+<script type="application/ld+json" is:inline>{schemaJson}</script>

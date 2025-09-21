@@ -13,12 +13,29 @@ interface Props {
 const { padding, paddingTop, paddingBottom } = Astro.props;
 const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
-const teamMembers = await getCollection('team', ({ data }) => {
-    return data.publish !== false;
-});
+let teamMembers: any[] = [];
+try {
+    // @ts-ignore Optional team collection not defined in all deployments
+    teamMembers = await getCollection('team');
+} catch (error) {
+    teamMembers = [];
+}
 
-  
-const sortedTeamMembers = teamMembers.sort((a, b) => a.data.order - b.data.order);
+const filteredMembers = Array.isArray(teamMembers)
+    ? teamMembers.filter((member) => member?.data?.publish !== false)
+    : [];
+
+const sortedTeamMembers = filteredMembers
+    .map((member) => ({
+        id: member?.id ?? "",
+        data: {
+            name: member?.data?.name ?? "",
+            jobTitle: member?.data?.jobTitle ?? "",
+            headshot: member?.data?.headshot,
+            order: member?.data?.order ?? 0,
+        },
+    }))
+    .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <section class:list={['relative', paddingClass]}>
@@ -32,13 +49,17 @@ const sortedTeamMembers = teamMembers.sort((a, b) => a.data.order - b.data.order
                         data-aos-delay={index * 100}
                         data-aos-duration="800"
                     >
-                        <a href={`/team/${member.id}`} class="flex flex-col group rounded-md">
+                        <a
+                            href={member.id ? `/team/${member.id}` : '#'}
+                            class="flex flex-col group rounded-md"
+                            aria-disabled={member.id ? undefined : 'true'}
+                        >
                             <div class="relative mb-4 overflow-hidden rounded-md">
                                 <span class="absolute inset-0 -mt-12 h-400 w-1/2 translate-x-[250%] rotate-12 bg-white opacity-20  group-hover:transition-all  group-hover:duration-300 ease-out group-hover:translate-x-[-250%] z-10" />
                                 {member.data.headshot ? (
                                     <Image
                                         src={member.data.headshot}
-                                        alt={member.data.name}
+                                        alt={member.data.name || 'Profesional de Cefem'}
                                         width={896}
                                         height={1280}
                                         quality={80}
@@ -54,9 +75,9 @@ const sortedTeamMembers = teamMembers.sort((a, b) => a.data.order - b.data.order
                                 )}
                             </div>
                             <h3 class="text-h5 font-medium transition-colors duration-500 group-hover:text-primary">
-                                {member.data.name}
+                                {member.data.name || 'Profesional de Cefem'}
                             </h3>
-                            <p class="text-xsmall text-body-base">{member.data.jobTitle}</p>
+                            {member.data.jobTitle && <p class="text-xsmall text-body-base">{member.data.jobTitle}</p>}
                         </a>
                     </div>
                 ))

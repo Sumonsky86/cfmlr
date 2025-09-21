@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import sitemap from '@astrojs/sitemap';
 
-const site = 'https://www.cefem.ar';
+const site = 'https://www.cefem.ar/';
 
 export default defineConfig({
   site,

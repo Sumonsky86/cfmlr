@@ -1,0 +1,102 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+  title: "Prensa y Entrevistas de Cefem",
+  description:
+    "Reviví notas con nuestros especialistas sobre ecografías, pediatría, ginecología, cirugía vascular y traumatología en Las Rosas.",
+  imageAlt: "Equipo médico de Cefem durante una entrevista",
+  backgroundImage: heroImage,
+  overlayOpacity: 0.35,
+};
+
+const highlights = [
+  {
+    title: "Pediatría: controles y prevención",
+    description: "Recomendaciones del Dr. Gustavo Blanco para familias de Las Rosas.",
+    link: "/blog/pediatria-controles-y-prevencion-las-rosas",
+    image: "https://img.youtube.com/vi/M4_HOnatb5c/hqdefault.jpg",
+    alt: "Entrevista de pediatría en Cefem",
+  },
+  {
+    title: "Doppler obstétrico y embarazo",
+    description: "El Dr. Alfonso Álamo explica cuándo realizar la ecografía Doppler.",
+    link: "/ecografias-doppler-embarazo-las-rosas/",
+    image: "https://img.youtube.com/vi/eruZqiTysJA/hqdefault.jpg",
+    alt: "Entrevista sobre Doppler obstétrico",
+  },
+  {
+    title: "Várices: cuándo consultar",
+    description: "El Dr. Alejandro Álamo brinda consejos para aliviar síntomas y prevenir complicaciones.",
+    link: "/cirugia-vascular-varices-las-rosas/",
+    image: "https://img.youtube.com/vi/qz4ytAzTPAg/hqdefault.jpg",
+    alt: "Entrevista sobre várices en Cefem",
+  },
+  {
+    title: "Lesiones deportivas",
+    description: "Pautas del Dr. Pablo González para prevenir y tratar lesiones musculares.",
+    link: "/ecografias-partes-blandas-lesiones-deportivas/",
+    image: "https://img.youtube.com/vi/YemQ4dCJDvw/hqdefault.jpg",
+    alt: "Entrevista de traumatología deportiva",
+  },
+];
+---
+<Layout
+  title="Prensa y Entrevistas Médicas – Cefem Las Rosas"
+  description="Notas y entrevistas de Cefem – Centro Familiar de Especialidades Médicas. Videos y artículos sobre ecografías, pediatría, traumatología y cirugía vascular."
+  canonicalUrl="/prensa-entrevistas/"
+>
+  <InnerHero content={heroContent} />
+
+  <section class="py-16 md:py-20 bg-background">
+    <div class="site-container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Playlist de entrevistas</h2>
+      <p class="text-lg text-body-base mb-6">
+        Explorá la playlist con entrevistas recientes a nuestros profesionales. Podés reproducir los videos sin salir de cefem.ar para mantener una experiencia ágil.
+      </p>
+      <div class="rounded-2xl overflow-hidden shadow-lg">
+        <iframe
+          loading="lazy"
+          width="100%"
+          height="420"
+          src="https://www.youtube-nocookie.com/embed/videoseries?list=PL_TU_PLAYLIST"
+          title="Entrevistas – Cefem"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20 bg-background-alt">
+    <div class="site-container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Notas destacadas</h2>
+      <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+        {highlights.map((item) => (
+          <article class="bg-white border border-background-light rounded-2xl shadow-sm overflow-hidden flex flex-col">
+            <a href={item.link} class="block" aria-label={`Ir a ${item.title}`}>
+              <img
+                src={item.image}
+                alt={item.alt}
+                loading="lazy"
+                width="640"
+                height="360"
+                class="w-full h-48 object-cover"
+              />
+            </a>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-xl font-semibold text-primary mb-3">{item.title}</h3>
+              <p class="text-body-base flex-1">{item.description}</p>
+              <a href={item.link} class="mt-6 inline-flex items-center gap-2 text-primary font-semibold">
+                Ver más
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

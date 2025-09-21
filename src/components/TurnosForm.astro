@@ -43,10 +43,14 @@ const specialties = featureLists.main.features.map(feature => feature.title);
 </form>
 
 <script>
-    document.getElementById('turnos-form').addEventListener('submit', function(event) {
+    const formElement = document.getElementById('turnos-form');
+    const messageElement = document.getElementById('form-message');
+
+    if (formElement) {
+        formElement.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        const form = event.target as HTMLFormElement;
+        const form = event.currentTarget as HTMLFormElement;
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
@@ -76,8 +80,11 @@ const specialties = featureLists.main.features.map(feature => feature.title);
         // });
 
         // Mock success message for now
-        document.getElementById('form-message').textContent = '¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto a la brevedad.';
-        document.getElementById('form-message').style.color = 'green';
+        if (messageElement) {
+            messageElement.textContent = '¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto a la brevedad.';
+            messageElement.style.color = 'green';
+        }
         form.reset();
     });
+    }
 </script>

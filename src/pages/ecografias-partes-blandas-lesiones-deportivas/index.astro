@@ -1,0 +1,176 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import CtaBanner from "@components/sections/CtaBanner.astro";
+import Faqs from "@components/sections/Faqs.astro";
+import YoutubeLite from "@components/YoutubeLite.astro";
+import type { FaqItem } from "@data/faqs";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+  title: "Ecografías de Partes Blandas y Lesiones Deportivas – Cefem Las Rosas",
+  description:
+    "Diagnóstico rápido de desgarros, tendinopatías y traumatismos con ecografías musculares realizadas por especialistas en Cefem.",
+  imageAlt: "Ecografía de partes blandas en Cefem Las Rosas",
+  backgroundImage: heroImage,
+  overlayOpacity: 0.4,
+};
+
+const indications = [
+  {
+    title: "Lesiones musculares y tendinosas",
+    description:
+      "Identificamos desgarros, contracturas, tendinopatías y rupturas parciales para planificar la recuperación deportiva.",
+  },
+  {
+    title: "Evaluación de ligamentos y articulaciones",
+    description:
+      "Analizamos esguinces, derrames articulares y lesiones ligamentarias en rodilla, tobillo, hombro y codo.",
+  },
+  {
+    title: "Control de lesiones crónicas",
+    description:
+      "Seguimos la evolución de fascitis plantar, epicondilitis y traumatismos repetitivos con informes comparativos.",
+  },
+];
+
+const preparation = [
+  "Presentate con ropa cómoda o deportiva para descubrir fácilmente la zona a evaluar.",
+  "Si tenés estudios previos (RX, resonancias), traelos para comparar la evolución.",
+  "En caso de dolor agudo, avisá al especialista para adaptar la posición durante la ecografía.",
+];
+
+const faqItems: FaqItem[] = [
+  {
+    question: "¿Cuánto dura una ecografía de partes blandas?",
+    answer: "El estudio dura entre 15 y 25 minutos, dependiendo de la zona y la complejidad de la lesión.",
+  },
+  {
+    question: "¿Se puede realizar después de una lesión reciente?",
+    answer:
+      "Sí. Recomendamos esperar al menos 48 horas para que la inflamación inicial disminuya y obtener imágenes más claras.",
+  },
+  {
+    question: "¿Quién interpreta los resultados?",
+    answer:
+      "Los médicos especialistas de Cefem generan un informe inmediato y coordinan, si es necesario, una consulta con traumatología o kinesiología.",
+  },
+];
+
+const ctaContent = {
+  eyebrow: "CUIDADO DEPORTIVO",
+  title: "Agendá tu ecografía musculoesquelética",
+  description:
+    "Confirmá desgarros y lesiones deportivas con especialistas de Cefem en Las Rosas. Coordinamos turnos rápidos y seguimiento personalizado.",
+  button: {
+    text: "Solicitar turno",
+    link: "https://wa.me/5493471341461",
+    variant: "primary" as const,
+    target: "_blank" as const,
+  },
+};
+
+const video = {
+  id: "YemQ4dCJDvw",
+  name: "Prevención y tratamiento de lesiones deportivas – Dr. Pablo González",
+  description:
+    "El Dr. Pablo González (Cefem) comparte recomendaciones para prevenir lesiones y aprovechar las ecografías musculares.",
+  uploadDate: "2022-03-20",
+};
+
+const videoJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name: video.name,
+  description: video.description,
+  thumbnailUrl: [`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`],
+  uploadDate: video.uploadDate,
+  publisher: {
+    "@type": "Organization",
+    name: "Cefem – Centro Familiar de Especialidades Médicas",
+  },
+  contentUrl: `https://www.youtube.com/watch?v=${video.id}`,
+  embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
+};
+---
+<Layout
+  title="Ecografías de Partes Blandas y Lesiones Deportivas en Las Rosas | Cefem"
+  description="Ecografías musculares en Cefem Las Rosas para diagnosticar desgarros, tendinopatías y lesiones deportivas. Informes inmediatos y equipo traumatológico."
+  canonicalUrl="/ecografias-partes-blandas-lesiones-deportivas/"
+>
+  <script type="application/ld+json" is:inline>{JSON.stringify(videoJsonLd)}</script>
+  <InnerHero content={heroContent} />
+
+  <section class="py-16 md:py-24 bg-background">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-[3fr_2fr] items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Diagnóstico ágil para volver a entrenar</h2>
+        <p class="text-lg text-body-base mb-6">
+          En Cefem contamos con ecógrafos de alta definición y especialistas en traumatología deportiva para evaluar lesiones de forma rápida.
+          Coordinamos el tratamiento con kinesiología y, si es necesario, con el servicio de <a href="/cirugia-vascular-varices-las-rosas/" class="text-primary underline">cirugía vascular</a> para descartar complicaciones circulatorias.
+        </p>
+        <div class="grid gap-6 md:grid-cols-2">
+          {indications.map((item) => (
+            <article class="p-6 bg-white border border-primary/10 rounded-xl shadow-sm">
+              <h3 class="text-xl font-semibold text-primary mb-3">{item.title}</h3>
+              <p class="text-body-base leading-relaxed">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Cómo prepararte</h3>
+        <ul class="space-y-3 text-body-base">
+          {preparation.map((item) => (
+            <li class="flex gap-3">
+              <span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-primary"></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-sm text-body-dark">
+          También realizamos <a href="/ecografias-abdominales-las-rosas/" class="text-primary underline">ecografías abdominales</a> y <a href="/pediatria/" class="text-primary underline">controles pediátricos</a> dentro del mismo centro.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20 bg-background-alt">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-2 items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-4">Video: recomendaciones para deportistas</h2>
+        <p class="text-lg text-body-base mb-6">
+          El Dr. Pablo González explica cómo prevenir lesiones y cuándo realizar una ecografía para controlar el estado de músculos y tendones.
+        </p>
+        <div class="rounded-2xl overflow-hidden shadow-lg">
+          <YoutubeLite id={video.id} title={video.name} />
+        </div>
+        <p class="mt-6 text-body-base">
+          Complementá tu rehabilitación solicitando turnos de <a href="/traumatologia/" class="text-primary underline">traumatología</a> y nutrición deportiva dentro de Cefem.
+        </p>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Beneficios del estudio en Cefem</h3>
+        <ul class="space-y-3 text-body-base">
+          <li>Evaluación en tiempo real con pruebas dinámicas.</li>
+          <li>Informes entregados al finalizar el turno.</li>
+          <li>Coordinación con kinesiólogos y médicos del club si lo necesitás.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <Faqs
+    content={{
+      eyebrow: "PREGUNTAS FRECUENTES",
+      title: "Consultas sobre ecografías musculares en Cefem",
+      description: "Aclaramos dudas comunes de deportistas y pacientes que necesitan seguimiento de lesiones blandas.",
+      faqs: faqItems,
+    }}
+    background="base"
+    paddingTop="large"
+    paddingBottom="large"
+  />
+
+  <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+</Layout>

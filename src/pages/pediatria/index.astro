@@ -3,13 +3,14 @@ import Layout from "@layouts/Layout.astro";
 import InnerHero from "@components/sections/InnerHero.astro";
 import CtaBanner from "@components/sections/CtaBanner.astro";
 import Faqs from "@components/sections/Faqs.astro";
+import YoutubeLite from "@components/YoutubeLite.astro";
 import type { FaqItem } from "@data/faqs";
 import heroImage from "../../assets/images/blog-hero-2.jpg";
 
 const heroContent = {
-    title: "Pediatría en Las Rosas – CeFEM",
+    title: "Pediatría en Las Rosas – Cefem",
     description: "Consultas de control, niño sano, vacunación y seguimiento integral del desarrollo infantil.",
-    imageAlt: "Consulta pediátrica en CeFEM Las Rosas",
+    imageAlt: "Consulta pediátrica en Cefem Las Rosas",
     backgroundImage: heroImage,
     overlayOpacity: 0.35,
 };
@@ -47,13 +48,35 @@ const faqItems: FaqItem[] = [
     },
     {
         question: "¿Atienden urgencias fuera del horario habitual?",
-        answer: "Coordinamos derivaciones y seguimiento con guardias locales. Ante síntomas agudos, escribinos por WhatsApp para que el pediatra de CeFEM te guíe con los pasos a seguir.",
+        answer: "Coordinamos derivaciones y seguimiento con guardias locales. Ante síntomas agudos, escribinos por WhatsApp para que el pediatra de Cefem te guíe con los pasos a seguir.",
     },
     {
-        question: "¿Puedo coordinar estudios complementarios en CeFEM?",
+        question: "¿Puedo coordinar estudios complementarios en Cefem?",
         answer: "Sí. Contamos con servicio de ecografías, laboratorio cercano y especialistas de otras áreas para brindar diagnósticos completos en menos tiempo.",
     },
 ];
+
+const video = {
+    id: "M4_HOnatb5c",
+    name: "Entrevista Dr. Gustavo Blanco – Consejos de Pediatría",
+    description: "El Dr. Gustavo Blanco (Cefem) comparte recomendaciones para controles pediátricos en Las Rosas.",
+    uploadDate: "2021-10-15",
+};
+
+const videoJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: video.name,
+    description: video.description,
+    thumbnailUrl: [`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`],
+    uploadDate: video.uploadDate,
+    publisher: {
+        "@type": "Organization",
+        name: "Cefem – Centro Familiar de Especialidades Médicas",
+    },
+    contentUrl: `https://www.youtube.com/watch?v=${video.id}`,
+    embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
+};
 
 const ctaContent = {
     eyebrow: "NIÑOS CUIDADOS",
@@ -69,10 +92,11 @@ const ctaContent = {
 ---
 
 <Layout
-    title="Pediatría en Las Rosas para controles y urgencias leves | CeFEM"
-    description="Consultas pediátricas, control del niño sano, vacunación y asesoramiento a familias en CeFEM Las Rosas. Turnos rápidos por WhatsApp."
+    title="Pediatría en Las Rosas para controles y urgencias leves | Cefem"
+    description="Consultas pediátricas, control del niño sano, vacunación y asesoramiento a familias en Cefem Las Rosas. Turnos rápidos por WhatsApp."
     canonicalUrl="/pediatria/"
 >
+    <script type="application/ld+json" is:inline>{JSON.stringify(videoJsonLd)}</script>
     <InnerHero content={heroContent} />
 
     <section class="py-16 md:py-20 bg-background">
@@ -80,7 +104,7 @@ const ctaContent = {
             <div>
                 <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Atención pediátrica cercana y constante</h2>
                 <p class="text-lg text-body-base mb-6">
-                    Cuidamos la salud de bebés, niños y adolescentes con una mirada integral. Construimos un vínculo de confianza con cada familia para acompañar dudas cotidianas, enfermedades frecuentes y la transición hacia la adolescencia.
+                    En Cefem – Centro Familiar de Especialidades Médicas, cuidamos la salud de bebés, niños y adolescentes con una mirada integral. Construimos un vínculo de confianza con cada familia para acompañar dudas cotidianas, enfermedades frecuentes y la transición hacia la adolescencia.
                 </p>
                 <div class="grid gap-6 md:grid-cols-2">
                     {serviceBlocks.map((block) => (
@@ -100,6 +124,31 @@ const ctaContent = {
                             <span>{item}</span>
                         </li>
                     ))}
+                </ul>
+            </aside>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-20 bg-background-alt">
+        <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-2 items-start">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-4">Video: controles pediátricos en Las Rosas</h2>
+                <p class="text-lg text-body-base mb-6">
+                    El Dr. Gustavo Blanco comparte consejos sobre control del niño sano, vacunación y prevención de enfermedades respiratorias para familias de Las Rosas. Mirá la entrevista y reservá tu turno sin salir del sitio de Cefem.
+                </p>
+                <div class="rounded-2xl overflow-hidden shadow-lg">
+                    <YoutubeLite id={video.id} title={video.name} />
+                </div>
+                <p class="mt-6 text-body-base">
+                    Después de ver la nota podés agendar un control o explorar estudios complementarios como las <a href="/ecografias-abdominales-las-rosas/" class="text-primary underline">ecografías abdominales</a> y el <a href="/ecografias-doppler-embarazo-las-rosas/" class="text-primary underline">Doppler obstétrico</a> que coordinamos dentro de Cefem.
+                </p>
+            </div>
+            <aside class="bg-white border border-background-light rounded-2xl p-6">
+                <h3 class="text-2xl font-semibold text-primary mb-4">Coordiná tu consulta</h3>
+                <ul class="space-y-3 text-body-base">
+                    <li>Turnos por WhatsApp: <a href="https://wa.me/5493471341461" class="text-primary underline" target="_blank" rel="noopener">549 3471 341461</a>.</li>
+                    <li>Consultas presenciales en Boulevard Kemmis 843, Las Rosas.</li>
+                    <li>Interconsulta directa con ginecología, nutrición y traumatología del centro.</li>
                 </ul>
             </aside>
         </div>

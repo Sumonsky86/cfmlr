@@ -2,8 +2,8 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import SchemaOrg from "../components/SchemaOrg.astro";
 import { SEO, siteConfig } from "../data/config";
-
 import { themeSetting } from "../data/config";
 const { theme } = themeSetting;
 
@@ -28,75 +28,62 @@ interface Props {
 
 const { title, description, image, footerCta, canonicalUrl } = Astro.props;
 
-const pageTitle = title ? (title.toLowerCase().includes(SiteName.toLowerCase()) ? title : `${title} ${Separator} ${SiteName}`) : SiteName;
-const pageDescription = description || defaultDescription || '';
-const pageImage = image || '';
-const canonicalPath = canonicalUrl || Astro.url.pathname;
-const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
-  
-const schema = {
-  "@context":"https://schema.org",
-  "@type":"MedicalBusiness",
-  "name": siteConfig.companyName,
-  "description": SEO.defaultDescription,
-  "address":{
-    "@type":"PostalAddress",
-    "streetAddress":"Boulevard Kemmis 843",
-    "addressLocality":"Las Rosas",
-    "addressRegion":"Santa Fe",
-    "postalCode":"2520",
-    "addressCountry":"AR"
-  },
-  "telephone":"+5493471341461",
-  "openingHoursSpecification":[
-    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"12:00"},
-    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"16:00","closes":"20:00"}
-  ],
-  "url": siteConfig.siteUrl,
-  "image": new URL("/og-image.png", siteConfig.siteUrl).toString(),
-  "sameAs": [
-    siteConfig.Socials.Facebook
-  ]
+const site = {
+        url: siteConfig.siteUrl,
+        name: siteConfig.companyName,
+        twitter: siteConfig.Socials.xSocial || "",
 };
+
+const normalizedSiteName = SiteName || site.name;
+const baseTitle = title || "";
+const shouldAppendSiteName = baseTitle
+        ? !baseTitle.toLowerCase().includes("cefem") && !baseTitle.toLowerCase().includes(normalizedSiteName.toLowerCase())
+        : false;
+const pageTitle = baseTitle
+        ? shouldAppendSiteName
+                ? `${baseTitle} ${Separator} ${normalizedSiteName}`
+                : baseTitle
+        : normalizedSiteName;
+const pageDescription = description || defaultDescription || "";
+const canonicalPath = canonicalUrl || Astro.url.pathname;
+const fullCanonicalUrl = new URL(canonicalPath, site.url).toString();
+const pageImage = image ? new URL(image, site.url).toString() : "";
 
 ---
 
 <!doctype html>
 <html lang="es-AR" class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<link rel="canonical" href={fullCanonicalUrl} />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-		<meta name="description" content={pageDescription} />
-		<meta name="robots" content="index, follow" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={fullCanonicalUrl} />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={pageDescription} />
-		{pageImage && <meta property="og:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
-
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={fullCanonicalUrl} />
-		<meta property="twitter:title" content={pageTitle} />
-		<meta property="twitter:description" content={pageDescription} />
-		{pageImage && <meta property="twitter:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
-
-		<!-- Schema.org (JSON-LD) -->
-		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
-	</head>
+<head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width" />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+                <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+                <link rel="sitemap" href="/sitemap-index.xml" />
+                <link rel="canonical" href={fullCanonicalUrl} />
+                <meta name="generator" content={Astro.generator} />
+                <title>{pageTitle}</title>
+                <meta name="description" content={pageDescription} />
+                <meta name="robots" content="index, follow" />
+                <meta property="og:site_name" content={site.name} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={fullCanonicalUrl} />
+                <meta property="og:title" content={pageTitle} />
+                <meta property="og:description" content={pageDescription} />
+                {pageImage && <meta property="og:image" content={pageImage} />}
+                <meta name="twitter:card" content="summary_large_image" />
+                {site.twitter && <meta name="twitter:site" content={site.twitter} />}
+                <meta name="twitter:title" content={pageTitle} />
+                <meta name="twitter:description" content={pageDescription} />
+                {pageImage && <meta name="twitter:image" content={pageImage} />}
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link rel="preconnect" href="https://www.youtube-nocookie.com">
+                <link rel="preconnect" href="https://i.ytimg.com">
+                <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+                <SchemaOrg />
+        </head>
 	<body data-theme={theme}>
 		<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 		<Header />
@@ -125,10 +112,10 @@ const schema = {
 			</svg>
 		</a>
 
-		<script is:inline>
-			document.addEventListener('DOMContentLoaded', () => {
-		 
-				const observer = new IntersectionObserver((entries) => {
+                <script is:inline>
+                        document.addEventListener('DOMContentLoaded', () => {
+
+                                const observer = new IntersectionObserver((entries) => {
 					entries.forEach((entry) => {
 						if (entry.isIntersecting) {
 							entry.target.classList.add('is-visible');
@@ -142,16 +129,43 @@ const schema = {
 
 		 
 				const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-				window.addEventListener('scroll', () => {
-					if (window.scrollY > 300) {
-						scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-					} else {
-						scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
-					}
-				}, { passive: true });
-			});
-		</script>
-	</body>
+                                window.addEventListener('scroll', () => {
+                                        if (window.scrollY > 300) {
+                                                scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                                        } else {
+                                                scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                                        }
+                                }, { passive: true });
+                        });
+                </script>
+                <script is:inline>
+                        window.addEventListener('cefem:video_play', (event) => {
+                                const detail = event?.detail || {};
+                                const videoId = detail.id;
+                                if (!videoId) {
+                                        return;
+                                }
+
+                                if (typeof window !== 'undefined' && window.dataLayer) {
+                                        window.dataLayer.push({
+                                                event: 'cefem_video_play',
+                                                video_id: videoId,
+                                                page_path: window.location.pathname,
+                                        });
+                                }
+
+                                if (typeof window !== 'undefined') {
+                                        const analytics = window.analytics;
+                                        if (analytics && typeof analytics.track === 'function') {
+                                                analytics.track('video_play', {
+                                                        id: videoId,
+                                                        page: window.location.pathname,
+                                                });
+                                        }
+                                }
+                        });
+                </script>
+        </body>
 </html>
 <style>
 	.skip-link {

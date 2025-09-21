@@ -1,0 +1,121 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import CtaBanner from "@components/sections/CtaBanner.astro";
+import Faqs from "@components/sections/Faqs.astro";
+import type { FaqItem } from "@data/faqs";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+    title: "Pediatría en Las Rosas – CeFEM",
+    description: "Consultas de control, niño sano, vacunación y seguimiento integral del desarrollo infantil.",
+    imageAlt: "Consulta pediátrica en CeFEM Las Rosas",
+    backgroundImage: heroImage,
+    overlayOpacity: 0.35,
+};
+
+const visitHighlights = [
+    "Controles del recién nacido y del niño sano",
+    "Seguimiento del crecimiento y desarrollo",
+    "Atención de enfermedades respiratorias y digestivas",
+    "Orientación en alimentación, sueño y hábitos saludables",
+];
+
+const serviceBlocks = [
+    {
+        title: "Consultas de control",
+        description: "Chequeamos peso, talla, perímetro cefálico y signos vitales en cada etapa. Orientamos sobre alimentación complementaria, lactancia y hábitos familiares.",
+    },
+    {
+        title: "Atención de urgencias leves",
+        description: "Asistimos fiebre, dolor abdominal, alergias y cuadros respiratorios con seguimiento cercano y derivación cuando es necesario.",
+    },
+    {
+        title: "Plan de vacunación",
+        description: "Te recordamos las vacunas obligatorias y optativas, coordinamos con los vacunatorios locales y registramos cada dosis en la historia clínica.",
+    },
+    {
+        title: "Trabajo en equipo",
+        description: "Articulamos con traumatología, nutrición y fonoaudiología para abordar integralmente el desarrollo infantil y las patologías crónicas.",
+    },
+];
+
+const faqItems: FaqItem[] = [
+    {
+        question: "¿Con qué frecuencia debo traer a mi hijo al pediatra?",
+        answer: "Durante el primer año sugerimos controles mensuales o bimestrales. Luego, un control anual permite asegurar un crecimiento saludable y detectar signos de alerta.",
+    },
+    {
+        question: "¿Atienden urgencias fuera del horario habitual?",
+        answer: "Coordinamos derivaciones y seguimiento con guardias locales. Ante síntomas agudos, escribinos por WhatsApp para que el pediatra de CeFEM te guíe con los pasos a seguir.",
+    },
+    {
+        question: "¿Puedo coordinar estudios complementarios en CeFEM?",
+        answer: "Sí. Contamos con servicio de ecografías, laboratorio cercano y especialistas de otras áreas para brindar diagnósticos completos en menos tiempo.",
+    },
+];
+
+const ctaContent = {
+    eyebrow: "NIÑOS CUIDADOS",
+    title: "Reservá un turno de pediatría",
+    description: "Coordiná una consulta para control de niño sano, dudas sobre alimentación o seguimiento de enfermedades crónicas.",
+    button: {
+        text: "Escribir por WhatsApp",
+        link: "https://wa.me/5493471341461",
+        variant: "primary" as const,
+        target: "_blank" as const,
+    },
+};
+---
+
+<Layout
+    title="Pediatría en Las Rosas para controles y urgencias leves | CeFEM"
+    description="Consultas pediátricas, control del niño sano, vacunación y asesoramiento a familias en CeFEM Las Rosas. Turnos rápidos por WhatsApp."
+    canonicalUrl="/pediatria/"
+>
+    <InnerHero content={heroContent} />
+
+    <section class="py-16 md:py-20 bg-background">
+        <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-[3fr_2fr] items-start">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Atención pediátrica cercana y constante</h2>
+                <p class="text-lg text-body-base mb-6">
+                    Cuidamos la salud de bebés, niños y adolescentes con una mirada integral. Construimos un vínculo de confianza con cada familia para acompañar dudas cotidianas, enfermedades frecuentes y la transición hacia la adolescencia.
+                </p>
+                <div class="grid gap-6 md:grid-cols-2">
+                    {serviceBlocks.map((block) => (
+                        <article class="p-6 rounded-xl border border-primary/20 bg-white shadow-sm">
+                            <h3 class="text-xl font-semibold text-primary mb-3">{block.title}</h3>
+                            <p class="text-body-base leading-relaxed">{block.description}</p>
+                        </article>
+                    ))}
+                </div>
+            </div>
+            <aside class="p-6 rounded-2xl bg-primary/10 border border-primary/20">
+                <h3 class="text-2xl font-semibold text-primary mb-4">Durante la consulta</h3>
+                <ul class="space-y-3 text-body-base">
+                    {visitHighlights.map((item) => (
+                        <li class="flex items-start gap-3">
+                            <span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-primary"></span>
+                            <span>{item}</span>
+                        </li>
+                    ))}
+                </ul>
+            </aside>
+        </div>
+    </section>
+
+    <Faqs
+        content={{
+            eyebrow: "PREGUNTAS FRECUENTES",
+            title: "Consultas pediátricas habituales",
+            description: "Respondemos dudas sobre turnos, controles y manejo de síntomas para que te sientas acompañado en todo momento.",
+            faqs: faqItems,
+        }}
+        background="base"
+        paddingTop="large"
+        paddingBottom="large"
+    />
+
+    <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+</Layout>

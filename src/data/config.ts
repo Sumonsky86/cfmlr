@@ -1,6 +1,6 @@
 export const siteConfig = {
   companyName: 'Cefem – Centro Familiar de Especialidades Médicas',
-  siteUrl: 'https://cefem.ar',
+  siteUrl: 'https://www.cefem.ar',
   Socials: {
       xSocial: '',
       Github: '',

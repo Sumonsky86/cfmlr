@@ -12,6 +12,7 @@ const sortedEntries = legalEntries.sort((a, b) => a.data.title.localeCompare(b.d
 const heroContent = {
     title: 'Legal Information',
     description: 'Important policies and terms governing the use of our services',
+    imageAlt: 'Documentos legales de Cefem',
     overlayOpacity: 0.8,
 };
 ---
@@ -33,7 +34,7 @@ const heroContent = {
 
                         return (
                             <div class="border-b border-body-base/10 pb-6">
-                                <a href={`/legal/${entry.id}`} class="group">
+                                <a href={`/legal/${entry.slug}`} class="group">
                                     <h2 class="text-medium group-hover:text-accent transition-colors">
                                         {entry.data.title}
                                     </h2>

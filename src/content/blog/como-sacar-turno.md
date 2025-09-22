@@ -13,7 +13,7 @@ seo:
   description: "Aprende a agendar tu turno en Cefem de forma rápida y directa. Sigue estos simples pasos para comunicarte con nosotros y reservar tu cita."
 ---
 
-En CeFEM, queremos que el acceso a la salud sea lo más simple posible. Por eso, hemos optimizado nuestro sistema de turnos para que puedas agendar tu cita de manera rápida y directa a través de WhatsApp.
+En Cefem, queremos que el acceso a la salud sea lo más simple posible. Por eso, hemos optimizado nuestro sistema de turnos para que puedas agendar tu cita de manera rápida y directa a través de WhatsApp.
 
 ## Pasos para Solicitar tu Turno
 

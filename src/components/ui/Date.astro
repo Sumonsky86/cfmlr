@@ -1,18 +1,19 @@
 ---
 interface Props {
-    date: Date;
+    date: string | Date;
     class?: string;
 }
 
-const { date, class: className } = Astro.props;
+const { date, class: className } = Astro.props as Props;
 
-const formattedDate = new Date(date).toLocaleDateString('es-ES', {
+const parsedDate = new globalThis.Date(date);
+const formattedDate = parsedDate.toLocaleDateString('es-ES', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
 });
 ---
 
-<time datetime={date.toISOString()} class:list={[className, "text-sm text-body-base"]}>
+<time datetime={parsedDate.toISOString()} class:list={[className, "text-sm text-body-base"]}>
     {formattedDate}
 </time>

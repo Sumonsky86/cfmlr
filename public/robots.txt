@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://cefem.ar/sitemap-index.xml
+Sitemap: https://www.cefem.ar/sitemap-index.xml

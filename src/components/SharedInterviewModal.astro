@@ -1,0 +1,59 @@
+---
+import AccessibleModal from "@components/AccessibleModal.astro";
+---
+
+<AccessibleModal modalId="interview-shared" title="Entrevista">
+  <div class="aspect-video bg-black relative">
+    <div class="vignette-edge pointer-events-none absolute inset-0"></div>
+    <div id="shared-video-container" data-video-slot class="w-full h-full"></div>
+  </div>
+  <div id="shared-excerpt" class="p-4 hidden"></div>
+</AccessibleModal>
+
+<script is:inline>
+  if (typeof window !== 'undefined') {
+    window.CefemSharedModal = {
+      openVideo: ({ id, title, excerpt }) => {
+        const modal = document.getElementById('interview-shared');
+        if (!modal) return;
+        const titleEl = modal.querySelector('h2');
+        if (titleEl && title) titleEl.textContent = title;
+
+        const slot = modal.querySelector('[data-video-slot]');
+        if (slot) {
+          slot.innerHTML = '';
+          // Inyectar YoutubeLite
+          const container = document.createElement('div');
+          container.className = 'yt-lite';
+          container.setAttribute('data-id', id);
+          const thumbBtn = document.createElement('button');
+          thumbBtn.setAttribute('aria-hidden', 'true');
+          container.appendChild(thumbBtn);
+          slot.appendChild(container);
+          if (typeof window.__cefemActivateLitePlayer === 'function') {
+            window.__cefemActivateLitePlayer(container);
+          }
+        }
+
+        const excerptBox = document.getElementById('shared-excerpt');
+        if (excerptBox) {
+          if (excerpt) {
+            excerptBox.textContent = excerpt;
+            excerptBox.classList.remove('hidden');
+          } else {
+            excerptBox.textContent = '';
+            excerptBox.classList.add('hidden');
+          }
+        }
+
+        window.CefemModal?.['interview-shared']?.open();
+      }
+    };
+  }
+</script>
+
+<style>
+  .vignette-edge { 
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.35) 100%);
+  }
+</style>

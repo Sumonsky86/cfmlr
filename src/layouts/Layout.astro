@@ -2,8 +2,8 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import SchemaOrg from "../components/SchemaOrg.astro";
 import { SEO, siteConfig } from "../data/config";
-
 import { themeSetting } from "../data/config";
 const { theme } = themeSetting;
 
@@ -28,75 +28,63 @@ interface Props {
 
 const { title, description, image, footerCta, canonicalUrl } = Astro.props;
 
-const pageTitle = title ? (title.toLowerCase().includes(SiteName.toLowerCase()) ? title : `${title} ${Separator} ${SiteName}`) : SiteName;
-const pageDescription = description || defaultDescription || '';
-const pageImage = image || '';
-const canonicalPath = canonicalUrl || Astro.url.pathname;
-const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
-  
-const schema = {
-  "@context":"https://schema.org",
-  "@type":"MedicalBusiness",
-  "name": siteConfig.companyName,
-  "description": SEO.defaultDescription,
-  "address":{
-    "@type":"PostalAddress",
-    "streetAddress":"Boulevard Kemmis 843",
-    "addressLocality":"Las Rosas",
-    "addressRegion":"Santa Fe",
-    "postalCode":"2520",
-    "addressCountry":"AR"
-  },
-  "telephone":"+5493471341461",
-  "openingHoursSpecification":[
-    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"12:00"},
-    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"16:00","closes":"20:00"}
-  ],
-  "url": siteConfig.siteUrl,
-  "image": new URL("/og-image.png", siteConfig.siteUrl).toString(),
-  "sameAs": [
-    siteConfig.Socials.Facebook
-  ]
+const site = {
+        url: siteConfig.siteUrl,
+        name: siteConfig.companyName,
+        twitter: siteConfig.Socials.xSocial || "",
 };
+
+const normalizedSiteName = SiteName || site.name;
+const baseTitle = title || "";
+const shouldAppendSiteName = baseTitle
+        ? !baseTitle.toLowerCase().includes("cefem") && !baseTitle.toLowerCase().includes(normalizedSiteName.toLowerCase())
+        : false;
+const pageTitle = baseTitle
+        ? shouldAppendSiteName
+                ? `${baseTitle} ${Separator} ${normalizedSiteName}`
+                : baseTitle
+        : normalizedSiteName;
+const pageDescription = description || defaultDescription || "";
+const canonicalPath = canonicalUrl || Astro.url.pathname;
+const fullCanonicalUrl = new URL(canonicalPath, site.url).toString();
+const pageImage = image ? new URL(image, site.url).toString() : "";
 
 ---
 
 <!doctype html>
 <html lang="es-AR" class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<link rel="canonical" href={fullCanonicalUrl} />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-		<meta name="description" content={pageDescription} />
-		<meta name="robots" content="index, follow" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={fullCanonicalUrl} />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={pageDescription} />
-		{pageImage && <meta property="og:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
-
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={fullCanonicalUrl} />
-		<meta property="twitter:title" content={pageTitle} />
-		<meta property="twitter:description" content={pageDescription} />
-		{pageImage && <meta property="twitter:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
-
-		<!-- Schema.org (JSON-LD) -->
-		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
-	</head>
+<head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width" />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+                <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+                <link rel="sitemap" href="/sitemap-index.xml" />
+                <link rel="canonical" href={fullCanonicalUrl} />
+                <meta name="generator" content={Astro.generator} />
+                <title>{pageTitle}</title>
+                <meta name="description" content={pageDescription} />
+                <meta name="robots" content="index, follow" />
+                <meta property="og:site_name" content={site.name} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={fullCanonicalUrl} />
+                <meta property="og:title" content={pageTitle} />
+                <meta property="og:description" content={pageDescription} />
+                {pageImage && <meta property="og:image" content={pageImage} />}
+                <meta name="twitter:card" content="summary_large_image" />
+                {site.twitter && <meta name="twitter:site" content={site.twitter} />}
+                <meta name="twitter:title" content={pageTitle} />
+                <meta name="twitter:description" content={pageDescription} />
+                {pageImage && <meta name="twitter:image" content={pageImage} />}
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link rel="preconnect" href="https://www.youtube-nocookie.com">
+                <link rel="preconnect" href="https://i.ytimg.com">
+                <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" onload="this.rel='stylesheet'">
+                <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"></noscript>
+                <SchemaOrg />
+        </head>
 	<body data-theme={theme}>
 		<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 		<Header />
@@ -106,17 +94,28 @@ const schema = {
 		<Footer {footerCta} />
 
 		<!-- Floating WhatsApp Button -->
-		<a
-			href="https://wa.me/5493471341461"
-			target="_blank"
-			rel="noopener noreferrer"
-			aria-label="Contactar por WhatsApp"
-			class="fixed bottom-5 right-5 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors duration-300"
-		>
-			<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
-				<path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.357 1.849 6.037l-1.092 3.996 4.045-1.052z"></path>
-			</svg>
-		</a>
+		<div class="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
+			<div
+				id="whatsappPrompt"
+				class="rounded-full bg-white px-4 py-2 text-sm font-medium text-gray-900 shadow-lg opacity-0 translate-y-2 transition-all duration-300 pointer-events-none"
+				aria-live="polite"
+			>
+				Necesitás un turno? Escribinos.
+			</div>
+			<a
+				id="whatsappCta"
+				href="https://wa.me/5493471341461"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="Contactar por WhatsApp"
+				class="bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+			>
+				<span class="sr-only">Contactar por WhatsApp</span>
+				<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7" aria-hidden="true">
+					<path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.672.15-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.135-.134.297-.346.446-.519.149-.173.198-.297.298-.495.099-.198.05-.372-.025-.521-.075-.149-.672-1.611-.921-2.206-.242-.58-.487-.502-.672-.512-.173-.009-.372-.011-.571-.011-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 5.392h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.519-5.261c.001-5.45 4.436-9.883 9.885-9.883 2.641 0 5.122 1.03 6.988 2.897a9.825 9.825 0 0 1 2.896 6.988c-.003 5.45-4.438 9.884-9.876 9.884m8.413-18.297C19.125 1.445 15.714 0 12.002 0 5.376 0 0 5.373 0 11.993c0 2.113.555 4.178 1.602 5.998L.057 24l6.182-1.623a11.94 11.94 0 0 0 5.761 1.466h.005c6.623 0 11.998-5.373 12-11.994a11.87 11.87 0 0 0-3.486-8.41" />
+				</svg>
+			</a>
+		</div>
 
 		<!-- Scroll to Top Button -->
 		<a id="scrollToTopBtn" href="#" aria-label="Volver arriba" class="fixed bottom-5 left-5 z-50 bg-gray-700 text-white p-3 rounded-full shadow-lg hover:bg-gray-800 transition-opacity duration-300 opacity-0 pointer-events-none">
@@ -125,10 +124,10 @@ const schema = {
 			</svg>
 		</a>
 
-		<script is:inline>
-			document.addEventListener('DOMContentLoaded', () => {
-		 
-				const observer = new IntersectionObserver((entries) => {
+                <script is:inline>
+                        document.addEventListener('DOMContentLoaded', () => {
+
+                                const observer = new IntersectionObserver((entries) => {
 					entries.forEach((entry) => {
 						if (entry.isIntersecting) {
 							entry.target.classList.add('is-visible');
@@ -142,16 +141,116 @@ const schema = {
 
 		 
 				const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-				window.addEventListener('scroll', () => {
-					if (window.scrollY > 300) {
-						scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-					} else {
-						scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+				if (scrollToTopBtn) {
+					window.addEventListener('scroll', () => {
+						if (window.scrollY > 300) {
+							scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+						} else {
+							scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+						}
+					}, { passive: true });
+				}
+
+				const whatsappPrompt = document.getElementById('whatsappPrompt');
+				const whatsappCta = document.getElementById('whatsappCta');
+				let whatsappPromptShown = false;
+				let whatsappPromptTimeoutId = null;
+
+				const setPageInert = (isInert) => {
+					const header = document.querySelector('header');
+					const main = document.getElementById('main-content');
+					const footer = document.querySelector('footer');
+					[header, main, footer].forEach((el) => {
+						if (!el) return;
+						if (isInert) {
+							el.setAttribute('inert', '');
+							el.setAttribute('aria-hidden', 'true');
+						} else {
+							el.removeAttribute('inert');
+							el.removeAttribute('aria-hidden');
+						}
+					});
+				};
+
+
+				const showWhatsappPrompt = () => {
+					if (!whatsappPrompt || whatsappPromptShown) {
+						return;
 					}
-				}, { passive: true });
-			});
-		</script>
-	</body>
+					whatsappPromptShown = true;
+					if (whatsappPromptTimeoutId) {
+						clearTimeout(whatsappPromptTimeoutId);
+					}
+					whatsappPrompt.classList.remove('opacity-0', 'translate-y-2');
+					whatsappPrompt.classList.add('opacity-100', 'translate-y-0');
+				};
+
+				if (whatsappPrompt) {
+					const scrollTriggerRatio = 0.4;
+					const bottomTriggerOffset = 800;
+					whatsappPromptTimeoutId = setTimeout(showWhatsappPrompt, 8000);
+					const handlePromptScroll = () => {
+						const documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+						const scrollableDistance = Math.max(documentHeight - window.innerHeight, 1);
+						const scrolledRatio = window.scrollY / scrollableDistance;
+						const scrolledBeyondTop = scrolledRatio >= scrollTriggerRatio;
+						const viewportBottom = window.scrollY + window.innerHeight;
+						const nearImportantSections = documentHeight - viewportBottom < bottomTriggerOffset;
+						if (scrolledBeyondTop || nearImportantSections) {
+							showWhatsappPrompt();
+							window.removeEventListener('scroll', handlePromptScroll);
+						}
+					};
+					window.addEventListener('scroll', handlePromptScroll, { passive: true });
+				}
+
+				if (whatsappCta) {
+					const revealOnInteract = () => showWhatsappPrompt();
+					whatsappCta.addEventListener('focus', revealOnInteract, { once: true });
+					whatsappCta.addEventListener('mouseenter', revealOnInteract, { once: true });
+				}
+
+				const releaseScroll = () => {
+					const openModals = document.querySelectorAll('[data-interview-modal]:not(.hidden)');
+					if (!openModals.length) {
+						document.documentElement.style.removeProperty('overflow');
+						document.body.style.removeProperty('overflow');
+						setPageInert(false);
+					}
+				};
+
+
+					// (Optimización) la página entrevistas inicializa sus propios handlers
+                        });
+                </script>
+                <script is:inline>
+                        window.addEventListener('cefem:video_play', (event) => {
+                                const detail = event?.detail || {};
+                                const videoId = detail.id;
+                                if (!videoId) {
+                                        return;
+                                }
+
+                                if (typeof window !== 'undefined' && window.dataLayer) {
+                                        window.dataLayer.push({
+                                                event: 'cefem_video_play',
+                                                video_id: videoId,
+                                                page_path: window.location.pathname,
+                                        });
+                                }
+
+                                if (typeof window !== 'undefined') {
+                                        const analytics = window.analytics;
+                                        if (analytics && typeof analytics.track === 'function') {
+                                                analytics.track('video_play', {
+                                                        id: videoId,
+                                                        page: window.location.pathname,
+                                                });
+                                        }
+                                }
+                        });
+                </script>
+        </body>
 </html>
 <style>
 	.skip-link {

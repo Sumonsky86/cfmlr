@@ -1,0 +1,182 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import CtaBanner from "@components/sections/CtaBanner.astro";
+import Faqs from "@components/sections/Faqs.astro";
+import type { FaqItem } from "@data/faqs";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+  title: "Ecografías Abdominales en Las Rosas – Cefem",
+  description:
+    "Diagnóstico por imágenes para abdomen, pelvis y riñones con especialistas de Cefem – Centro Familiar de Especialidades Médicas.",
+  imageAlt: "Ecografía abdominal en Cefem Las Rosas",
+  backgroundImage: heroImage,
+  overlayOpacity: 0.4,
+};
+
+const studies = [
+  {
+    title: "Ecografía abdominal completa",
+    description:
+      "Evaluamos hígado, vesícula, páncreas, bazo y riñones para detectar cálculos, esteatosis u otras patologías abdominales.",
+  },
+  {
+    title: "Ecografía hepatobiliar",
+    description:
+      "Controlamos hígado y vías biliares para seguimiento de colelitiasis, cirugías previas y enfermedades hepáticas crónicas.",
+  },
+  {
+    title: "Ecografía renal y de vías urinarias",
+    description:
+      "Analizamos riñones, vejiga y próstata para detectar cálculos, infecciones recurrentes o alteraciones funcionales.",
+  },
+  {
+    title: "Ecografía pélvica",
+    description:
+      "Complementamos con estudios transabdominales para controlar útero, ovarios y vejiga según la indicación médica.",
+  },
+];
+
+const preparation = [
+  "Ayuno de 6 a 8 horas para estudios abdominales y hepatobiliares.",
+  "Beber 1 litro de agua una hora antes del turno si se solicita ecografía pélvica.",
+  "Traer órdenes médicas, análisis recientes y estudios anteriores para comparar resultados.",
+];
+
+const faqItems: FaqItem[] = [
+  {
+    question: "¿Cuánto dura la ecografía abdominal?",
+    answer: "Entre 15 y 20 minutos, dependiendo de la complejidad y la necesidad de imágenes adicionales.",
+  },
+  {
+    question: "¿Cuándo recibo el informe?",
+    answer: "El informe se entrega el mismo día con recomendaciones para el profesional solicitante.",
+  },
+  {
+    question: "¿Atienden obras sociales?",
+    answer:
+      "Sí. Escribinos por WhatsApp para verificar tu cobertura o conocer opciones particulares en Cefem.",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
+const ctaContent = {
+  eyebrow: "DIAGNÓSTICO ABORDAJE COMPLETO",
+  title: "Reservá tu ecografía abdominal en Cefem",
+  description:
+    "Coordinamos turnos rápidos, informes en el día y seguimiento con especialistas de Las Rosas.",
+  button: {
+    text: "Solicitar turno",
+    link: "https://wa.me/5493471341461",
+    variant: "primary" as const,
+    target: "_blank" as const,
+  },
+};
+---
+<Layout
+  title="Ecografías Abdominales y Renales en Las Rosas | Cefem"
+  description="Ecografías abdominales, hepatobiliares y renales en Cefem Las Rosas. Preparación guiada, informes en el día e interconsulta con especialistas."
+  canonicalUrl="/ecografias-abdominales-las-rosas/"
+>
+  <script type="application/ld+json" is:inline>{JSON.stringify(faqJsonLd)}</script>
+  <InnerHero content={heroContent} />
+
+  <section class="py-16 md:py-24 bg-background">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-[3fr_2fr] items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Estudios abdominales realizados en Cefem</h2>
+        <p class="text-lg text-body-base mb-6">
+          Nuestro equipo de diagnóstico por imágenes trabaja en conjunto con clínica médica, gastroenterología y ginecología para brindar informes completos.
+          Coordinamos estudios complementarios como <a href="/ecografias-doppler-embarazo-las-rosas/" class="text-primary underline">Doppler obstétrico</a> y <a href="/ecografias-partes-blandas-lesiones-deportivas/" class="text-primary underline">ecografías musculares</a> sin salir de Cefem.
+        </p>
+        <div class="grid gap-6 md:grid-cols-2">
+          {studies.map((study) => (
+            <article class="p-6 bg-white border border-primary/10 rounded-xl shadow-sm">
+              <h3 class="text-xl font-semibold text-primary mb-3">{study.title}</h3>
+              <p class="text-body-base leading-relaxed">{study.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Preparación previa</h3>
+        <ul class="space-y-3 text-body-base">
+          {preparation.map((item) => (
+            <li class="flex gap-3">
+              <span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-primary"></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-sm text-body-dark">
+          Consultá también por <a href="/cirugia-vascular-varices-las-rosas/" class="text-primary underline">evaluación vascular</a> y <a href="/pediatria/" class="text-primary underline">controles pediátricos</a> dentro del centro.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20 bg-background-alt">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-2 items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-4">Conocé más sobre nuestros estudios</h2>
+        <p class="text-lg text-body-base mb-6">
+          Mirá la entrevista con el Dr. Gustavo Blanco y descubrí cómo integramos las ecografías con el seguimiento clínico de las familias en Las Rosas.
+        </p>
+        <a
+          href="https://www.youtube.com/watch?v=M4_HOnatb5c"
+          target="_blank"
+          rel="noopener"
+          aria-label="Ver entrevista sobre ecografías y controles pediátricos"
+          class="block rounded-2xl overflow-hidden shadow-lg"
+        >
+          <img
+            src="https://img.youtube.com/vi/M4_HOnatb5c/hqdefault.jpg"
+            alt="Entrevista Cefem sobre controles pediátricos"
+            loading="lazy"
+            width="1280"
+            height="720"
+            class="w-full h-auto"
+          />
+        </a>
+        <p class="mt-6 text-body-base">
+          Si preferís leer, visitá el <a href="/blog/controles-pediatricos" class="text-primary underline">blog de controles pediátricos</a> con recomendaciones del equipo de Cefem.
+        </p>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Beneficios de elegir Cefem</h3>
+        <ul class="space-y-3 text-body-base">
+          <li>Equipamiento digital con entrega de imágenes y videos.</li>
+          <li>Interpretación inmediata junto a tu médico de cabecera.</li>
+          <li>Turnos coordinados por WhatsApp para evitar esperas.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <Faqs
+    content={{
+      eyebrow: "PREGUNTAS FRECUENTES",
+      title: "Dudas sobre ecografías abdominales en Cefem",
+      description: "Respondemos consultas frecuentes sobre preparación, coberturas y tiempos de entrega.",
+      faqs: faqItems,
+    }}
+    background="base"
+    paddingTop="large"
+    paddingBottom="large"
+  />
+
+  <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+</Layout>

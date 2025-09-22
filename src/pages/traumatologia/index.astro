@@ -1,0 +1,168 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import CtaBanner from "@components/sections/CtaBanner.astro";
+import Faqs from "@components/sections/Faqs.astro";
+import YoutubeLite from "@components/YoutubeLite.astro";
+import type { FaqItem } from "@data/faqs";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+  title: "Traumatología y Medicina Deportiva en Las Rosas – Cefem",
+  description:
+    "Atendemos lesiones óseas, articulares y deportivas con especialistas de Cefem y ecografías musculoesqueléticas en el mismo centro.",
+  imageAlt: "Consulta de traumatología en Cefem Las Rosas",
+  backgroundImage: heroImage,
+  overlayOpacity: 0.35,
+};
+
+const careAreas = [
+  {
+    title: "Lesiones deportivas",
+    description:
+      "Tratamos esguinces, tendinopatías y desgarros con diagnóstico por imágenes y plan de rehabilitación personalizado.",
+  },
+  {
+    title: "Traumatología general",
+    description:
+      "Seguimiento de fracturas, artrosis, dolor lumbar y patologías de columna con coordinación interdisciplinaria.",
+  },
+  {
+    title: "Prevención y retorno al deporte",
+    description:
+      "Diseñamos rutinas de fortalecimiento, control postural y evaluación previa a competencias para evitar recaídas.",
+  },
+];
+
+const faqItems: FaqItem[] = [
+  {
+    question: "¿Qué estudios necesito llevar a la consulta?",
+    answer:
+      "Traé radiografías, ecografías o resonancias previas. En Cefem podemos coordinar nuevos estudios si son necesarios.",
+  },
+  {
+    question: "¿Atienden urgencias?",
+    answer:
+      "Recibimos urgencias leves como esguinces o traumatismos recientes y articulamos con guardias externas si se requiere internación.",
+  },
+  {
+    question: "¿Trabajan con kinesiología?",
+    answer:
+      "Sí, derivamos a kinesiólogos de confianza y realizamos controles periódicos para medir la evolución.",
+  },
+];
+
+const ctaContent = {
+  eyebrow: "RECUPERÁ EL MOVIMIENTO",
+  title: "Agendá tu consulta traumatológica",
+  description:
+    "Coordinamos turnos ágiles, diagnóstico por imágenes y plan de rehabilitación en Cefem Las Rosas.",
+  button: {
+    text: "Solicitar turno",
+    link: "https://wa.me/5493471341461",
+    variant: "primary" as const,
+    target: "_blank" as const,
+  },
+};
+
+const video = {
+  id: "39Wd_DulN4M",
+  name: "Prevención de lesiones deportivas – Dr. Pablo González",
+  description:
+    "Consejos del Dr. Pablo González (Cefem) para prevenir lesiones y mantener una rutina de entrenamiento segura.",
+  uploadDate: "2022-02-18",
+};
+
+const videoJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name: video.name,
+  description: video.description,
+  thumbnailUrl: [`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`],
+  uploadDate: video.uploadDate,
+  publisher: {
+    "@type": "Organization",
+    name: "Cefem – Centro Familiar de Especialidades Médicas",
+  },
+  contentUrl: `https://www.youtube.com/watch?v=${video.id}`,
+  embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
+};
+---
+<Layout
+  title="Traumatología y Lesiones Deportivas en Las Rosas | Cefem"
+  description="Consultas traumatológicas, ecografías musculares y prevención de lesiones en Cefem Las Rosas. Equipo especializado para deportistas y pacientes crónicos."
+  canonicalUrl="/traumatologia/"
+>
+  <script type="application/ld+json" is:inline>{JSON.stringify(videoJsonLd)}</script>
+  <InnerHero content={heroContent} />
+
+  <section class="py-16 md:py-24 bg-background">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-[3fr_2fr] items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Atención integral para tu recuperación</h2>
+        <p class="text-lg text-body-base mb-6">
+          Combinamos evaluación clínica, ecografías de partes blandas y seguimiento cercano para tratar lesiones agudas y crónicas.
+          Coordinamos estudios complementarios como <a href="/ecografias-partes-blandas-lesiones-deportivas/" class="text-primary underline">ecografías musculares</a> y <a href="/nutricion/" class="text-primary underline">planes nutricionales</a> que acompañan la rehabilitación.
+        </p>
+        <div class="grid gap-6 md:grid-cols-2">
+          {careAreas.map((area) => (
+            <article class="p-6 bg-white border border-primary/10 rounded-xl shadow-sm">
+              <h3 class="text-xl font-semibold text-primary mb-3">{area.title}</h3>
+              <p class="text-body-base leading-relaxed">{area.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Coordinación del tratamiento</h3>
+        <ul class="space-y-3 text-body-base">
+          <li>Diagnóstico inicial con ecografía o radiografía.</li>
+          <li>Plan de rehabilitación coordinado con kinesiólogos.</li>
+          <li>Evaluación de retorno deportivo y control de recaídas.</li>
+        </ul>
+        <p class="mt-6 text-sm text-body-dark">
+          También acompañamos a familias con <a href="/pediatria/" class="text-primary underline">pediatría</a> y controles preventivos en el mismo edificio.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20 bg-background-alt">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-2 items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-4">Video: consejos para deportistas de Las Rosas</h2>
+        <p class="text-lg text-body-base mb-6">
+          El Dr. Pablo González comparte pautas para evitar lesiones frecuentes y detectar señales de alerta antes de competir.
+        </p>
+        <div class="rounded-2xl overflow-hidden shadow-lg">
+          <YoutubeLite id={video.id} title={video.name} />
+        </div>
+        <p class="mt-6 text-body-base">
+          Sumá a tu entrenamiento controles de <a href="/ecografias-abdominales-las-rosas/" class="text-primary underline">ecografía abdominal</a> y chequeos generales en Cefem para cuidar tu rendimiento.
+        </p>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Tips rápidos para recuperarte mejor</h3>
+        <ul class="space-y-3 text-body-base">
+          <li>Respetá los tiempos de reposo indicados por el especialista.</li>
+          <li>Aplicá crioterapia y fisioterapia según la fase de la lesión.</li>
+          <li>Adoptá un plan nutricional equilibrado para favorecer la regeneración muscular.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <Faqs
+    content={{
+      eyebrow: "PREGUNTAS FRECUENTES",
+      title: "Consultas sobre traumatología en Cefem",
+      description: "Resolvemos dudas habituales de deportistas y pacientes que buscan recuperar movilidad.",
+      faqs: faqItems,
+    }}
+    background="base"
+    paddingTop="large"
+    paddingBottom="large"
+  />
+
+  <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+</Layout>

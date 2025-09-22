@@ -1,0 +1,168 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import CtaBanner from "@components/sections/CtaBanner.astro";
+import Faqs from "@components/sections/Faqs.astro";
+import YoutubeLite from "@components/YoutubeLite.astro";
+import type { FaqItem } from "@data/faqs";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+  title: "Cirugía Vascular y Tratamientos de Várices – Cefem Las Rosas",
+  description:
+    "Diagnóstico clínico y ecográfico de insuficiencia venosa con opciones de tratamiento mínimamente invasivas en Cefem.",
+  imageAlt: "Evaluación de várices en Cefem Las Rosas",
+  backgroundImage: heroImage,
+  overlayOpacity: 0.45,
+};
+
+const services = [
+  {
+    title: "Consulta vascular integral",
+    description:
+      "Evaluamos antecedentes, síntomas y realizamos ecodoppler venoso para determinar el grado de insuficiencia y planificar el tratamiento.",
+  },
+  {
+    title: "Tratamientos mínimamente invasivos",
+    description:
+      "Ofrecemos esclerosis, microespuma y recomendaciones preventivas para aliviar dolor, pesadez y mejorar la estética de las piernas.",
+  },
+  {
+    title: "Seguimiento personalizado",
+    description:
+      "Coordinamos controles periódicos y trabajamos junto a traumatología y diagnóstico por imágenes para detectar otras complicaciones vasculares.",
+  },
+];
+
+const faqItems: FaqItem[] = [
+  {
+    question: "¿Cuándo debo consultar por várices?",
+    answer:
+      "Si notás pesadez, calambres nocturnos, edema o venas visibles que generan molestias. Un diagnóstico temprano evita complicaciones.",
+  },
+  {
+    question: "¿La esclerosis es dolorosa?",
+    answer:
+      "La técnica se realiza en consultorio y genera una molestia mínima. Recomendamos usar medias de compresión después del procedimiento.",
+  },
+  {
+    question: "¿Necesito estudios previos?",
+    answer:
+      "El especialista puede solicitar un ecodoppler venoso complementario. En Cefem coordinamos el turno y entregamos el informe el mismo día.",
+  },
+];
+
+const ctaContent = {
+  eyebrow: "CIRCULACIÓN SANA",
+  title: "Solicitá una evaluación vascular en Cefem",
+  description:
+    "Agendá tu consulta para prevenir várices y mejorar la salud de tus piernas en Las Rosas.",
+  button: {
+    text: "Reservar turno",
+    link: "https://wa.me/5493471341461",
+    variant: "primary" as const,
+    target: "_blank" as const,
+  },
+};
+
+const video = {
+  id: "qz4ytAzTPAg",
+  name: "Cuándo consultar por várices – Dr. Alejandro Alamo",
+  description:
+    "El Dr. Alejandro Alamo (Cefem) explica signos de alerta, opciones terapéuticas y cuidados domiciliarios.",
+  uploadDate: "2022-05-15",
+};
+
+const videoJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name: video.name,
+  description: video.description,
+  thumbnailUrl: [`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`],
+  uploadDate: video.uploadDate,
+  publisher: {
+    "@type": "Organization",
+    name: "Cefem – Centro Familiar de Especialidades Médicas",
+  },
+  contentUrl: `https://www.youtube.com/watch?v=${video.id}`,
+  embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
+};
+---
+<Layout
+  title="Cirugía Vascular y Tratamientos de Várices en Las Rosas | Cefem"
+  description="Evaluación vascular, esclerosis y ecodoppler venoso en Cefem Las Rosas. Tratamientos personalizados para várices y arañitas con especialistas locales."
+  canonicalUrl="/cirugia-vascular-varices-las-rosas/"
+>
+  <script type="application/ld+json" is:inline>{JSON.stringify(videoJsonLd)}</script>
+  <InnerHero content={heroContent} />
+
+  <section class="py-16 md:py-24 bg-background">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-[3fr_2fr] items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Abordaje integral de la insuficiencia venosa</h2>
+        <p class="text-lg text-body-base mb-6">
+          Cefem combina evaluación clínica, ecodoppler y tratamientos minimamente invasivos para aliviar síntomas de várices en Las Rosas.
+          Trabajamos con planes personalizados y recomendaciones de hábitos saludables para mejorar la circulación.
+        </p>
+        <div class="grid gap-6 md:grid-cols-2">
+          {services.map((service) => (
+            <article class="p-6 bg-white border border-primary/10 rounded-xl shadow-sm">
+              <h3 class="text-xl font-semibold text-primary mb-3">{service.title}</h3>
+              <p class="text-body-base leading-relaxed">{service.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Consejos previos a la consulta</h3>
+        <ul class="space-y-3 text-body-base">
+          <li>Traé estudios previos o recetas de tratamientos anteriores.</li>
+          <li>Usá ropa cómoda para evaluar las piernas con facilidad.</li>
+          <li>Consultá sobre medias de compresión si viajás o permanecés de pie muchas horas.</li>
+        </ul>
+        <p class="mt-6 text-sm text-body-dark">
+          También realizamos <a href="/ecografias-doppler-embarazo-las-rosas/" class="text-primary underline">ecografías Doppler obstétricas</a> y <a href="/ecografias-abdominales-las-rosas/" class="text-primary underline">controles abdominales</a> en el mismo centro.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20 bg-background-alt">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-2 items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-4">Video: cuándo consultar por várices</h2>
+        <p class="text-lg text-body-base mb-6">
+          El Dr. Alejandro Alamo explica cómo detectar síntomas, cuándo iniciar tratamiento y qué cuidados seguir en casa.
+        </p>
+        <div class="rounded-2xl overflow-hidden shadow-lg">
+          <YoutubeLite id={video.id} title={video.name} />
+        </div>
+        <p class="mt-6 text-body-base">
+          Si presentás dolor o inflamación recurrente, coordinamos estudios complementarios como <a href="/ecografias-partes-blandas-lesiones-deportivas/" class="text-primary underline">ecografías musculares</a> y seguimiento clínico dentro de Cefem.
+        </p>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Beneficios de atenderte en Cefem</h3>
+        <ul class="space-y-3 text-body-base">
+          <li>Diagnóstico con ecodoppler en el mismo día.</li>
+          <li>Tratamientos ambulatorios y recuperación rápida.</li>
+          <li>Equipo multidisciplinario para abordar factores de riesgo.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <Faqs
+    content={{
+      eyebrow: "PREGUNTAS FRECUENTES",
+      title: "Consultas sobre várices y circulación",
+      description: "Resolvemos dudas sobre turnos, estudios y cuidados después del tratamiento.",
+      faqs: faqItems,
+    }}
+    background="base"
+    paddingTop="large"
+    paddingBottom="large"
+  />
+
+  <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+</Layout>

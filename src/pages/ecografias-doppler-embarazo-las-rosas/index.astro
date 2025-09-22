@@ -1,0 +1,177 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import CtaBanner from "@components/sections/CtaBanner.astro";
+import Faqs from "@components/sections/Faqs.astro";
+import YoutubeLite from "@components/YoutubeLite.astro";
+import type { FaqItem } from "@data/faqs";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+  title: "Ecografías Doppler en Embarazo – Cefem Las Rosas",
+  description:
+    "Controlamos el flujo uteroplacentario y el bienestar del bebé con estudios Doppler obstétricos realizados por especialistas de Cefem.",
+  imageAlt: "Ecografía doppler en embarazo en Cefem Las Rosas",
+  backgroundImage: heroImage,
+  overlayOpacity: 0.45,
+};
+
+const benefits = [
+  {
+    title: "Monitoreo del flujo sanguíneo",
+    description:
+      "Evaluamos arterias uterinas, cordón umbilical y circulación fetal para detectar alteraciones en el aporte de oxígeno y nutrientes.",
+  },
+  {
+    title: "Seguimiento personalizado",
+    description:
+      "Coordinamos cada resultado con el equipo de ginecología y obstetricia de Cefem para ajustar controles y definir el plan de parto.",
+  },
+  {
+    title: "Tecnología doppler color",
+    description:
+      "Utilizamos ecógrafos digitales de alta resolución para obtener mediciones precisas y entregarte informes claros en el momento.",
+  },
+];
+
+const preparation = [
+  "Traé tu orden médica y estudios previos para comparar el crecimiento fetal.",
+  "Llega 15 minutos antes del turno para completar datos y relajarte antes del estudio.",
+  "No requiere ayuno, pero se recomienda una hidratación adecuada previo a la ecografía.",
+];
+
+const faqItems: FaqItem[] = [
+  {
+    question: "¿En qué semana se solicita la ecografía Doppler?",
+    answer:
+      "Generalmente se indica a partir de la semana 24 del embarazo, aunque puede pedirse antes si el obstetra detecta factores de riesgo.",
+  },
+  {
+    question: "¿El estudio es doloroso o invasivo?",
+    answer:
+      "No. Se realiza con un transductor sobre el abdomen materno y dura entre 20 y 30 minutos.",
+  },
+  {
+    question: "¿Cuándo tengo el informe?",
+    answer:
+      "El informe se entrega el mismo día. El equipo de Cefem puede coordinar una consulta obstétrica o repetir el estudio si se necesita un seguimiento más cercano.",
+  },
+];
+
+const ctaContent = {
+  eyebrow: "EMBARAZOS SEGUROS",
+  title: "Reservá tu Doppler obstétrico en Cefem",
+  description:
+    "Coordinamos turnos ágiles y seguimiento conjunto con obstetras, ginecólogos y pediatras del centro en Las Rosas.",
+  button: {
+    text: "Solicitar turno por WhatsApp",
+    link: "https://wa.me/5493471341461",
+    variant: "primary" as const,
+    target: "_blank" as const,
+  },
+};
+
+const video = {
+  id: "eruZqiTysJA",
+  name: "Doppler en embarazo – Dr. Alfonso Alamo",
+  description:
+    "El Dr. Alfonso Alamo (Cefem) explica cuándo se indica la ecografía Doppler y cómo se prepara la paciente.",
+  uploadDate: "2022-04-10",
+};
+
+const videoJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name: video.name,
+  description: video.description,
+  thumbnailUrl: [`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`],
+  uploadDate: video.uploadDate,
+  publisher: {
+    "@type": "Organization",
+    name: "Cefem – Centro Familiar de Especialidades Médicas",
+  },
+  contentUrl: `https://www.youtube.com/watch?v=${video.id}`,
+  embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
+};
+---
+<Layout
+  title="Ecografías Doppler en Embarazo en Las Rosas | Cefem"
+  description="Ecografías Doppler obstétricas en Cefem Las Rosas. Control del flujo uteroplacentario, informes en el día y seguimiento con obstetras."
+  canonicalUrl="/ecografias-doppler-embarazo-las-rosas/"
+>
+  <script type="application/ld+json" is:inline>{JSON.stringify(videoJsonLd)}</script>
+  <InnerHero content={heroContent} />
+
+  <section class="py-16 md:py-24 bg-background">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-[3fr_2fr] items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">¿Por qué realizar tu Doppler en Cefem?</h2>
+        <p class="text-lg text-body-base mb-6">
+          Nuestro servicio de diagnóstico por imágenes trabaja junto al equipo de ginecología y obstetricia para acompañar cada embarazo de Las Rosas con controles precisos.
+          Interpretamos los resultados en el momento y coordinamos interconsultas con pediatría para planificar la llegada del bebé.
+        </p>
+        <div class="grid gap-6 md:grid-cols-2">
+          {benefits.map((benefit) => (
+            <article class="p-6 bg-white border border-primary/10 rounded-xl shadow-sm">
+              <h3 class="text-xl font-semibold text-primary mb-3">{benefit.title}</h3>
+              <p class="text-body-base leading-relaxed">{benefit.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Preparación para el turno</h3>
+        <ul class="space-y-3 text-body-base">
+          {preparation.map((item) => (
+            <li class="flex gap-3">
+              <span class="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-primary"></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-sm text-body-dark">
+          Coordinamos también ecografías <a href="/ecografias-abdominales-las-rosas/" class="text-primary underline">abdominales</a> y <a href="/ecografias-partes-blandas-lesiones-deportivas/" class="text-primary underline">de partes blandas</a> dentro de Cefem.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20 bg-background-alt">
+    <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-2 items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-4">Video: Doppler obstétrico explicado por el Dr. Alfonso Alamo</h2>
+        <p class="text-lg text-body-base mb-6">
+          Conocé por qué el Doppler permite evaluar el flujo sanguíneo del bebé y cuándo se recomienda según cada embarazo en Las Rosas.
+        </p>
+        <div class="rounded-2xl overflow-hidden shadow-lg">
+          <YoutubeLite id={video.id} title={video.name} />
+        </div>
+        <p class="mt-6 text-body-base">
+          Si necesitás un control adicional, podemos complementar con <a href="/cirugia-vascular-varices-las-rosas/" class="text-primary underline">evaluaciones vasculares</a> y seguimiento nutricional para embarazadas dentro de Cefem.
+        </p>
+      </div>
+      <aside class="bg-white border border-background-light rounded-2xl p-6">
+        <h3 class="text-2xl font-semibold text-primary mb-4">Qué incluye el informe</h3>
+        <ul class="space-y-3 text-body-base">
+          <li>Medición de índices de pulsatilidad y resistencia.</li>
+          <li>Análisis del crecimiento fetal y líquido amniótico.</li>
+          <li>Recomendaciones para controles posteriores con tu obstetra.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <Faqs
+    content={{
+      eyebrow: "PREGUNTAS FRECUENTES",
+      title: "Dudas sobre el Doppler obstétrico en Cefem",
+      description: "Respondemos las consultas más frecuentes para que llegues preparada al estudio.",
+      faqs: faqItems,
+    }}
+    background="base"
+    paddingTop="large"
+    paddingBottom="large"
+  />
+
+  <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+</Layout>

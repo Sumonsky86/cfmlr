@@ -7,12 +7,30 @@ import type { FaqItem } from "@data/faqs";
 import heroImage from "../../assets/images/blog-hero-2.jpg";
 
 const heroContent = {
-    title: "Ecografías en Las Rosas – CeFEM",
-    description: "Estudios ecográficos generales, obstétricos, doppler y ginecológicos con médicos especialistas y equipamiento digital de alta resolución.",
-    imageAlt: "Equipo médico realizando una ecografía en CeFEM",
+    title: "Ecografías en Las Rosas – Cefem",
+    description: "Estudios ecográficos generales, obstétricos, doppler y ginecológicos con especialistas de Cefem – Centro Familiar de Especialidades Médicas.",
+    imageAlt: "Equipo médico realizando una ecografía en Cefem",
     backgroundImage: heroImage,
     overlayOpacity: 0.35,
 };
+
+const specializedServices = [
+    {
+        title: "Ecografías abdominales",
+        description: "Preparación guiada y resultados comparativos para abdomen, hígado y riñones.",
+        link: "/ecografias-abdominales-las-rosas/",
+    },
+    {
+        title: "Doppler obstétrico",
+        description: "Control del flujo uteroplacentario y seguimiento integral del embarazo en Cefem.",
+        link: "/ecografias-doppler-embarazo-las-rosas/",
+    },
+    {
+        title: "Ecografías de partes blandas",
+        description: "Diagnóstico musculoesquelético para deportistas y rehabilitación de lesiones.",
+        link: "/ecografias-partes-blandas-lesiones-deportivas/",
+    },
+];
 
 const examSections = [
     {
@@ -49,7 +67,7 @@ const differentiators = [
 
 const faqItems: FaqItem[] = [
     {
-        question: "¿Qué estudios ecográficos puedo hacer en CeFEM?",
+        question: "¿Qué estudios ecográficos puedo hacer en Cefem?",
         answer: "Realizamos ecografías generales, obstétricas, ginecológicas, mamarias, renales y doppler color. Consultanos si necesitás un estudio específico.",
     },
     {
@@ -76,8 +94,8 @@ const ctaContent = {
 ---
 
 <Layout
-    title="Ecografías en Las Rosas con Doppler y Obstétricas | CeFEM"
-    description="Ecografías generales, obstétricas, doppler y ginecológicas en CeFEM Las Rosas. Turnos rápidos, informes confiables y especialistas en diagnóstico por imágenes."
+    title="Ecografías en Las Rosas con Doppler y Obstétricas | Cefem"
+    description="Ecografías generales, obstétricas, doppler y ginecológicas en Cefem Las Rosas. Turnos rápidos, informes confiables y especialistas en diagnóstico por imágenes."
     canonicalUrl="/ecografias-las-rosas/"
 >
     <InnerHero content={heroContent} />
@@ -85,7 +103,7 @@ const ctaContent = {
     <section class="py-16 md:py-24 bg-background">
         <div class="site-container mx-auto px-4 grid gap-12 lg:grid-cols-[3fr_2fr] items-start">
             <div>
-                <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Estudios ecográficos realizados en CeFEM</h2>
+                <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Estudios ecográficos realizados en Cefem</h2>
                 <p class="text-lg text-body-base mb-8">
                     Nuestro servicio de diagnóstico por imágenes combina equipos digitales de alta definición con médicos especialistas que interpretan cada estudio con precisión. Coordinamos los turnos con las diferentes áreas del centro para brindarte un seguimiento integral y sin traslados innecesarios.
                 </p>
@@ -115,7 +133,7 @@ const ctaContent = {
     <section class="py-16 md:py-20 bg-background-alt">
         <div class="site-container mx-auto px-4">
             <div class="max-w-3xl mb-10">
-                <h2 class="text-3xl md:text-4xl font-semibold mb-4">¿Por qué elegir CeFEM para tus ecografías?</h2>
+                <h2 class="text-3xl md:text-4xl font-semibold mb-4">¿Por qué elegir Cefem para tus ecografías?</h2>
                 <p class="text-lg text-body-base">
                     Somos el único centro de Las Rosas que integra diagnóstico por imágenes con ginecología, obstetricia, pediatría y clínica médica. Eso nos permite compartir resultados de forma inmediata, coordinar interconsultas y acompañarte en cada etapa del tratamiento.
                 </p>
@@ -133,7 +151,7 @@ const ctaContent = {
     <Faqs
         content={{
             eyebrow: "PREGUNTAS FRECUENTES",
-            title: "Consultas comunes sobre ecografías en CeFEM",
+            title: "Consultas comunes sobre ecografías en Cefem",
             description: "Respondemos las dudas más habituales para que llegues preparado a tu estudio y aproveches al máximo la consulta.",
             faqs: faqItems,
         }}
@@ -141,6 +159,27 @@ const ctaContent = {
         paddingTop="large"
         paddingBottom="large"
     />
+
+    <section class="py-16 md:py-20 bg-background">
+        <div class="site-container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-6">Servicios específicos de diagnóstico por imágenes</h2>
+            <p class="text-lg text-body-base mb-8">
+                Elegí la página de servicio que mejor se adapte a tu estudio para conocer preparación, video explicativo y preguntas frecuentes dedicadas.
+            </p>
+            <div class="grid gap-6 md:grid-cols-3">
+                {specializedServices.map((service) => (
+                    <article class="p-6 bg-white border border-primary/10 rounded-2xl shadow-sm flex flex-col">
+                        <h3 class="text-xl font-semibold text-primary mb-3">{service.title}</h3>
+                        <p class="text-body-base flex-1">{service.description}</p>
+                        <a href={service.link} class="mt-6 inline-flex items-center gap-2 text-primary font-semibold">
+                            Ver detalles
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </article>
+                ))}
+            </div>
+        </div>
+    </section>
 
     <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
 </Layout>

@@ -1,0 +1,146 @@
+---
+export interface Props {
+  modalId: string;
+  title?: string;
+  open?: boolean;
+  closeLabel?: string;
+}
+const { modalId, title = "Diálogo", open = false, closeLabel = "Cerrar" } = Astro.props;
+---
+
+<div class="hidden" />
+
+<!-- script movido debajo del markup para asegurar que el elemento exista -->
+
+<style>
+  .modal-fade { transition: opacity .18s ease; }
+  [data-modal-panel] { transform: scale(.98); transition: transform .18s ease, box-shadow .18s ease; }
+  .modal-open [data-modal-panel] { transform: scale(1); box-shadow: 0 25px 60px rgba(0,0,0,.25); }
+</style>
+
+<div
+  id={modalId}
+  class="modal-fade pointer-events-none fixed inset-0 z-50 grid place-items-center bg-primary/30 backdrop-blur-sm opacity-0"
+  aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby={`${modalId}-title`}
+  tabindex="-1"
+>
+  <div data-modal-panel class="w-full max-w-3xl overflow-hidden rounded-2xl bg-white/95 backdrop-blur-sm border border-primary/10 shadow-xl">
+    <div class="flex items-center justify-between border-b bg-primary/5 px-4 py-3">
+      <h2 id={`${modalId}-title`} class="text-base font-semibold">{title}</h2>
+      <button
+        class="inline-flex h-8 w-8 items-center justify-center rounded-md text-primary/70 hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        data-close-button aria-label="Cerrar" title="Cerrar"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="p-0">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<script is:inline data-modal-id={modalId} data-open={open}>
+  (() => {
+    const scriptEl = document.currentScript;
+    const modalId = scriptEl?.dataset.modalId || '';
+    let isOpen = scriptEl?.dataset.open === 'true';
+    let lastActiveEl = null;
+    const MAIN_SELECTOR = '#main-content';
+    const MODAL_SELECTOR = `#${modalId}`;
+
+    const getFocusable = (el) => el.querySelectorAll(
+      'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), iframe, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]'
+    );
+
+    const openModal = () => {
+      const modal = document.querySelector(MODAL_SELECTOR);
+      const main = document.querySelector(MAIN_SELECTOR);
+      if (!modal || !main) return;
+
+      const previouslyActive = document.activeElement;
+
+      // Mostrar modal primero y mover el foco dentro del diálogo
+      modal.classList.remove('pointer-events-none','opacity-0');
+      modal.setAttribute('aria-hidden','false');
+
+      const f = getFocusable(modal);
+      (f[0] || modal).focus();
+
+      // Luego desactivar la página y marcar animación de panel
+      main.setAttribute('inert','');
+      document.body.style.overflow = 'hidden';
+      modal.classList.add('modal-open');
+
+      lastActiveEl = previouslyActive;
+      isOpen = true;
+    };
+
+    const closeModal = () => {
+      const modal = document.querySelector(MODAL_SELECTOR);
+      const main = document.querySelector(MAIN_SELECTOR);
+      if (!modal || !main) return;
+
+      main.removeAttribute('inert');
+      document.body.style.overflow = '';
+
+      modal.classList.add('pointer-events-none','opacity-0');
+      modal.setAttribute('aria-hidden','true');
+      modal.classList.remove('modal-open');
+
+      // Detener cualquier reproducción de video (YouTube iframe)
+      const iframes = modal.querySelectorAll('iframe');
+      iframes.forEach((ifr) => {
+        try { ifr.src = 'about:blank'; } catch {}
+        ifr.remove();
+      });
+
+      if (lastActiveEl && typeof lastActiveEl.focus === 'function') lastActiveEl.focus();
+      isOpen = false;
+    };
+
+    const onKey = (e) => {
+      const modal = document.querySelector(MODAL_SELECTOR);
+      if (!modal || !isOpen) return;
+      if (e.key === 'Escape'){ e.preventDefault(); closeModal(); return; }
+      if (e.key === 'Tab'){
+        const f = Array.from(getFocusable(modal));
+        if (!f.length){ e.preventDefault(); return; }
+        const first = f[0], last = f[f.length-1];
+        if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+    };
+
+    const onOverlayClick = (e) => {
+      const panel = e.currentTarget.querySelector('[data-modal-panel]');
+      if (panel && !panel.contains(e.target)) closeModal();
+    };
+
+    window.CefemModal = window.CefemModal || {};
+    window.CefemModal[modalId] = { open: openModal, close: closeModal };
+
+    // Ahora el elemento ya existe; conectar listeners inmediatamente
+    const el = document.querySelector(MODAL_SELECTOR);
+    if (el) {
+      el.addEventListener('click', onOverlayClick);
+      const closeBtn = el.querySelector('[data-close-button]');
+      closeBtn?.addEventListener('click', (e) => { e.preventDefault(); closeModal(); });
+
+      // Si el modal está dentro de #main-content, moverlo fuera (portal)
+      const isInsideMain = !!el.closest('#main-content');
+      if (isInsideMain) {
+        let portal = document.getElementById('modal-root');
+        if (!portal) {
+          portal = document.createElement('div');
+          portal.id = 'modal-root';
+          document.body.appendChild(portal);
+        }
+        portal.appendChild(el);
+      }
+    }
+
+    document.addEventListener('keydown', onKey);
+    if (isOpen) openModal();
+  })();
+</script>

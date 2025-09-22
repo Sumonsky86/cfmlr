@@ -1,0 +1,69 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import InterviewSection from "@components/InterviewSection.astro";
+import InterviewTimeline from "@components/InterviewTimeline.astro";
+import { entrevistas } from "@data/interviews";
+import { timelineItems } from "@data/cronologia-entrevistas";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+import SharedInterviewModal from "@components/SharedInterviewModal.astro";
+
+const heroContent = {
+  title: "Entrevistas Médicas",
+  description: "Recomendaciones de nuestros especialistas y entrevistas en medios locales. Los videos se cargan al hacer click para mejorar el rendimiento.",
+  imageAlt: "Entrevistas Médicas en Cefem",
+  backgroundImage: heroImage,
+  overlayOpacity: 0.3
+}
+---
+
+<Layout
+  title="Entrevistas Médicas – Cefem Las Rosas"
+  description="Entrevistas médicas y recomendaciones de nuestros especialistas emitidas en medios locales. Los videos cargan al hacer click para optimizar el rendimiento."
+  canonicalUrl="/entrevistas-medicas/"
+>
+  <link rel="preconnect" href="https://www.youtube-nocookie.com">
+  <link rel="preconnect" href="https://i.ytimg.com">
+
+  <InnerHero content={heroContent} />
+
+  <main id="main-content" class="py-10">
+    <section class="mx-auto max-w-6xl px-4 mb-6">
+      <h2 class="text-xl font-bold">Cronología de entrevistas</h2>
+      <p class="mt-2 text-gray-600">Explorá la línea de tiempo con una breve descripción y reproducí el video dentro de la misma página.</p>
+    </section>
+    <div class="mx-auto max-w-6xl mb-10">
+      <InterviewTimeline items={timelineItems} />
+    </div>
+
+    <InterviewSection title="Pediatría – Dr. Gustavo Blanco" items={entrevistas.pediatria} />
+    <div class="h-10"></div>
+    <InterviewSection title="Ginecología y Obstetricia – Dr. Alfonso Álamo" items={entrevistas.gineco} />
+    <div class="h-10"></div>
+    <InterviewSection title="Cirugía Vascular Periférica – Dr. Alejandro Álamo" items={entrevistas.vascular} />
+    <div class="h-10"></div>
+    <InterviewSection title="Traumatología y Lesiones Deportivas – Dr. Pablo González" items={entrevistas.trauma} />
+
+  </main>
+  <SharedInterviewModal />
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const timelines = document.querySelectorAll('[data-interview-timeline]');
+      timelines.forEach((timeline) => {
+        const items = timeline.querySelectorAll('[data-timeline-item]');
+        items.forEach((item) => {
+          const button = item.querySelector('[data-toggle]');
+          const vid = item.getAttribute('data-video-id');
+          const vtitle = item.getAttribute('data-video-title') || '';
+          if (!button || !vid) return;
+          const pre = () => { const i = new Image(); i.src = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`; };
+          button.addEventListener('mouseenter', pre);
+          button.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.CefemSharedModal?.openVideo?.({ id: vid, title: vtitle });
+          });
+        });
+      });
+    });
+  </script>
+</Layout>

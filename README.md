@@ -1,7 +1,7 @@
-# CFM – 
+# Cefem – Centro Familiar de Especialidades Médicas
 
-Este proyecto es el sitio web oficial de **CFM**.  
-El sitio está desarrollado con **[Astro](https://astro.build/)** y **[TailwindCSS](https://tailwindcss.com/)**, optimizado para velocidad, performance y escalabilidad.  
+Este proyecto es el sitio web oficial de **Cefem – Centro Familiar de Especialidades Médicas** (Las Rosas, Santa Fe).  
+El sitio está desarrollado con **[Astro](https://astro.build/)** y **[TailwindCSS](https://tailwindcss.com/)**, optimizado para velocidad, performance y escalabilidad.
 
 Incluye:
 - **Landing page institucional** con información de la clínica.
@@ -26,18 +26,25 @@ Incluye:
 
 ## ⚙️ Instalación
 
-Cloná el repositorio:
-
-```bash
-git clone https://github.com/usuario/cefem-astro.git
-cd cefem-astro
-```
-Instalá las dependencias:
+1) Instalá las dependencias:
 ```bash
 npm install
 ```
 
-Iniciá el servidor de desarrollo:
+2) Desarrollo local:
 ```bash
 npm run dev
 ```
+
+3) Verificación de tipos y build:
+```bash
+npm run check
+npm run build
+```
+
+4) Preview del build:
+```bash
+npm run preview
+```
+
+Sugerido: configurar `site` en `astro.config.mjs` y datos en `src/data/config.ts` (nombre, URL, redes sociales) para SEO correcto.

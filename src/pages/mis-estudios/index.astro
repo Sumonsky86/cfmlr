@@ -1,0 +1,53 @@
+---
+import Layout from "@layouts/Layout.astro";
+import InnerHero from "@components/sections/InnerHero.astro";
+import heroImage from "../../assets/images/blog-hero-2.jpg";
+
+const heroContent = {
+  title: "Mis Estudios Online",
+  description:
+    "Accedé a tus resultados y estudios realizados en Cefem directamente desde casa.",
+  backgroundImage: heroImage,
+  imageAlt: "Paciente revisando estudios médicos online",
+  overlayOpacity: 0.2,
+};
+---
+
+<Layout
+  title="Consultar Estudios Médicos Online | Cefem Las Rosas"
+  description="Ingresá al portal de resultados de Cefem para descargar tus estudios médicos y compartirlos con tus especialistas."
+>
+  <InnerHero content={heroContent} />
+
+  <section class="py-12 md:py-20 bg-background">
+    <div class="site-container mx-auto max-w-4xl space-y-8 px-4">
+      <div class="space-y-4 text-body-base">
+        <p>
+          Si realizaste un estudio en <strong>Cefem – Centro Familiar de Especialidades Médicas</strong>, podés acceder al informe digital iniciando sesión en el portal seguro de resultados.
+        </p>
+        <div class="rounded-2xl border border-primary/10 bg-white p-6 shadow-sm">
+          <h2 class="text-lg font-semibold text-primary">Ingresar al portal de estudios</h2>
+          <p class="mt-2 text-sm md:text-base text-body-base/80">
+            Recordá tener a mano tu documento y la contraseña entregada al finalizar el estudio. Si necesitás ayuda, comunicate con recepción.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href="https://resultados.cefem.ar"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white shadow transition hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              Entrar al portal
+            </a>
+            <a
+              href="/contact"
+              class="inline-flex items-center justify-center rounded-full border border-primary px-5 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              Necesito ayuda
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

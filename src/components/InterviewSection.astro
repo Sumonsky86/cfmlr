@@ -1,0 +1,22 @@
+---
+import InterviewCard from "@components/InterviewCard.astro";
+
+export interface Item {
+  id: string;
+  title: string;
+  excerpt?: string;
+  modalId: string;
+}
+export interface Props {
+  title: string;
+  items: Item[];
+}
+const { title, items } = Astro.props;
+---
+
+<section class="mx-auto max-w-6xl px-4">
+  <h2 class="mb-4 text-xl font-bold">{title}</h2>
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {items.map((v) => <InterviewCard {...v} />)}
+  </div>
+</section>

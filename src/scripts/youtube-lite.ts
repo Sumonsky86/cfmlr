@@ -16,7 +16,7 @@ if (!window.__cefemActivateLitePlayer) {
     iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
     iframe.title = 'YouTube video player';
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-    (iframe as any).allowFullscreen = true;
+    iframe.allowFullscreen = true;
     iframe.loading = 'lazy';
     iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
 
@@ -41,4 +41,3 @@ if (!window.__cefemYoutubeLiteInitialized) {
 }
 
 export {};
-

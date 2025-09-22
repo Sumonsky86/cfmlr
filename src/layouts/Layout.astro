@@ -3,7 +3,7 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SchemaOrg from "../components/SchemaOrg.astro";
-import youtubeLiteUrl from "../scripts/youtube-lite.ts?url";
+// Cargar el script como módulo compilado (no como asset URL)
 import { SEO, siteConfig } from "../data/config";
 import { themeSetting } from "../data/config";
 const { theme } = themeSetting;
@@ -224,8 +224,40 @@ const pageImage = image ? new URL(image, site.url).toString() : "";
 					// (Optimización) la página entrevistas inicializa sus propios handlers
                         });
                 </script>
-                <script type="module" src={youtubeLiteUrl}></script>
-                <script is:inline>
+                <script is:inline data-cfasync="false">
+                        (function(){
+                                if (!window.__cefemActivateLitePlayer) {
+                                        window.__cefemActivateLitePlayer = function(container){
+                                                if (!container || container.classList.contains('loaded')) return;
+                                                var id = container.getAttribute('data-id');
+                                                if (!id) return;
+
+                                                var iframe = document.createElement('iframe');
+                                                iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+                                                iframe.title = 'YouTube video player';
+                                                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+                                                iframe.setAttribute('allowfullscreen', '');
+                                                iframe.loading = 'lazy';
+                                                iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+
+                                                container.textContent = '';
+                                                container.appendChild(iframe);
+                                                container.classList.add('loaded');
+
+                                                try { window.dispatchEvent(new CustomEvent('cefem:video_play', { detail: { id: id } })); } catch(e){}
+                                        };
+                                }
+                                if (!window.__cefemYoutubeLiteInitialized) {
+                                        window.__cefemYoutubeLiteInitialized = true;
+                                        document.addEventListener('click', function(event){
+                                                var target = event && event.target && event.target.closest ? event.target.closest('.yt-lite') : null;
+                                                if (!target) return;
+                                                if (window.__cefemActivateLitePlayer) window.__cefemActivateLitePlayer(target);
+                                        });
+                                }
+                        })();
+                </script>
+                <script is:inline data-cfasync="false">
                         window.addEventListener('cefem:video_play', (event) => {
                                 const detail = event?.detail || {};
                                 const videoId = detail.id;

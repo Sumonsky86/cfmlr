@@ -1,12 +1,11 @@
 import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
 import { categories } from '@data/categories';
 
 
 const categoryNames = categories.map((category) => category.name);
 
 const blog = defineCollection({
-    loader: glob({ base: './src/content/blog', pattern: '**/*.md' }),
+    type: 'content',
     schema: ({ image }) =>
         z.object({
             title: z.string(),
@@ -29,7 +28,7 @@ const blog = defineCollection({
 });
 
 const legal = defineCollection({
-    loader: glob({ base: './src/content/legal', pattern: '**/*.md' }),
+    type: 'content',
     schema: z.object({
         title: z.string(),
         lastUpdated: z.string().transform((str) => new Date(str)),

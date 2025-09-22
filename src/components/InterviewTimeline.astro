@@ -1,0 +1,131 @@
+---
+import { PlayCircle } from "lucide-astro";
+
+const generateUID = () => Math.random().toString(36).substring(2, 15);
+
+interface TimelineItem {
+  date: string;
+  title: string;
+  id: string;
+  points?: string[];
+}
+type TimelineView = TimelineItem & {
+  uid: string;
+  formattedDate: string;
+  templateId: string;
+  videoSource: string;
+  points: string[];
+};
+
+interface Props {
+  items: TimelineItem[];
+}
+
+const { items } = Astro.props;
+
+const timelineId = `timeline-${generateUID()}`;
+
+const formatDate = (value: string) => {
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return value;
+  return parsed.toLocaleDateString("es-AR", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+};
+
+const sorted = [...items].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+const timelineItems: TimelineView[] = sorted.map((item) => {
+  const uid = generateUID();
+  return {
+    ...item,
+    uid,
+    formattedDate: formatDate(item.date),
+    templateId: `timeline-template-${uid}`,
+    videoSource: `${timelineId}-${uid}`,
+    points: item.points ?? [],
+  };
+});
+
+const groups = timelineItems.reduce((acc: Array<{ year: string; items: TimelineView[] }>, it) => {
+  const year = new Date(it.date).getFullYear().toString();
+  const g = acc.find((x) => x.year === year);
+  if (g) g.items.push(it);
+  else acc.push({ year, items: [it] });
+  return acc;
+}, [] as Array<{ year: string; items: TimelineView[] }>);
+
+type FlatEntry = { type: 'year'; year: string } | (TimelineView & { type: 'item' });
+const flatEntries: FlatEntry[] = [];
+for (const g of groups) {
+  flatEntries.push({ type: 'year', year: g.year });
+  for (const it of g.items) flatEntries.push({ type: 'item', ...it });
+}
+---
+
+<section
+  data-interview-timeline={timelineId}
+  class="rounded-3xl border border-primary/10 bg-gradient-to-br from-white/95 to-primary/5 px-6 py-10 shadow-md backdrop-blur"
+>
+  <div class="timeline-list relative space-y-10 border-l border-primary/20 pl-6">
+    {flatEntries.map((entry) => (
+      entry.type === 'year' ? (
+        <div class="timeline-year relative pl-4">
+          <div class="year-label text-sm font-semibold text-primary/80">{entry.year}</div>
+        </div>
+      ) : (
+        <div
+          data-timeline-item={entry.uid}
+          data-video-source={entry.videoSource}
+          data-template-id={entry.templateId}
+          data-video-id={(entry as any).id}
+          data-video-title={(entry as any).title}
+          class="timeline-item relative pl-4 transition"
+        >
+          <span class="absolute left-[-0.70rem] top-3 flex h-3 w-3 -translate-x-1/2 items-center justify-center">
+            <span class="timeline-dot h-3 w-3 rounded-full bg-primary" />
+          </span>
+
+          <div class="flex flex-col gap-3">
+            <p class="text-xs font-medium uppercase tracking-wide text-primary/70">{entry.formattedDate}</p>
+            <h3 class="text-xl font-semibold text-primary">{entry.title}</h3>
+
+            {entry.points.length > 0 && (
+              <ul class="list-disc space-y-1.5 pl-4 text-sm leading-relaxed text-body-base">
+                {entry.points.map((point: string) => (
+                  <li>{point}</li>
+                ))}
+              </ul>
+            )}
+
+            <button
+              type="button"
+              data-toggle
+              data-label-closed="Ver video"
+              data-label-open="Cerrar video"
+              aria-expanded="false"
+              class="inline-flex w-max items-center gap-2 rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <PlayCircle size={18} />
+              Ver video
+            </button>
+
+            <div data-video-container class="hidden"></div>
+          </div>
+        </div>
+      )
+    ))}
+  </div>
+</section>
+
+<style>
+  .timeline-dot {
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  [data-interview-timeline] [data-timeline-item][data-active="true"] .timeline-dot {
+    box-shadow: 0 0 0 6px rgba(53, 87, 193, 0.2);
+    transform: scale(1.05);
+  }
+</style>

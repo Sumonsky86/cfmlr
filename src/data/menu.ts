@@ -8,6 +8,7 @@ export interface MenuItem {
 export const headerMenu: MenuItem[] = [
   { name: 'Inicio', link: '/' },
   { name: 'Especialidades', link: '/especialidades' },
+  { name: 'Entrevistas Médicas', link: '/entrevistas-medicas/' },
   { name: 'Blog', link: '/blog' },
 ];
 
@@ -20,8 +21,7 @@ export const footerMenu: MenuItem[] = [
   { name: 'Pediatría', link: '/pediatria/' },
   { name: 'Traumatología', link: '/traumatologia/' },
   { name: 'Nutrición', link: '/nutricion/' },
-  { name: 'Prensa y Entrevistas', link: '/prensa-entrevistas/' },
-  { name: 'Solicitar turno por WhatsApp', link: 'https://wa.me/5493471341461' },
+  { name: 'Entrevistas Médicas', link: '/entrevistas-medicas/' },
 ];
 
 export const legalMenu: MenuItem[] = [

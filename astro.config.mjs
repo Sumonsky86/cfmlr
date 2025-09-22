@@ -3,6 +3,8 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import sitemap from '@astrojs/sitemap';
 
+import mdx from '@astrojs/mdx';
+
 const site = 'https://www.cefem.ar/';
 
 export default defineConfig({
@@ -30,15 +32,17 @@ export default defineConfig({
       lineNumbersPrefix: ''
     }
   },
-  integrations: [
-    sitemap({
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-      filter: (page) => !page.includes('/404'), 
-      entryLimit: 10000, 
-    }),
-  ],
+  integrations: [sitemap({
+    changefreq: 'weekly',
+    priority: 0.7,
+    lastmod: new Date(),
+    filter: (page) => !page.includes('/404')
+      && !page.includes('/prensa-entrevistas')
+      && !page.includes('/components')
+      && !page.includes('/theme-info')
+      && page !== '/privacy-policy/',
+    entryLimit: 10000,
+  }), mdx()],
   image: {
     remotePatterns: [
       { protocol: "https" },

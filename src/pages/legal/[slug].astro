@@ -6,7 +6,7 @@ import InnerHero from '../../components/sections/InnerHero.astro';
 export async function getStaticPaths() {
     const legalEntries = await getCollection('legal');
     return legalEntries.map((entry) => ({
-        params: { slug: entry.id },
+        params: { slug: entry.slug },
         props: { entry },
     }));
 }

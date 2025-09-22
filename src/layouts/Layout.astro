@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SchemaOrg from "../components/SchemaOrg.astro";
+import youtubeLiteUrl from "../scripts/youtube-lite.ts?url";
 import { SEO, siteConfig } from "../data/config";
 import { themeSetting } from "../data/config";
 const { theme } = themeSetting;
@@ -223,6 +224,7 @@ const pageImage = image ? new URL(image, site.url).toString() : "";
 					// (Optimización) la página entrevistas inicializa sus propios handlers
                         });
                 </script>
+                <script type="module" src={youtubeLiteUrl}></script>
                 <script is:inline>
                         window.addEventListener('cefem:video_play', (event) => {
                                 const detail = event?.detail || {};

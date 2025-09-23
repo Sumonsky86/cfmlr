@@ -10,7 +10,7 @@ import SharedInterviewModal from "@components/SharedInterviewModal.astro";
 
 const heroContent = {
   title: "Entrevistas Médicas",
-  description: "Recomendaciones de nuestros especialistas y entrevistas en medios locales. Los videos se cargan al hacer click para mejorar el rendimiento.",
+  description: "Recomendaciones de nuestros especialistas y entrevistas.",
   imageAlt: "Entrevistas Médicas en Cefem",
   backgroundImage: heroImage,
   overlayOpacity: 0.3
@@ -19,7 +19,7 @@ const heroContent = {
 
 <Layout
   title="Entrevistas Médicas – Cefem Las Rosas"
-  description="Entrevistas médicas y recomendaciones de nuestros especialistas emitidas en medios locales. Los videos cargan al hacer click para optimizar el rendimiento."
+  description="Entrevistas médicas y recomendaciones de nuestros especialistas."
   canonicalUrl="/entrevistas-medicas/"
 >
   <link rel="preconnect" href="https://www.youtube-nocookie.com">
@@ -30,7 +30,7 @@ const heroContent = {
   <main id="main-content" class="py-10">
     <section class="mx-auto max-w-6xl px-4 mb-6">
       <h2 class="text-xl font-bold">Cronología de entrevistas</h2>
-      <p class="mt-2 text-gray-600">Explorá la línea de tiempo con una breve descripción y reproducí el video dentro de la misma página.</p>
+      <p class="mt-2 text-gray-600">Explorá la línea de tiempo.</p>
     </section>
     <div class="mx-auto max-w-6xl mb-10">
       <InterviewTimeline items={timelineItems} />

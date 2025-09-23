@@ -17,4 +17,4 @@ const schemaJson = JSON.stringify({
   sameAs: [siteConfig.Socials.Facebook].filter(Boolean),
 });
 ---
-<script type="application/ld+json" is:inline>{schemaJson}</script>
+<script type="application/ld+json" set:html={schemaJson}></script>

@@ -24,6 +24,10 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# internal planning docs (not for production)
+PLAN.md
+AGENTS.md
+
 # jetbrains setting folder
 .idea/
 # vscode setting folder

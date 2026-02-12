@@ -49,7 +49,7 @@ Nos reservamos el derecho de modificar esta política de privacidad. Cualquier c
 
 Si tenés alguna pregunta sobre esta política, no dudes en contactarnos:
 
-- **Email:** info@cefem.com.ar
+- **Email:** info [at] cefem [dot] com [dot] ar
 - **Dirección:** Boulevard Kemmis 843, Las Rosas, Santa Fe, Argentina
 
 ---

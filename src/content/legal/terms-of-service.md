@@ -44,7 +44,7 @@ Estos términos se rigen por las leyes de la República Argentina.
 
 Si tenés alguna pregunta sobre estos términos, podés contactarnos:
 
-- **Email:** info@cefem.com.ar
+- **Email:** info [at] cefem [dot] com [dot] ar
 - **Dirección:** Boulevard Kemmis 843, Las Rosas, Santa Fe, Argentina
 
 ---

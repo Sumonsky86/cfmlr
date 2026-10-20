@@ -1,0 +1,45 @@
+---
+import InstitutionalLayout from './InstitutionalLayout.astro';
+interface Props { title: string; description: string; canonicalUrl: string; }
+---
+<InstitutionalLayout {...Astro.props}>
+  <div class="clinical-content"><slot /></div>
+</InstitutionalLayout>
+<style is:global>
+  /* Compatibility is intentionally bounded to these ten clinical pages. */
+  body.institutional-surface .clinical-content { font-size: 16px; line-height: 1.75; overflow-wrap: anywhere; }
+  body.institutional-surface .clinical-content > section:not(.page-intro) { padding-block: 32px; border-top: 1px solid var(--line); }
+  body.institutional-surface .clinical-content .site-container { width: calc(100% - 80px); max-width: 1180px; margin-inline: auto; }
+  body.institutional-surface .clinical-content .grid { display: grid; gap: 24px; }
+  body.institutional-surface .clinical-content .grid > * { min-width: 0; }
+  body.institutional-surface .clinical-content h2 { font-size: clamp(29px, 3vw, 38px); line-height: 1.2; margin-bottom: 18px; }
+  body.institutional-surface .clinical-content h3 { font-family: var(--sans); font-size: 20px; line-height: 1.4; margin-bottom: 12px; }
+  body.institutional-surface .clinical-content p { color: #475569; font-size: 16px; line-height: 1.75; }
+  body.institutional-surface .clinical-content p + .grid, body.institutional-surface .clinical-content p + div { margin-top: 24px; }
+  body.institutional-surface .clinical-content article, body.institutional-surface .clinical-content aside, body.institutional-surface .clinical-content .grid > div[class~="p-6"] { padding: 24px; border: 1px solid var(--line); border-radius: 14px; background: var(--soft); }
+  body.institutional-surface .clinical-content aside { align-self: start; }
+  body.institutional-surface .clinical-content ul, body.institutional-surface .clinical-content ol { padding-left: 24px; margin: 16px 0 0; }
+  body.institutional-surface .clinical-content li { display: list-item; padding-left: 3px; margin-block: 10px; color: #475569; }
+  body.institutional-surface .clinical-content li::marker { color: var(--blue); }
+  body.institutional-surface .clinical-content li > span:empty { display: none; }
+  body.institutional-surface .clinical-content a:not(.button):not(.back-link) { color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+  body.institutional-surface .clinical-content .mt-6 { margin-top: 24px; }
+  body.institutional-surface .clinical-content .mb-4, body.institutional-surface .clinical-content .mb-6, body.institutional-surface .clinical-content .mb-8, body.institutional-surface .clinical-content .mb-10 { margin-bottom: 20px; }
+  body.institutional-surface .clinical-content .yt-lite { margin-top: 20px; border-radius: 14px; overflow: hidden; }
+  body.institutional-surface .clinical-content .yt-lite iframe { display: block; width: 100%; height: 100%; border: 0; }
+  body.institutional-surface .clinical-content .max-w-3xl { max-width: 760px; }
+  body.institutional-surface .clinical-content img { height: auto; }
+  @media (min-width: 768px) {
+    body.institutional-surface .clinical-content [class~="md:grid-cols-2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    body.institutional-surface .clinical-content [class~="md:grid-cols-3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (min-width: 1100px) {
+    body.institutional-surface .clinical-content [class~="lg:grid-cols-[3fr_2fr]"] { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 40px; }
+    body.institutional-surface .clinical-content [class~="lg:grid-cols-2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+  }
+  @media (max-width: 650px) {
+    body.institutional-surface .clinical-content .site-container { width: calc(100% - 36px); }
+    body.institutional-surface .clinical-content > section:not(.page-intro) { padding-block: 26px; }
+    body.institutional-surface .clinical-content article, body.institutional-surface .clinical-content aside, body.institutional-surface .clinical-content .grid > div[class~="p-6"] { padding: 20px; }
+  }
+</style>

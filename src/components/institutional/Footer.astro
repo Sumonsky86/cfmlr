@@ -1,0 +1,6 @@
+---
+import logo from '../../assets/institutional/cefem-logo.png';
+import { PUBLIC_PATHS } from '../../utils/public-routes';
+import { institutionalIdentity } from '../../data/institutional-identity';
+---
+<footer class="site-footer"><div class="wrap"><div class="footer-top"><a class="footer-brand" href="/"><img src={logo.src} width="25" height="33" alt="">CEFEM</a><nav class="footer-links" aria-label="Enlaces del pie"><a href={PUBLIC_PATHS.contact}>Contacto</a><a href={PUBLIC_PATHS.privacy}>Privacidad</a><a href={PUBLIC_PATHS.terms}>Términos y condiciones</a></nav></div><div class="footer-bottom"><span>© {new Date().getFullYear()} {institutionalIdentity.name}</span><span>{institutionalIdentity.address.streetAddress} · {institutionalIdentity.address.addressLocality}, {institutionalIdentity.address.addressRegion}, Argentina</span></div></div></footer>

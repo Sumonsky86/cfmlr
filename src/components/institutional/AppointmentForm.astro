@@ -1,0 +1,147 @@
+---
+import { appointmentContact, appointmentLinks, appointmentServices } from '../../data/appointments';
+---
+
+<section class="appointment-page wrap" aria-labelledby="appointment-title">
+  <div class="appointment-intro">
+    <p class="eyebrow">Turnos CEFEM</p>
+    <h1 id="appointment-title">Solicitá tu turno.</h1>
+    <p>Completá los datos de tu solicitud y continuá por WhatsApp para coordinar con recepción.</p>
+  </div>
+
+  <div class="appointment-columns">
+    <form data-appointment-form method="post" action="/turnos/" novalidate aria-describedby="appointment-confirmation-note">
+      <p id="appointment-confirmation-note" class="confirmation-note">Esto prepara un mensaje: no reserva un horario ni confirma el turno. Recepción te informará la disponibilidad.</p>
+
+      <noscript>
+        <p class="form-notice">Este formulario necesita JavaScript para preparar el mensaje. Podés <a href={appointmentLinks.whatsapp}>escribir directamente por WhatsApp</a> o <a href={appointmentLinks.phone}>llamar a recepción</a>. Los campos no se enviarán automáticamente.</p>
+      </noscript>
+
+      <fieldset data-appointment-fields disabled>
+        <legend class="sr-only">Datos de contacto y preferencias de la solicitud</legend>
+        <div class="fields-grid">
+          <div class="field field-wide">
+            <label for="appointment-name">Nombre y apellido <span>(obligatorio)</span></label>
+            <input id="appointment-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="120" aria-describedby="appointment-name-error" />
+            <p id="appointment-name-error" class="field-error" data-error-for="name" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="appointment-phone">Teléfono de contacto <span>(obligatorio)</span></label>
+            <input id="appointment-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="40" aria-describedby="appointment-phone-help appointment-phone-error" />
+            <p id="appointment-phone-help" class="field-help">Incluí el código de área.</p>
+            <p id="appointment-phone-error" class="field-error" data-error-for="phone" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="appointment-specialty">Especialidad o servicio <span>(obligatorio)</span></label>
+            <select id="appointment-specialty" name="specialty" required aria-describedby="appointment-specialty-error">
+              <option value="">Elegí una especialidad</option>
+              {appointmentServices.map(service => <option value={service.id}>{service.label}</option>)}
+            </select>
+            <p id="appointment-specialty-error" class="field-error" data-error-for="specialty" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="appointment-date">Fecha preferida <span>(opcional)</span></label>
+            <input id="appointment-date" name="preferredDate" type="date" aria-describedby="appointment-date-help appointment-date-error" />
+            <p id="appointment-date-help" class="field-help">Sujeta a disponibilidad; no es una reserva.</p>
+            <p id="appointment-date-error" class="field-error" data-error-for="preferredDate" hidden></p>
+          </div>
+
+          <div class="field field-wide">
+            <label for="appointment-comment">Comentario administrativo <span>(opcional)</span></label>
+            <textarea id="appointment-comment" name="comment" rows="3" maxlength="300" aria-describedby="appointment-comment-help appointment-comment-error"></textarea>
+            <p id="appointment-comment-help" class="field-help">Hasta 300 caracteres, por ejemplo una preferencia de horario. No incluyas diagnósticos, resultados ni otros datos de salud.</p>
+            <p id="appointment-comment-error" class="field-error" data-error-for="comment" hidden></p>
+          </div>
+        </div>
+        <button class="button button-primary continue-button" type="submit">Continuar por WhatsApp <span aria-hidden="true">↗</span></button>
+      </fieldset>
+
+      <p class="form-status" data-form-status role="status" aria-live="polite" aria-atomic="true"></p>
+
+      <section class="message-fallback" data-message-fallback hidden aria-labelledby="prepared-message-title">
+        <h2 id="prepared-message-title">Tu mensaje preparado</h2>
+        <p>Si WhatsApp no se abre, podés intentar de nuevo o copiar este mensaje. Tus datos siguen en el formulario.</p>
+        <label class="sr-only" for="prepared-appointment-message">Mensaje para recepción</label>
+        <textarea id="prepared-appointment-message" data-prepared-message readonly rows="8"></textarea>
+        <div class="fallback-actions">
+          <a class="button button-primary" data-whatsapp-retry>Abrir WhatsApp <span aria-hidden="true">↗</span></a>
+          <button class="button button-outline" data-copy-message type="button">Copiar mensaje</button>
+        </div>
+        <p class="copy-status" data-copy-status role="status" aria-live="polite" aria-atomic="true"></p>
+      </section>
+    </form>
+
+    <aside class="reception-details" aria-labelledby="reception-title">
+      <h2 id="reception-title">¿Preferís comunicarte directamente?</h2>
+      <p>Recepción puede ayudarte a coordinar la consulta.</p>
+      <a class="inline-link" href={appointmentLinks.whatsapp}>WhatsApp de recepción <span aria-hidden="true">↗</span></a>
+      <a class="inline-link" href={appointmentLinks.phone}>Llamar: {appointmentContact.phoneDisplay}</a>
+      <div class="reception-address">
+        <p>{appointmentContact.address}</p>
+        <p>{appointmentContact.locality}</p>
+        <p>{appointmentContact.openingHours}</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<script>
+  import '../../scripts/appointments';
+</script>
+
+<style>
+  .appointment-page { padding-block: 42px 56px; }
+  .appointment-intro { max-width: 750px; margin-bottom: 28px; }
+  .appointment-intro h1 { font-size: clamp(36px, 4vw, 48px); line-height: 1.15; margin-top: 10px; }
+  .appointment-intro > p:last-child { color: var(--text); font-size: 17px; line-height: 1.75; margin-top: 16px; }
+  .appointment-columns { display: grid; grid-template-columns: minmax(0, 2fr) minmax(230px, 1fr); gap: 54px; align-items: start; }
+  form { min-width: 0; }
+  .confirmation-note, .form-notice { color: var(--text); font-size: 16px; line-height: 1.7; margin-bottom: 24px; }
+  .form-notice { border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+  .form-notice a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .fields-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+  .field { min-width: 0; }
+  .field-wide { grid-column: 1 / -1; }
+  label { display: block; color: var(--ink); font-size: 16px; font-weight: 600; line-height: 1.6; margin-bottom: 8px; }
+  label span { font-size: 13px; color: var(--text); font-weight: 400; }
+  input, select, textarea { display: block; width: 100%; min-width: 0; border: 1px solid #aebdce; border-radius: 6px; padding: 11px 12px; min-height: 48px; color: var(--ink); background: #fff; font-family: var(--sans); font-size: 16px; line-height: 1.5; }
+  textarea { resize: vertical; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-color: var(--blue); }
+  [aria-invalid="true"] { border-color: #9b1c1c; }
+  .field-help { color: var(--text); font-size: 14px; line-height: 1.65; margin-top: 8px; }
+  .field-error { color: #9b1c1c; font-size: 15px; font-weight: 600; line-height: 1.6; margin-top: 8px; }
+  .field-error[hidden], .message-fallback[hidden] { display: none; }
+  .continue-button { margin-top: 26px; min-height: 48px; font-size: 16px; }
+  .form-status { color: var(--text); font-size: 16px; line-height: 1.7; margin-top: 20px; }
+  .form-status:empty, .copy-status:empty { display: none; }
+  .message-fallback { margin-top: 24px; padding: 22px; background: var(--soft); border: 1px solid var(--line); border-radius: 8px; }
+  .message-fallback h2 { font-size: 28px; line-height: 1.2; margin-bottom: 12px; }
+  .message-fallback p { color: var(--text); font-size: 16px; line-height: 1.7; }
+  .message-fallback textarea { margin-top: 16px; }
+  .fallback-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .fallback-actions .button { min-height: 46px; font-size: 14px; }
+  .message-fallback .copy-status { margin-top: 14px; }
+  .reception-details { padding-left: 28px; border-left: 1px solid var(--line); }
+  .reception-details h2 { font-size: 29px; line-height: 1.2; margin-bottom: 16px; }
+  .reception-details > p { color: var(--text); font-size: 16px; line-height: 1.7; margin-bottom: 10px; }
+  .reception-details .inline-link { display: flex; font-size: 15px; }
+  .reception-address { border-top: 1px solid var(--line); margin-top: 18px; padding-top: 16px; }
+  .reception-address p { color: var(--text); font-size: 14px; line-height: 1.8; margin-bottom: 5px; }
+  @media (max-width: 900px) {
+    .appointment-columns { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+    .reception-details { padding: 24px 0 0; border-left: 0; border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 650px) {
+    .appointment-page { padding-block: 30px 40px; }
+    .appointment-intro { margin-bottom: 22px; }
+    .fields-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    .field-wide { grid-column: auto; }
+    .continue-button { width: 100%; font-size: 15px; }
+    .message-fallback { padding: 18px; }
+    .fallback-actions .button { width: 100%; }
+  }
+</style>

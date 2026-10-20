@@ -1,0 +1,21 @@
+---
+import { OCTOBER_ROSE } from '../../data/october-rose';
+import OctoberRoseIcon from './OctoberRoseIcon.astro';
+interface Props { variant?: 'mention' | 'feature'; }
+const { variant = 'feature' } = Astro.props;
+---
+{variant === 'mention' ? <p class="october-mention" data-october-rose="mention" hidden><a href={OCTOBER_ROSE.href}><OctoberRoseIcon /><span>Octubre Rosa: información para acompañar el cuidado de la salud.</span><span aria-hidden="true">→</span></a></p> : <aside class="october-feature" data-october-rose="feature" aria-labelledby="october-feature-title" hidden><OctoberRoseIcon /><div><p class="october-label">Octubre Rosa</p><h2 id="october-feature-title">Informarnos también es cuidarnos.</h2><p>Detección temprana, cambios que conviene consultar y controles según cada situación.</p><a href={OCTOBER_ROSE.href}>Leer el artículo <span aria-hidden="true">→</span></a></div></aside>}
+<script>import '../../scripts/october-rose';</script>
+<style>
+  .october-mention[hidden], .october-feature[hidden] { display: none !important; }
+  .october-mention { margin: 0 0 26px; font-size: 16px; }
+  .october-mention a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+  .october-mention :global(svg) { flex: none; width: 18px; height: 24px; }
+  .october-feature { display: grid; grid-template-columns: 30px minmax(0,1fr); gap: 18px; padding: 24px; margin-bottom: 32px; border: 1px solid #ecc7d7; border-left: 3px solid #b42361; border-radius: 10px; background: #fff7fa; }
+  .october-feature :global(svg) { margin-top: 4px; }
+  .october-feature .october-label { color: #9c1c50; font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .october-feature h2 { font-size: 30px; line-height: 1.25; margin-bottom: 10px; }
+  .october-feature p { color: var(--text); font-size: 16px; line-height: 1.7; }
+  .october-feature a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 10px; color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+  @media (max-width:650px) { .october-feature { padding: 20px; gap: 12px; } .october-feature h2 { font-size: 27px; } }
+</style>

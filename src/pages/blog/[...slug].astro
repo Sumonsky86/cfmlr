@@ -1,9 +1,16 @@
 ---
 import { getCollection, render } from 'astro:content';
-import Layout from '@layouts/Layout.astro';
-import CategoryPill from '@components/ui/CategoryPill.astro';
-import Date from '@components/ui/Date.astro';
+import InstitutionalLayout from '@layouts/InstitutionalLayout.astro';
+import ArticleHeader from '@components/institutional/ArticleHeader.astro';
+import ArticleContent from '@components/institutional/ArticleContent.astro';
+import ArticleSeo from '@components/institutional/ArticleSeo.astro';
+import ArticleToc from '@components/institutional/ArticleToc.astro';
+import ArticleContext from '@components/institutional/ArticleContext.astro';
+import BlogPost from '@components/blog/BlogPost.astro';
 import { Image } from 'astro:assets';
+import { siteConfig } from '@data/config';
+import { categories } from '@data/categories';
+import { categoryPath } from '../../utils/public-routes';
 
 export async function getStaticPaths() {
     const posts = await getCollection('blog');
@@ -14,109 +21,140 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 
 const allPosts = await getCollection('blog');
-const relatedPosts = allPosts.filter(p => {
-    if (p.slug === post.slug) return false;
-    return p.data.categories.some(cat => post.data.categories.includes(cat));
-}).slice(0, 3);
+const relatedPosts = allPosts
+    .filter((p) => {
+        if (p.slug === post.slug || p.data.publish === false) return false;
+        return p.data.categories.some((cat) => post.data.categories.includes(cat));
+    })
+    .slice(0, 3);
 
- 
 const seoTitle = post.data.seo?.title || post.data.title;
 const seoDescription = post.data.seo?.description || post.data.excerpt;
- 
+const siteUrl = Astro.site || siteConfig.siteUrl;
 let seoImage: string | undefined = post.data.seo?.image;
- 
 if (seoImage && !seoImage.startsWith('http')) {
-    const siteUrl = import.meta.env.SITE || 'https://titan-core.vercel.app';
     seoImage = new URL(seoImage.startsWith('/') ? seoImage : `/${seoImage}`, siteUrl).toString();
-}
- 
-else if (!seoImage && post.data.featuredImage) {
-    
-    const siteUrl = import.meta.env.SITE || 'https://titan-core.vercel.app';
+} else if (!seoImage && post.data.featuredImage) {
     seoImage = new URL(post.data.featuredImage.src.src, siteUrl).toString();
 }
+const postCategories = post.data.categories
+    .map((name) => categories.find((category) => category.name === name))
+    .filter((category) => category !== undefined);
+const breadcrumbs = [
+    { name: 'Inicio', href: '/' },
+    { name: 'Blog', href: '/blog' },
+    { name: post.data.title, href: Astro.url.pathname },
+];
 ---
 
-<Layout title={seoTitle} description={seoDescription} image={seoImage}>
-    <div class="w-full h-120 absolute top-0 left-0 z-0 overflow-hidden border-b border-black">
-        {
-            post.data.featuredImage && (
-                <>
+<InstitutionalLayout title={seoTitle} description={seoDescription} image={seoImage} ogType="article">
+    <ArticleSeo slot="head" title={post.data.title} description={post.data.excerpt} publishDate={post.data.publishDate} canonicalUrl={new URL(Astro.url.pathname, siteConfig.siteUrl).href} image={seoImage} breadcrumbs={breadcrumbs} />
+    <article class="blog-article">
+        <div class="blog-reading-frame wrap">
+            <ArticleHeader title={post.data.title} excerpt={post.data.excerpt} publishDate={post.data.publishDate} categories={postCategories.map((category) => ({ name: category.name, href: categoryPath(category.slug) }))} breadcrumbs={breadcrumbs} />
+            {
+                post.data.featuredImage && (
                     <Image
                         src={post.data.featuredImage.src}
-                        alt=""
-                        width={1920}
-                        height={1080}
-                        class="w-full h-full object-cover grayscale opacity-20"
-                        quality={60}
+                        alt={post.data.featuredImage.alt}
+                        width={Math.min(1200, post.data.featuredImage.src.width)}
+                        class="blog-featured-image"
+                        quality={80}
+                        format="webp"
                     />
-                    <div class="absolute inset-0 bg-primary/10 backdrop-blur-md" />
-                </>
-            )
-        }
-    </div>
-
-    <article class="site-container--small mx-auto px-4 prose relative z-10 pb-base">
-        <div class="mt-42 mb-12 text-center">
-            <h1>{post.data.title}</h1>
-            <div class="flex items-center justify-center gap-4 text-gray-600">
-                <Date date={post.data.publishDate} />
-                {
-                    post.data.categories && (
-                        <div class="flex flex-wrap gap-2">
-                            {post.data.categories.map((category) => (
-                                <CategoryPill category={category} />
-                            ))}
-                        </div>
-                    )
-                }
-            </div>
-        </div>
-
-        {
-            post.data.featuredImage && (
-                <Image
-                    src={post.data.featuredImage.src}
-                    alt={post.data.featuredImage.alt}
-                    width={1200}
-                    height={675}
-                    class="w-full h-auto rounded-lg border mb-12 border-black"
-                    quality={80}
-                    format="webp"
-                />
-            )
-        }
-
-        <div class="mt-8">
-            <Content />
+                )
+            }
+            <ArticleToc headings={headings} />
+            <ArticleContent><Content /></ArticleContent>
+            <ArticleContext categories={post.data.categories} />
+            <a class="blog-back" href="/blog">← Todos los artículos</a>
         </div>
     </article>
 
-    {relatedPosts.length > 0 &&
-        <section class="site-container--small mx-auto px-4 py-16">
-            <h2 class="text-3xl font-bold mb-8">Artículos Relacionados</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {relatedPosts.map(relatedPost => (
-                    <a href={`/blog/${relatedPost.slug}`} class="border border-black rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-                        {relatedPost.data.featuredImage && 
-                            <Image 
-                                src={relatedPost.data.featuredImage.src} 
-                                alt={relatedPost.data.featuredImage.alt} 
-                                width={400} 
-                                height={225} 
-                                class="w-full h-auto object-cover"
-                            />
-                        }
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2">{relatedPost.data.title}</h3>
-                            <p class="text-gray-600 text-sm">{relatedPost.data.excerpt}</p>
-                        </div>
-                    </a>
-                ))}
-            </div>
-        </section>
+    {
+        relatedPosts.length > 0 && (
+            <section class="blog-related wrap" aria-labelledby="blog-related-heading">
+                <h2 id="blog-related-heading">Artículos relacionados</h2>
+                <div class="blog-related-grid">
+                    {relatedPosts.map((relatedPost) => (
+                        <BlogPost
+                            title={relatedPost.data.title}
+                            excerpt={relatedPost.data.excerpt}
+                            featuredImage={relatedPost.data.featuredImage}
+                            publishDate={relatedPost.data.publishDate}
+                            categories={relatedPost.data.categories}
+                            slug={relatedPost.slug}
+                            headingLevel="h3"
+                        />
+                    ))}
+                </div>
+            </section>
+        )
     }
-</Layout>
+</InstitutionalLayout>
+<style>
+    .blog-article {
+        padding-bottom: 40px;
+        font-size: 16px;
+    }
+    .blog-article .blog-reading-frame {
+        max-width: 780px;
+    }
+    .blog-featured-image {
+        width: 100%;
+        height: auto;
+        max-height: 360px;
+        object-fit: contain;
+        border-radius: 10px;
+        margin-bottom: 32px;
+    }
+    .blog-back {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--blue);
+        margin-top: 24px;
+    }
+    .blog-back:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+    .blog-related {
+        padding-block: 32px 48px;
+        border-top: 1px solid var(--line);
+        font-size: 16px;
+    }
+    .blog-related > h2 {
+        font-size: clamp(30px, 3vw, 38px);
+        line-height: 1.25;
+        margin-bottom: 26px;
+    }
+    .blog-related-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px;
+    }
+    @media (max-width: 1000px) {
+        .blog-related-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+    }
+    @media (max-width: 650px) {
+        .blog-featured-image { max-height: 220px; }
+        .blog-related-grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+        .blog-related {
+            padding-block: 28px 32px;
+        }
+    }
+    @media (max-width: 650px) {
+        .blog-article {
+            padding-bottom: 28px;
+        }
+    }
+</style>

@@ -1,0 +1,35 @@
+---
+import logo from '../../assets/institutional/cefem-logo.png';
+import { publicNavigation } from '../../data/public-navigation';
+import { publicNavCurrent } from '../../utils/public-navigation';
+import OctoberRoseRibbon from './OctoberRoseRibbon.astro';
+---
+<header class="site-header"><div class="wrap header-inner"><div class="brand-block"><a class="brand" href="/" aria-label="CEFEM, inicio"><img src={logo.src} width="47" height="62" alt="Logo de CEFEM"><span><span class="brand-name">CEFEM</span><span class="brand-caption">Centro Familiar de<br>Especialidades Médicas</span></span></a><OctoberRoseRibbon /></div>
+<nav class="desktop-nav" aria-label="Navegación principal">{publicNavigation.map(link => <a href={link.href} aria-current={publicNavCurrent(Astro.url.pathname, link.href)}>{link.label}</a>)}</nav>
+<div class="header-actions"><a class="button button-outline" href="/mis-estudios/" aria-current={publicNavCurrent(Astro.url.pathname, "/mis-estudios/")}>Mis estudios</a><a class="button button-primary" href="/turnos/">Solicitar turno</a></div><button id="menu-toggle" class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"><svg class="menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+<nav id="mobile-menu" class="mobile-nav" aria-label="Navegación móvil" hidden>{publicNavigation.map(link => <a href={link.href} aria-current={publicNavCurrent(Astro.url.pathname, link.href)}>{link.label}</a>)}<div class="mobile-actions"><a class="button button-outline" href="/mis-estudios/" aria-current={publicNavCurrent(Astro.url.pathname, "/mis-estudios/")}>Mis estudios</a><a class="button button-primary" href="/turnos/">Solicitar turno</a></div></nav></header>
+<script is:inline>
+const menuButton=document.querySelector('#menu-toggle');
+const mobileMenu=document.querySelector('#mobile-menu');
+function closeMenu(returnFocus=false){
+  mobileMenu.hidden=true;
+  menuButton.setAttribute('aria-expanded','false');
+  menuButton.setAttribute('aria-label','Abrir menú');
+  if(returnFocus)menuButton.focus();
+}
+menuButton.addEventListener('click',()=>{
+  const opening=mobileMenu.hidden;
+  mobileMenu.hidden=!opening;
+  menuButton.setAttribute('aria-expanded',String(opening));
+  menuButton.setAttribute('aria-label',opening?'Cerrar menú':'Abrir menú');
+});
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>closeMenu()));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!mobileMenu.hidden)closeMenu(true);});
+window.matchMedia('(min-width: 1101px)').addEventListener('change',e=>{if(e.matches)closeMenu();});
+
+</script>
+<style>
+  .brand-block { position: relative; flex: none; }
+  :global(body.institutional-surface .brand-block:has([data-october-rose]:not([hidden])) .brand-name) { display: inline-block; padding-right: 44px; }
+  .desktop-nav a[aria-current], .mobile-nav > a[aria-current] { color: var(--blue); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+</style>

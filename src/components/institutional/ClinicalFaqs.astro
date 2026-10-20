@@ -1,0 +1,40 @@
+---
+import type { FaqItem } from '@data/faqs';
+interface Props {
+  content: { eyebrow?: string; title?: string; description?: string; faqs: FaqItem[]; };
+  background?: string; paddingTop?: string; paddingBottom?: string;
+}
+const { content: { eyebrow, title, description, faqs } } = Astro.props;
+const schema = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqs.map(({ question, answer }) => ({
+    '@type': 'Question', name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+};
+const safeJson = JSON.stringify(schema).replace(/</g, '\\u003c');
+---
+<section class="clinical-faq">
+  <div class="site-container">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    {title && <h2>{title}</h2>}
+    {description && <p>{description}</p>}
+    <div class="clinical-faq-list">
+      {faqs.map(({ question, answer }) => (
+        <details>
+          <summary>{question}</summary>
+          <p>{answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+<script type="application/ld+json" is:inline set:html={safeJson} />
+<style>
+  .clinical-faq-list { margin-top: 24px; max-width: 850px; }
+  details { padding-block: 16px; border-top: 1px solid var(--line); }
+  details:last-child { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; min-height: 44px; padding-block: 8px; font-size: 17px; font-weight: 600; }
+  details p { margin-top: 12px; }
+  .eyebrow { color: var(--blue); font-weight: 600; letter-spacing: .08em; margin-bottom: 10px; }
+</style>

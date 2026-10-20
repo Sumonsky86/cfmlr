@@ -1,0 +1,12 @@
+---
+import { OCTOBER_ROSE } from '../../data/october-rose';
+import OctoberRoseIcon from './OctoberRoseIcon.astro';
+---
+<a class="october-ribbon" href={OCTOBER_ROSE.href} aria-label="Octubre Rosa: información sobre detección temprana del cáncer de mama" data-october-rose="header" hidden><OctoberRoseIcon /></a>
+<script>import '../../scripts/october-rose';</script>
+<style>
+  .october-ribbon { position: absolute; right: 0; top: 0; width: 44px; height: 44px; display: inline-flex; justify-content: center; align-items: center; border-radius: 6px; }
+  .october-ribbon[hidden] { display: none !important; }
+  .october-ribbon:hover { background: #fff0f6; }
+  .october-ribbon:focus-visible { outline: 3px solid #9c1c50; outline-offset: 2px; }
+</style>

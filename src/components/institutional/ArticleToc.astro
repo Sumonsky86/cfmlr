@@ -1,0 +1,46 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props { headings: MarkdownHeading[]; }
+const { headings } = Astro.props;
+// Keep the outline concise. Older posts begin at H3; do not rewrite them.
+const primaryDepth = headings.some((heading) => heading.depth === 2) ? 2 : 3;
+const sections = headings.filter((heading) => heading.depth === primaryDepth);
+---
+{sections.length >= 2 && (
+    <nav class="article-toc" aria-label="En este artículo">
+        <p>En este artículo</p>
+        <ol>
+            {sections.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}
+        </ol>
+    </nav>
+)}
+<style>
+    .article-toc {
+        margin-block: 0 28px;
+        padding: 20px 24px;
+        background: var(--soft);
+        border-left: 3px solid var(--blue);
+        border-radius: 0 8px 8px 0;
+        font-size: 16px;
+        overflow-wrap: anywhere;
+    }
+    .article-toc p { font-weight: 700; }
+    .article-toc ol {
+        margin: 10px 0 0;
+        padding-left: 22px;
+        list-style: decimal;
+    }
+    .article-toc li { padding-left: 4px; }
+    .article-toc a {
+        display: inline-block;
+        padding-block: 7px;
+        color: var(--blue);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        line-height: 1.6;
+    }
+    @media (max-width: 650px) {
+        .article-toc { padding: 18px; }
+    }
+</style>

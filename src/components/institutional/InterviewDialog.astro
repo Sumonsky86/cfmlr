@@ -1,0 +1,73 @@
+<dialog id="interview-dialog" class="interview-dialog" aria-labelledby="interview-dialog-title" hidden>
+  <div class="interview-dialog-panel">
+    <div class="interview-dialog-heading"><h2 id="interview-dialog-title">Entrevista médica</h2><button type="button" class="interview-dialog-close" aria-label="Cerrar entrevista" autofocus>×</button></div>
+    <div class="interview-player" data-interview-player></div>
+    <div class="interview-dialog-footer"><p>Si el reproductor no está disponible, podés ver el video en YouTube.</p><a data-interview-source target="_blank" rel="noopener noreferrer">Abrir en YouTube <span aria-hidden="true">↗</span></a></div>
+  </div>
+</dialog>
+<script>
+  const modal = document.querySelector<HTMLDialogElement>('#interview-dialog');
+  const slot = modal?.querySelector<HTMLElement>('[data-interview-player]');
+  const title = modal?.querySelector<HTMLElement>('#interview-dialog-title');
+  const external = modal?.querySelector<HTMLAnchorElement>('[data-interview-source]');
+  if (modal && slot && title && external && typeof modal.showModal === 'function') {
+    let trigger: HTMLAnchorElement | null = null;
+    let priorOverflow = '';
+    const releasePlayer = () => {
+      slot.replaceChildren();
+      modal.hidden = true;
+      if (!trigger) return;
+      document.body.style.overflow = priorOverflow;
+      const restore = trigger;
+      trigger = null;
+      restore.focus();
+    };
+    const close = () => { if (modal.open) modal.close(); releasePlayer(); };
+    modal.querySelector('button')?.addEventListener('click', close);
+    modal.addEventListener('cancel', event => { event.preventDefault(); close(); });
+    modal.addEventListener('close', () => { if (!modal.open) releasePlayer(); });
+    modal.addEventListener('click', event => { if (event.target === modal) close(); });
+    for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-interview-link]')) {
+      link.setAttribute('aria-controls', modal.id);
+      link.setAttribute('aria-haspopup', 'dialog');
+      link.addEventListener('click', event => {
+        if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        const id = link.dataset.videoId || '';
+        const label = link.dataset.videoTitle || '';
+        if (!/^[A-Za-z0-9_-]{11}$/.test(id) || !label) return;
+        if (modal.open) { event.preventDefault(); return; }
+        if (trigger) releasePlayer();
+        modal.hidden = false;
+        try { modal.showModal(); } catch { modal.hidden = true; return; }
+        event.preventDefault();
+        trigger = link;
+        priorOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        title.textContent = label;
+        external.href = `https://www.youtube.com/watch?v=${id}`;
+        const player = document.createElement('iframe');
+        player.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+        player.title = label;
+        player.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        player.allowFullscreen = true;
+        player.referrerPolicy = 'strict-origin-when-cross-origin';
+        slot.replaceChildren(player);
+        modal.querySelector<HTMLButtonElement>('button')?.focus();
+      });
+    }
+  }
+</script>
+<style>
+  .interview-dialog { width: min(960px, calc(100% - 32px)); max-height: calc(100dvh - 32px); margin: auto; padding: 0; overflow: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); color: var(--ink); }
+  .interview-dialog::backdrop { background: #172d43b8; }
+  .interview-dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 15px 20px; }
+  .interview-dialog-heading h2 { font-family: var(--sans); font-size: 18px; font-weight: 600; line-height: 1.5; letter-spacing: -.02em; }
+  .interview-dialog-close { flex: none; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); color: var(--ink); font-size: 28px; }
+  .interview-dialog-close:hover { border-color: var(--blue); color: var(--blue); }
+  .interview-player { position: relative; aspect-ratio: 16 / 9; background: #111; }
+  .interview-player :global(iframe) { position: absolute; inset: 0; display: block; width: 100%; height: 100%; border: 0; }
+  .interview-dialog-footer { padding: 16px 20px 18px; }
+  .interview-dialog-footer p { color: var(--text); font-size: 14px; }
+  .interview-dialog-footer a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: var(--blue); font-weight: 600; font-size: 16px; }
+  @media (max-width: 650px) { .interview-dialog { width: calc(100% - 20px); max-height: calc(100dvh - 20px); border-radius: 10px; } .interview-dialog-heading { padding: 10px 14px; } .interview-dialog-heading h2 { font-size: 16px; } .interview-dialog-footer { padding: 12px 14px; } }
+</style>

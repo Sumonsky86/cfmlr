@@ -1,18 +1,17 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import InnerHero from "@components/sections/InnerHero.astro";
-import CtaBanner from "@components/sections/CtaBanner.astro";
-import Faqs from "@components/sections/Faqs.astro";
+import Layout from "@layouts/ClinicalLayout.astro";
+import InnerHero from "@components/institutional/ClinicalIntro.astro";
+import CtaBanner from "@components/institutional/ClinicalCta.astro";
+import Faqs from "@components/institutional/ClinicalFaqs.astro";
 import type { FaqItem } from "@data/faqs";
-import heroImage from "../../assets/images/blog-hero-2.jpg";
+import { publicInterviewGroups } from "@data/public-interviews";
+
+const video = publicInterviewGroups.flatMap(group => group.items).find(item => item.id === "M4_HOnatb5c")!;
 
 const heroContent = {
   title: "Ecografías Abdominales en Las Rosas – Cefem",
   description:
     "Diagnóstico por imágenes para abdomen, pelvis y riñones con especialistas de Cefem – Centro Familiar de Especialidades Médicas.",
-  imageAlt: "Ecografía abdominal en Cefem Las Rosas",
-  backgroundImage: heroImage,
-  overlayOpacity: 0.4,
 };
 
 const studies = [
@@ -60,19 +59,6 @@ const faqItems: FaqItem[] = [
   },
 ];
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqItems.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
-};
-
 const ctaContent = {
   eyebrow: "DIAGNÓSTICO ABORDAJE COMPLETO",
   title: "Reservá tu ecografía abdominal en Cefem",
@@ -91,7 +77,6 @@ const ctaContent = {
   description="Ecografías abdominales, hepatobiliares y renales en Cefem Las Rosas. Preparación guiada, informes en el día e interconsulta con especialistas."
   canonicalUrl="/ecografias-abdominales-las-rosas/"
 >
-  <script type="application/ld+json" is:inline>{JSON.stringify(faqJsonLd)}</script>
   <InnerHero content={heroContent} />
 
   <section class="py-16 md:py-24 bg-background">
@@ -131,20 +116,20 @@ const ctaContent = {
   <section class="py-16 md:py-20 bg-background-alt">
     <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-2 items-start">
       <div>
-        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-4">Conocé más sobre nuestros estudios</h2>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-4">Entrevista: {video.title}</h2>
         <p class="text-lg text-body-base mb-6">
-          Mirá la entrevista con el Dr. Gustavo Blanco y descubrí cómo integramos las ecografías con el seguimiento clínico de las familias en Las Rosas.
+          Entrevista del archivo audiovisual. Título original de la publicación: {video.sourceTitle}.
         </p>
         <a
           href="https://www.youtube.com/watch?v=M4_HOnatb5c"
           target="_blank"
-          rel="noopener"
-          aria-label="Ver entrevista sobre ecografías y controles pediátricos"
+          rel="noopener noreferrer"
+          aria-label={`Ver entrevista: ${video.title}`}
           class="block rounded-2xl overflow-hidden shadow-lg"
         >
           <img
             src="https://img.youtube.com/vi/M4_HOnatb5c/hqdefault.jpg"
-            alt="Entrevista Cefem sobre controles pediátricos"
+            alt={video.title}
             loading="lazy"
             width="1280"
             height="720"
@@ -178,5 +163,5 @@ const ctaContent = {
     paddingBottom="large"
   />
 
-  <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+  <CtaBanner content={ctaContent} service="ultrasound" variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
 </Layout>

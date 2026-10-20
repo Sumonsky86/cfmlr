@@ -1,46 +1,21 @@
 ---
 import { getCollection, render } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import InnerHero from '../../components/sections/InnerHero.astro';
+import InstitutionalLayout from '../../layouts/InstitutionalLayout.astro';
+import LegalReading from '../../components/institutional/LegalReading.astro';
+import { legalSlug, legalPath } from '../../utils/public-routes';
 
 export async function getStaticPaths() {
     const legalEntries = await getCollection('legal');
-    return legalEntries.map((entry) => ({
-        params: { slug: entry.slug },
-        props: { entry },
-    }));
+    return legalEntries.map((entry) => ({ params: { slug: legalSlug(entry.slug) }, props: { entry } }));
 }
-
 const { entry } = Astro.props;
 const { Content } = await render(entry);
- 
 const seoTitle = entry.data.seo?.title || entry.data.title;
-const seoDescription = entry.data.seo?.description || '';
-
- 
-const formattedDate = new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-}).format(entry.data.lastUpdated);
-
- 
-const heroContent = {
-    title: entry.data.title,
-    description: '',
-    overlayOpacity: 0.8,
-    imageAlt: entry.data.title || 'Hero image',  
-};
+const seoDescription = entry.data.seo?.description || undefined;
+const dateInContent = /última\s+actualización/i.test(entry.body);
 ---
-
-<Layout title={seoTitle} description={seoDescription}>
-    <InnerHero content={heroContent} />
-
-    <article class="site-container--small mx-auto px-8 prose pb-base">
-        <div class="mt-12 mb-8">
-            <p class="text-sm text-body-base/80">Last updated: {formattedDate}</p>
-        </div>
-
+<InstitutionalLayout title={seoTitle} description={seoDescription} canonicalUrl={legalPath(entry.slug)}>
+    <LegalReading title={entry.data.title} lastUpdated={entry.data.lastUpdated} dateInContent={dateInContent}>
         <Content />
-    </article>
-</Layout>
+    </LegalReading>
+</InstitutionalLayout>

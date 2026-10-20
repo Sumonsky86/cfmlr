@@ -1,0 +1,27 @@
+# Public route aliases only. No study routes or catch-all rewrites.
+/contact /contacto/ 301
+/contact/ /contacto/ 301
+/legal/privacy-policy /legal/privacidad/ 301
+/legal/privacy-policy/ /legal/privacidad/ 301
+/privacy-policy /legal/privacidad/ 301
+/privacy-policy/ /legal/privacidad/ 301
+/legal/terms-of-service /legal/terminos-y-condiciones/ 301
+/legal/terms-of-service/ /legal/terminos-y-condiciones/ 301
+/category/especialidades /categorias/especialidades/ 301
+/category/especialidades/ /categorias/especialidades/ 301
+/category/ginecologia /categorias/ginecologia/ 301
+/category/ginecologia/ /categorias/ginecologia/ 301
+/category/guias /categorias/guias/ 301
+/category/guias/ /categorias/guias/ 301
+/category/institucional /categorias/institucional/ 301
+/category/institucional/ /categorias/institucional/ 301
+/category/medicina-general /categorias/medicina-general/ 301
+/category/medicina-general/ /categorias/medicina-general/ 301
+/category/nutricion /categorias/nutricion/ 301
+/category/nutricion/ /categorias/nutricion/ 301
+/category/pediatria /categorias/pediatria/ 301
+/category/pediatria/ /categorias/pediatria/ 301
+/category/salud-preventiva /categorias/salud-preventiva/ 301
+/category/salud-preventiva/ /categorias/salud-preventiva/ 301
+/category/urologia /categorias/urologia/ 301
+/category/urologia/ /categorias/urologia/ 301

@@ -1,5 +1,7 @@
 ---
 import BlogPost from './BlogPost.astro';
+import OctoberRosePromotion from '../institutional/OctoberRosePromotion.astro';
+import { categoryPath } from '../../utils/public-routes';
 import type { CollectionEntry } from 'astro:content';
 import { categories } from '../../data/categories';
 import { getCollection } from 'astro:content';
@@ -11,77 +13,124 @@ interface Props {
 
 const { posts, currentCategory } = Astro.props;
 
-  
 const allPosts = await getCollection('blog', ({ data }) => {
     return import.meta.env.DEV || data.publish !== false;
 });
 
-  
+const matchingPosts = currentCategory
+    ? allPosts.filter((post) => post.data.categories?.includes(currentCategory))
+    : allPosts;
 const activeCategories = categories.filter((category) =>
     allPosts.some((post) => post.data.categories?.includes(category.name)),
 );
 ---
 
-<section class="site-container mx-auto px-4 py-base">
-    <div
-        class="mb-16 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6"
-        data-aos="fade-in"
-        data-aos-delay="100"
-    >
-        <div class="w-full">
-            <h2 class="text-lg font-semibold mb-4">Filter by Categories:</h2>
-            <div class="flex flex-wrap gap-2">
-                <a
-                    href="/blog"
-                    class={`px-4 sm:px-6 py-2 sm:py-3 leading-none rounded-md text-small flex items-center justify-center transition-colors border border-primary duration-200 ${
-                        !currentCategory
-                            ? 'bg-primary text-body-dark shadow-md'
-                            : 'bg-background text-body-base hover:bg-background-light hover:text-body-light'
-                    }`}
-                >
-                    Show All
-                </a>
+<section class="blog-list wrap" aria-label="Artículos del blog">
+    {Astro.url.pathname === "/blog/" && <OctoberRosePromotion />}
+    <div class="blog-toolbar">
+        <div>
+            <h2 class="filter-heading">Filtrar por tema</h2>
+            <nav class="blog-filters" aria-label="Temas del blog">
+                <a href="/blog" aria-current={!currentCategory ? 'page' : undefined}>Todos</a>
                 {
                     activeCategories.map((category) => (
                         <a
-                            href={`/category/${category.slug}`}
-                            class={`px-4 sm:px-6 py-2 sm:py-3 leading-none rounded-md text-small flex items-center justify-center transition-colors border border-primary duration-200 ${
-                                currentCategory === category.name
-                                    ? 'bg-primary text-body-dark shadow-md'
-                                    : 'bg-background text-body-base hover:bg-background-light hover:text-body-light'
-                            }`}
+                            href={categoryPath(category.slug)}
                             title={category.description}
+                            aria-current={currentCategory === category.name ? 'page' : undefined}
                         >
                             {category.name}
                         </a>
                     ))
                 }
-            </div>
+            </nav>
         </div>
-        <p class="text-small text-body-base text-left sm:text-right whitespace-nowrap">
-            Showing <span class="font-bold text-primary">{posts.length}</span> of <span class="font-bold text-primary"
-                >{allPosts.length}</span
-            > posts
+        <p class="blog-count">
+            Mostrando <strong>{posts.length}</strong> de <strong>{matchingPosts.length}</strong> artículos
         </p>
     </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="blog-grid">
         {
             posts.map((post, index) => (
-                <div>
-                    <BlogPost
-                        title={post.data.title}
-                        excerpt={post.data.excerpt}
-                        featuredImage={post.data.featuredImage || ''}
-                        publishDate={post.data.publishDate}
-                        categories={post.data.categories || []}
-                        slug={post.slug}
-                        index={index}
-                    />
-                </div>
+                <BlogPost
+                    title={post.data.title}
+                    excerpt={post.data.excerpt}
+                    featuredImage={post.data.featuredImage || ''}
+                    publishDate={post.data.publishDate}
+                    categories={post.data.categories || []}
+                    slug={post.slug}
+                    index={index}
+                />
             ))
         }
     </div>
-
-    {posts.length === 0 && <p class="text-center text-gray-500 py-8">No posts found in this category.</p>}
+    {posts.length === 0 && <p class="blog-empty">No hay artículos en esta categoría.</p>}
 </section>
+<style>
+    .blog-list {
+        padding-block: 8px 44px;
+        font-size: 16px;
+    }
+    .blog-toolbar {
+        display: grid;
+        gap: 20px;
+        padding-bottom: 30px;
+    }
+    .filter-heading {
+        font-family: var(--sans);
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0;
+        margin-bottom: 12px;
+    }
+    .blog-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .blog-filters a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 15px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        color: var(--text);
+        line-height: 1.5;
+    }
+    .blog-filters a:hover {
+        border-color: var(--blue);
+        color: var(--blue);
+    }
+    .blog-filters a[aria-current] {
+        background: var(--blue);
+        border-color: var(--blue);
+        color: var(--paper);
+    }
+    .blog-count {
+        color: var(--text);
+    }
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px;
+    }
+    .blog-empty {
+        padding-block: 32px;
+        color: var(--text);
+    }
+    @media (max-width: 1000px) {
+        .blog-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+    }
+    @media (max-width: 650px) {
+        .blog-grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+        .blog-list {
+            padding-bottom: 30px;
+        }
+    }
+</style>

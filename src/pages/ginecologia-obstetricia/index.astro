@@ -1,19 +1,16 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import InnerHero from "@components/sections/InnerHero.astro";
-import CtaBanner from "@components/sections/CtaBanner.astro";
-import Faqs from "@components/sections/Faqs.astro";
-import YoutubeLite from "@components/YoutubeLite.astro";
+import Layout from "@layouts/ClinicalLayout.astro";
+import InnerHero from "@components/institutional/ClinicalIntro.astro";
+import CtaBanner from "@components/institutional/ClinicalCta.astro";
+import Faqs from "@components/institutional/ClinicalFaqs.astro";
+import YoutubeLite from "@components/institutional/ClinicalVideo.astro";
 import type { FaqItem } from "@data/faqs";
-import heroImage from "../../assets/images/blog-hero-2.jpg";
+import { publicInterviewGroups } from "@data/public-interviews";
 
 const heroContent = {
   title: "Ginecología y Obstetricia Integral en Las Rosas – Cefem",
   description:
     "Controles preventivos, salud sexual, seguimiento del embarazo y ecografías obstétricas en Cefem – Centro Familiar de Especialidades Médicas.",
-  imageAlt: "Consulta ginecológica en Cefem Las Rosas",
-  backgroundImage: heroImage,
-  overlayOpacity: 0.35,
 };
 
 const services = [
@@ -64,35 +61,14 @@ const ctaContent = {
   },
 };
 
-const video = {
-  id: "eruZqiTysJA",
-  name: "Doppler en embarazo y controles prenatales – Dr. Alfonso Alamo",
-  description:
-    "El Dr. Alfonso Alamo (Cefem) comparte recomendaciones sobre ecografías y cuidados durante el embarazo en Las Rosas.",
-  uploadDate: "2022-04-10",
-};
+const video = publicInterviewGroups.flatMap(group => group.items).find(item => item.id === "eruZqiTysJA")!;
 
-const videoJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "VideoObject",
-  name: video.name,
-  description: video.description,
-  thumbnailUrl: [`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`],
-  uploadDate: video.uploadDate,
-  publisher: {
-    "@type": "Organization",
-    name: "Cefem – Centro Familiar de Especialidades Médicas",
-  },
-  contentUrl: `https://www.youtube.com/watch?v=${video.id}`,
-  embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
-};
 ---
 <Layout
   title="Ginecología y Obstetricia en Las Rosas | Cefem"
   description="Consultas ginecológicas, planificación familiar y seguimiento del embarazo en Cefem Las Rosas. Equipo cercano con ecografías obstétricas y controles integrados."
   canonicalUrl="/ginecologia-obstetricia/"
 >
-  <script type="application/ld+json" is:inline>{JSON.stringify(videoJsonLd)}</script>
   <InnerHero content={heroContent} />
 
   <section class="py-16 md:py-24 bg-background">
@@ -129,12 +105,12 @@ const videoJsonLd = {
   <section class="py-16 md:py-20 bg-background-alt">
     <div class="site-container mx-auto px-4 grid gap-10 lg:grid-cols-2 items-start">
       <div>
-        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-4">Video: controles prenatales en Cefem</h2>
+        <h2 class="text-3xl md:text-4xl font-semibold text-primary mb-4">Entrevista: {video.title}</h2>
         <p class="text-lg text-body-base mb-6">
-          Conocé cómo planificamos las ecografías Doppler y los chequeos obstétricos para garantizar el bienestar del bebé y la mamá en Las Rosas.
+          Entrevista del archivo audiovisual. Título original de la publicación: {video.sourceTitle}.
         </p>
         <div class="rounded-2xl overflow-hidden shadow-lg">
-          <YoutubeLite id={video.id} title={video.name} />
+          <YoutubeLite id={video.id} title={video.title} />
         </div>
         <p class="mt-6 text-body-base">
           Reforzá tus controles leyendo la guía sobre <a href="/blog/doppler-embarazo-cuando-hacerlo" class="text-primary underline">cuándo realizar el Doppler en el embarazo</a> y programando ecografías complementarias en Cefem.
@@ -163,5 +139,5 @@ const videoJsonLd = {
     paddingBottom="large"
   />
 
-  <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+  <CtaBanner content={ctaContent} service="gynecology-obstetrics" variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
 </Layout>

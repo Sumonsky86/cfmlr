@@ -1,101 +1,17 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import Hero from '@components/sections/Hero.astro';
-import Features from '@components/sections/Features.astro';
-import { featureLists } from '@data/features';
-import CtaBanner from '@components/sections/CtaBanner.astro';
-import Faqs from '@components/sections/Faqs.astro';
-import { faqLists } from '@data/faqs';
-import RecentPosts from '@components/sections/RecentPosts.astro';
-import ContactInfo from '@components/sections/ContactInfo.astro'; 
-import heroImage from '../assets/images/home/default-hero-2.png';
-
-const seo = {
-    title: "Cefem – Centro Familiar de Especialidades Médicas en Las Rosas",
-    description: "Cefem en Las Rosas: Atención integral en Pediatría, Urología, Ginecología y más. Cuidamos de tu familia con especialistas de confianza.",
-    image: "/og-imagen.png" 
-}
-
-const heroContent = {
-    title: 'Cefem: Centro Familiar de Especialidades Médicas',
-    description: 'Atención médica confiable y cercana en Las Rosas para toda la familia.',
-    imageAlt: "Sala de espera de Cefem – Centro Familiar de Especialidades Médicas",
-    buttons: [
-        {
-            text: 'Nuestras Especialidades',
-            link: '/especialidades',
-            variant: 'primary' as const,
-            size: 'lg' as const,
-            target: '_self'
-        }
-    ],
-    backgroundImage: heroImage,
-    overlayOpacity: 0.2,
-    highlightWord: 'especialidades' 
-}
-
-const featuresSection = {
-    id: "especialidades", 
-    eyebrow: "Servicios",
-    title: "Nuestras Especialidades en Cefem",
-    description: "En Cefem, contamos con un equipo de profesionales para brindarte una atención integral, coordinada y en un mismo lugar.",
-    features: featureLists.main.features,
-}
-
-const contactSection = { 
-    eyebrow: "Contacto",
-    title: "Encontranos en Las Rosas – Cefem",
-    description: "Nuestro centro médico está ubicado en el corazón de Las Rosas. En Cefem te esperamos para brindarte la mejor atención."
-}
-
-const faqsSection = {
-    eyebrow: "Preguntas Frecuentes",
-    title: 'Todo lo que necesitas saber',
-    description: 'Respondemos a las dudas más comunes sobre nuestros turnos, estudios y horarios de atención.',
-    faqs: faqLists.main.faqs
-}
-
-const recentPostsSection = {
-    eyebrow: "Blog Cefem",
-    title: "Novedades y Consejos de Salud en Cefem",
-    description: "Artículos escritos por nuestros profesionales para mantenerte informado y cuidar tu bienestar.",
-    button: {
-        text: "Ver todos los artículos",
-        link: "/blog",
-        variant: "primary" as const
-    }
-}
-
-const mainCta = {
-    title: "¿Necesitas un turno en Cefem?",
-    description: "Contactate con Cefem para gestionar tu próxima cita en Las Rosas. Estamos para ayudarte.",
-    button: {
-        text: "Contactanos por WhatsApp",
-        link: "https://wa.me/5493471341461",
-        variant: "primary" as const,
-        target: "_blank" as const
-    }
-};
-
+import InstitutionalLayout from '../layouts/InstitutionalLayout.astro';
+import Hero from '../components/institutional/Hero.astro';
+import Services from '../components/institutional/Services.astro';
+import Conversations from '../components/institutional/Conversations.astro';
+import Visit from '../components/institutional/Visit.astro';
+import Journal from '../components/institutional/Journal.astro';
+const title = 'Cefem – Centro Familiar de Especialidades Médicas en Las Rosas';
+const description = 'Cefem en Las Rosas: Atención integral en Pediatría, Urología, Ginecología y más. Cuidamos de tu familia con especialistas de confianza.';
 ---
-
-    <Layout 
-    title={seo.title} 
-    description={seo.description}
-    footerCta={{
-        title: "",
-        description: "",
-        hideCta: true,
-        button: {
-        text: "",
-        link: "#"
-        }
-    }}
-    >
-    <Hero content={heroContent} />
-    <Features content={featuresSection} background="light" padding="base" />
-    <RecentPosts content={recentPostsSection} background="base" padding="base" postsToShow={3} />
-    <ContactInfo content={contactSection} background="light" padding="base" />
-    <Faqs content={faqsSection} background="base" padding="base" />
-    <CtaBanner content={mainCta} variant="contained" background="light" paddingTop="base" paddingBottom="base" />
-</Layout>
+<InstitutionalLayout {title} {description} canonicalUrl="/">
+  <Hero />
+  <Services compact={true} />
+  <Conversations />
+  <Visit />
+  <Journal />
+</InstitutionalLayout>

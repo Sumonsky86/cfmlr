@@ -1,0 +1,5 @@
+---
+import facade from "../../assets/institutional/clinic-facade.png";
+import { appointmentContact, appointmentLinks } from '../../data/appointments';
+---
+<section class="hero" style={`--hero-photo: url("${facade.src}")`} aria-labelledby="hero-title"><div class="wrap hero-grid"><div class="hero-copy"><div class="eyebrow">Atención para toda la familia</div><h1 id="hero-title">Especialidades médicas<br>en <em>Las Rosas.</em></h1><p>Pediatría, ginecología, ecografías y otras especialidades, en un mismo lugar.</p><div class="hero-actions"><a class="button button-primary" href="/turnos/">Solicitar turno <span class="arrow" aria-hidden="true">→</span></a><a class="button button-text" href={appointmentLinks.phone} aria-label="Llamar a recepción">Llamar</a></div><div class="hero-info"><a href="#ubicacion"><span class="info-label">Dónde estamos</span>{appointmentContact.address} · {appointmentContact.city}</a><div><span class="info-label">Atención con turno programado</span>{appointmentContact.openingHours}</div></div></div></div></section>

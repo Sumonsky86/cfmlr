@@ -1,24 +1,13 @@
-import { siteConfig } from "@data/config";
-
-const videoId = "eruZqiTysJA";
-const pageUrl = new URL("/blog/doppler-embarazo-cuando-hacerlo/", siteConfig.siteUrl).toString();
-
-export const videoJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "VideoObject",
-  name: "Doppler obstétrico explicado por el Dr. Alfonso Alamo",
-  description: "El Dr. Alfonso Alamo detalla indicaciones, parámetros y cuidados del Doppler obstétrico en Cefem Las Rosas.",
-  thumbnailUrl: [`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`],
-  uploadDate: "2023-06-12",
-  contentUrl: `https://www.youtube.com/watch?v=${videoId}`,
-  embedUrl: `https://www.youtube-nocookie.com/embed/${videoId}`,
-  publisher: {
-    "@type": "Organization",
-    name: "Cefem – Centro Familiar de Especialidades Médicas",
-    url: siteConfig.siteUrl,
+/** Public medical-information sources; not a video attribution or a clinical-review record. */
+export const dopplerPregnancySources = [
+  {
+    id: 1,
+    title: 'ISUOG — Physics Principles of Doppler Ultrasound',
+    url: 'https://www.isuog.org/clinical-resources/patient-information-series/patient-information-pregnancy-conditions/early-pregnancy/physics-principles-of-doppler-ultrasound.html',
   },
-  potentialAction: {
-    "@type": "WatchAction",
-    target: pageUrl,
+  {
+    id: 2,
+    title: 'Gloucestershire Hospitals NHS — Doppler Scan',
+    url: 'https://www.gloshospitals.nhs.uk/your-visit/patient-information-leaflets/doppler-scan/',
   },
-};
+] as const;

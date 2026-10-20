@@ -1,0 +1,76 @@
+---
+import { publicInterviewGroups as groups } from '../../data/public-interviews';
+import { timelineItems } from '../../data/cronologia-entrevistas';
+const dateLabel = (value: string) => new Intl.DateTimeFormat('es-AR', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(value + 'T00:00:00Z'));
+const videos = new Map(groups.flatMap(group => group.items.map(video => [video.id, video] as const)));
+---
+<div class="interview-catalog wrap">
+  <nav class="interview-topics" aria-label="Explorar entrevistas por especialidad">
+    {groups.map(group => <a href={`#entrevistas-${group.id}`}>{group.label}<span>{group.items.length}</span></a>)}
+  </nav>
+  {groups.map(group => <section class="interview-group" aria-labelledby={`entrevistas-${group.id}`}>
+    <div class="interview-group-heading">
+      <h2 id={`entrevistas-${group.id}`}>{group.label}</h2>
+      <p>{group.doctor}</p>
+    </div>
+    <div class="interview-grid">
+      {group.items.map(video => <article class="interview-card">
+        <a class="interview-watch" data-video-id={video.id} data-video-title={video.title} data-interview-link href={video.url} target="_blank" rel="noopener noreferrer">
+          <div class="interview-thumbnail"><img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} width="480" height="360" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" /><span class="interview-play" aria-hidden="true">▶</span></div>
+          <div class="interview-caption"><h3>{video.title}</h3><span class="interview-action">Ver entrevista <span aria-hidden="true">↗</span></span></div>
+        </a>
+      </article>)}
+    </div>
+  </section>)}
+  <details class="interview-archive">
+    <summary>Archivo cronológico de entrevistas</summary>
+    <p class="archive-note">Se conservan las fechas y reseñas del sitio anterior. Sus fechas y asociaciones con los videos requieren revisión editorial; los títulos contrastados con YouTube están en el catálogo de arriba.</p>
+    <ol class="archive-list">
+      {timelineItems.map(item => {
+        const video = videos.get(item.id);
+        return <li>
+          <time datetime={item.date}>{dateLabel(item.date)}</time>
+          <h3>{item.title}</h3>
+          <ul>{item.points.map(point => <li>{point}</li>)}</ul>
+          {video && <a class="archive-watch" data-video-id={video.id} data-video-title={video.title} data-interview-link href={video.url} target="_blank" rel="noopener noreferrer">Video asociado en el archivo: {video.title} <span aria-hidden="true">↗</span></a>}
+        </li>;
+      })}
+    </ol>
+  </details>
+  <p class="interview-availability">La publicación de una entrevista no indica disponibilidad actual de turnos. Para consultar la atención, <a href="/contacto/">comunicate con recepción</a>.</p>
+</div>
+<style>
+  .interview-catalog { padding-bottom: 48px; }
+  .interview-topics { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
+  .interview-topics a { display: inline-flex; align-items: center; gap: 14px; min-height: 46px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 8px; color: var(--text); font-size: 14px; }
+  .interview-topics a:hover { border-color: var(--blue); color: var(--blue); }
+  .interview-topics span { color: var(--blue); font-size: 13px; font-weight: 600; }
+  .interview-group { padding-block: 32px 7px; }
+  .interview-group-heading { margin-bottom: 22px; }
+  .interview-group h2 { max-width: 780px; font-size: 34px; line-height: 1.2; scroll-margin-top: 120px; }
+  .interview-group-heading p { margin-top: 8px; font-size: 16px; color: var(--text); }
+  .interview-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .interview-card { min-width: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--paper); }
+  .interview-watch { display: flex; flex-direction: column; height: 100%; }
+  .interview-watch:hover h3 { color: var(--blue); }
+  .interview-thumbnail { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--soft); }
+  .interview-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+  .interview-play { position: absolute; left: 16px; bottom: 14px; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #fff; color: var(--blue); box-shadow: 0 2px 12px #172d4320; font-size: 16px; }
+  .interview-caption { flex: 1; display: flex; flex-direction: column; align-items: flex-start; padding: 19px 20px 16px; }
+  .interview-caption h3 { font-size: 17px; line-height: 1.5; margin-bottom: 10px; }
+  .interview-action { margin-top: auto; display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-size: 14px; font-weight: 600; color: var(--blue); }
+  .interview-archive { margin-top: 34px; padding: 12px 0; border-block: 1px solid var(--line); }
+  .interview-archive summary { min-height: 48px; padding: 10px 0; cursor: pointer; font-weight: 600; font-size: 16px; }
+  .interview-archive .archive-note { max-width: 800px; margin-block: 10px 24px; color: var(--text); font-size: 16px; }
+  .archive-list { padding: 0; margin: 0; list-style: none; }
+  .archive-list > li { padding: 22px 0; border-top: 1px solid var(--line); }
+  .archive-list time { color: var(--text); font-size: 14px; }
+  .archive-list h3 { margin-top: 6px; }
+  .archive-list ul { padding-left: 22px; margin-block: 12px; color: var(--text); font-size: 16px; }
+  .archive-watch { display: inline-block; min-height: 44px; padding-block: 8px; color: var(--blue); font-size: 16px; }
+  .archive-watch:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .interview-availability { max-width: 800px; margin-top: 25px; color: var(--text); font-size: 16px; }
+  .interview-availability a { color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+  @media (max-width: 1024px) { .interview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 650px) { .interview-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; } .interview-group h2 { font-size: 30px; } .interview-group { padding-top: 26px; } .interview-topics a { font-size: 14px; } .interview-catalog { padding-bottom: 32px; } }
+</style>

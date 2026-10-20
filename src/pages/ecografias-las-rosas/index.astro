@@ -1,17 +1,13 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import InnerHero from "@components/sections/InnerHero.astro";
-import CtaBanner from "@components/sections/CtaBanner.astro";
-import Faqs from "@components/sections/Faqs.astro";
+import Layout from "@layouts/ClinicalLayout.astro";
+import InnerHero from "@components/institutional/ClinicalIntro.astro";
+import CtaBanner from "@components/institutional/ClinicalCta.astro";
+import Faqs from "@components/institutional/ClinicalFaqs.astro";
 import type { FaqItem } from "@data/faqs";
-import heroImage from "../../assets/images/blog-hero-2.jpg";
 
 const heroContent = {
     title: "Ecografías en Las Rosas – Cefem",
     description: "Estudios ecográficos generales, obstétricos, doppler y ginecológicos con especialistas de Cefem – Centro Familiar de Especialidades Médicas.",
-    imageAlt: "Equipo médico realizando una ecografía en Cefem",
-    backgroundImage: heroImage,
-    overlayOpacity: 0.35,
 };
 
 const specializedServices = [
@@ -181,5 +177,5 @@ const ctaContent = {
         </div>
     </section>
 
-    <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+    <CtaBanner content={ctaContent} service="ultrasound" variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
 </Layout>

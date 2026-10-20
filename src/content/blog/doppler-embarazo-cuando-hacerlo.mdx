@@ -1,33 +1,52 @@
 ---
-title: "Doppler en embarazo: cuándo hacerlo y qué evaluar – Dr. Alfonso Alamo (Cefem)"
-excerpt: "Guía práctica del Dr. Alfonso Alamo sobre la ecografía Doppler en embarazo, indicaciones y preparación en Las Rosas."
+title: "Doppler en el embarazo: cuándo se indica y qué evalúa"
+excerpt: "Qué información aporta el Doppler obstétrico y qué conviene consultar sobre su indicación, preparación y resultados."
 publishDate: "2023-06-12"
 publish: true
 categories:
   - "Ginecología"
   - "Guías"
 seo:
-  title: "Cuándo realizar la ecografía Doppler en el embarazo | Cefem"
-  description: "El Dr. Alfonso Alamo (Cefem) detalla las semanas recomendadas y cuidados previos para el Doppler obstétrico en Las Rosas."
+  title: "Doppler en el embarazo: indicaciones y preparación | Cefem"
+  description: "Conocé para qué sirve el Doppler obstétrico, cómo se realiza y qué consultar con el equipo de salud antes del estudio."
 ---
 
-import YoutubeLite from "@components/YoutubeLite.astro";
-import { videoJsonLd } from "@data/doppler-embarazo";
+import { dopplerPregnancySources } from "@data/doppler-embarazo";
 
-<script type="application/ld+json" is:inline>{JSON.stringify(videoJsonLd)}</script>
+## ¿Qué información aporta el Doppler obstétrico?
 
-## Resumen de la entrevista
-- ¿En qué trimestre se indica el Doppler obstétrico?
-- Cómo interpretar los índices de pulsatilidad y resistencia.
-- Preparación previa y cuidados posteriores al estudio.
-- Coordinación con obstetricia, nutrición y pediatría de Cefem.
+La ecografía Doppler permite evaluar el flujo sanguíneo durante el embarazo, por ejemplo, en las arterias uterinas y en los vasos del cordón umbilical. Aporta información sobre la circulación que puede complementar la ecografía obstétrica convencional. <sup><a href="#fuente-1">[1]</a></sup>
 
-## Video de la entrevista
-<YoutubeLite id="eruZqiTysJA" title="Doppler en embarazo – Dr. Alfonso Alamo" />
+## ¿Cuándo puede indicarse?
+
+El equipo de obstetricia puede solicitarlo, entre otras situaciones, cuando existe una preocupación por el crecimiento del bebé o por el funcionamiento de la placenta. <sup><a href="#fuente-2">[2]</a></sup>
+
+La necesidad y el momento del estudio deben definirse en el control obstétrico, según los antecedentes y lo que se busca evaluar. No conviene tomar una semana de gestación como una indicación general para todos los embarazos. <sup><a href="#fuente-1">[1]</a></sup>
 
 ## Preguntas frecuentes
-**¿En qué semana se solicita el Doppler?** Habitualmente desde la semana 24, aunque el obstetra puede indicarlo antes según antecedentes.
 
-**¿Qué resultados recibe la paciente?** Se entrega informe con índices Doppler y recomendaciones para controles posteriores.
+### ¿Cómo se realiza?
 
-> Turnos en **Cefem – Centro Familiar de Especialidades Médicas (Las Rosas)** por WhatsApp.
+Puede realizarse durante una ecografía. En el estudio abdominal se aplica gel sobre la piel y se utiliza un transductor para evaluar el flujo en los vasos seleccionados. <sup><a href="#fuente-1">[1]</a></sup>
+
+### ¿Cómo me preparo?
+
+Al solicitar el turno, confirmá la preparación correspondiente al estudio indicado y qué documentación llevar. Si tenés una orden médica o informes previos, consultá si debés presentarlos. Seguí las indicaciones específicas del centro donde te realizarán el estudio.
+
+### ¿Cómo se interpretan los resultados?
+
+Revisá el informe con el profesional que acompaña tu embarazo. La información del Doppler debe valorarse junto con los demás datos clínicos y ecográficos, no de forma aislada. <sup><a href="#fuente-1">[1]</a></sup>
+
+> Este artículo brinda información general y no reemplaza la consulta ni las indicaciones del equipo de salud que acompaña tu embarazo.
+
+Para consultar disponibilidad en Cefem, podés [preparar una solicitud de turno](/turnos/?especialidad=ultrasound). Recepción confirma la disponibilidad y coordina la atención.
+
+## Fuentes de información
+
+<ol>
+  {dopplerPregnancySources.map((source) => (
+    <li id={`fuente-${source.id}`}>
+      <a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a>
+    </li>
+  ))}
+</ol>

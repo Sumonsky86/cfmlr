@@ -1,53 +1,37 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import InnerHero from "@components/sections/InnerHero.astro";
-import heroImage from "../../assets/images/blog-hero-2.jpg";
-
-const heroContent = {
-  title: "Mis Estudios Online",
-  description:
-    "Accedé a tus resultados y estudios realizados en Cefem directamente desde casa.",
-  backgroundImage: heroImage,
-  imageAlt: "Paciente revisando estudios médicos online",
-  overlayOpacity: 0.2,
-};
+import InstitutionalLayout from '../../layouts/InstitutionalLayout.astro';
+import PageIntro from '../../components/institutional/PageIntro.astro';
+import { appointmentLinks } from '../../data/appointments';
+// Keep the existing destination; authentication and files belong to the separate backend.
+const portalUrl = 'https://resultados.cefem.ar';
 ---
-
-<Layout
-  title="Consultar Estudios Médicos Online | Cefem Las Rosas"
-  description="Ingresá al portal de resultados de Cefem para descargar tus estudios médicos y compartirlos con tus especialistas."
->
-  <InnerHero content={heroContent} />
-
-  <section class="py-12 md:py-20 bg-background">
-    <div class="site-container mx-auto max-w-4xl space-y-8 px-4">
-      <div class="space-y-4 text-body-base">
-        <p>
-          Si realizaste un estudio en <strong>Cefem – Centro Familiar de Especialidades Médicas</strong>, podés acceder al informe digital iniciando sesión en el portal seguro de resultados.
-        </p>
-        <div class="rounded-2xl border border-primary/10 bg-white p-6 shadow-sm">
-          <h2 class="text-lg font-semibold text-primary">Ingresar al portal de estudios</h2>
-          <p class="mt-2 text-sm md:text-base text-body-base/80">
-            Recordá tener a mano tu documento y la contraseña entregada al finalizar el estudio. Si necesitás ayuda, comunicate con recepción.
-          </p>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <a
-              href="https://resultados.cefem.ar"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white shadow transition hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              Entrar al portal
-            </a>
-            <a
-              href="/contact"
-              class="inline-flex items-center justify-center rounded-full border border-primary px-5 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              Necesito ayuda
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</Layout>
+<InstitutionalLayout title="Consultar Estudios Médicos Online | Cefem Las Rosas" description="Ingresá al portal de resultados de Cefem para descargar tus estudios médicos y compartirlos con tus especialistas." canonicalUrl="/mis-estudios/">
+  <PageIntro title="Mis estudios" description="Accedé a tus resultados y estudios realizados en Cefem directamente desde casa." />
+  <div class="study-access wrap">
+    <section class="study-entry" aria-labelledby="study-entry-title">
+      <h2 id="study-entry-title">Ingresar al portal de estudios</h2>
+      <p>Si realizaste un estudio en <strong>Cefem – Centro Familiar de Especialidades Médicas</strong>, podés consultar el informe digital y las imágenes disponibles desde el portal de resultados.</p>
+      <p>Tené a mano los datos de acceso que te entregó recepción. El acceso a tus archivos se realiza dentro del portal, en una nueva pestaña.</p>
+      <a class="button button-primary portal-entry" href={portalUrl} target="_blank" rel="noopener noreferrer">Entrar al portal <span aria-hidden="true">↗</span></a>
+    </section>
+    <aside class="study-help" aria-labelledby="study-help-title">
+      <h2 id="study-help-title">¿Necesitás ayuda?</h2>
+      <p>Si no recibiste tus datos de acceso o tenés dificultades para ingresar, comunicate con recepción.</p>
+      <a class="button button-outline" href={appointmentLinks.whatsapp} target="_blank" rel="noopener noreferrer">Ayuda por WhatsApp <span aria-hidden="true">↗</span></a>
+      <a class="study-contact" href="/contacto/">Otros medios de contacto →</a>
+      <p class="study-privacy">Por privacidad, no incluyas tu clave de acceso en mensajes.</p>
+    </aside>
+  </div>
+</InstitutionalLayout>
+<style>
+  .study-access { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 32px; padding-bottom: 52px; }
+  .study-entry, .study-help { padding: 28px; border: 1px solid var(--line); border-radius: 12px; }
+  .study-help { background: var(--soft); }
+  .study-access h2 { font-size: 30px; line-height: 1.25; }
+  .study-access p { font-size: 16px; line-height: 1.75; color: var(--text); margin-top: 16px; }
+  .study-access .button { margin-top: 24px; gap: 12px; }
+  .study-contact { display: flex; align-items: center; min-height: 44px; margin-top: 12px; color: var(--blue); }
+  .study-contact:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .study-help .study-privacy { border-top: 1px solid var(--line); padding-top: 16px; }
+  @media (max-width: 767px) { .study-access { grid-template-columns: minmax(0,1fr); gap: 22px; padding-bottom: 34px; } .study-entry, .study-help { padding: 22px; } .study-access h2 { font-size: 28px; } }
+</style>

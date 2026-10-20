@@ -1,0 +1,29 @@
+---
+import { appointmentServices } from '@data/appointments';
+interface Props {
+  content: { eyebrow?: string; title: string; description?: string; button?: { text: string; link: string; target?: string; variant?: string; }; };
+  service?: (typeof appointmentServices)[number]['id'];
+  variant?: string; background?: string; paddingTop?: string; paddingBottom?: string;
+}
+const { content: { eyebrow, title, description, button }, service } = Astro.props;
+if (service && !appointmentServices.some(item => item.id === service)) throw new Error(`Especialidad no válida: ${service}`);
+const href = service ? `/turnos/?especialidad=${service}` : '/turnos/';
+---
+<section class="clinical-cta">
+  <div class="site-container">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h2>{title}</h2>
+    {description && <p>{description}</p>}
+    <div class="clinical-cta-actions">
+      <a class="button button-primary" href={href}>Solicitar turno</a>
+      {button && <a href={button.link} target={button.target || '_self'} rel={button.target === '_blank' ? 'noopener noreferrer' : undefined}>{button.text}</a>}
+    </div>
+  </div>
+</section>
+<style>
+  .clinical-cta { background: var(--soft); }
+  .clinical-cta h2, .clinical-cta p { max-width: 800px; }
+  .clinical-cta-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 20px; }
+  .clinical-cta-actions a { display: inline-flex; align-items: center; min-height: 48px; }
+  .eyebrow { color: var(--blue); font-weight: 600; letter-spacing: .08em; margin-bottom: 10px; }
+</style>

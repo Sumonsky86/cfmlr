@@ -1,5 +1,6 @@
 ---
 import { categories } from '@data/categories';
+import { categoryPath } from '../../utils/public-routes';
 
 interface Props {
   category: string;
@@ -10,6 +11,6 @@ const match = categories.find(c => c.name === category);
 const categorySlug = match?.slug ?? category.toLowerCase().replace(/\s+/g, '-');
 ---
 
-<a href={`/category/${categorySlug}`} class="px-2 py-1 text-sm rounded-sm bg-primary/10 text-primary border-primary border flex items-center justify-center leading-none font-medium hover:bg-primary/20">
+<a href={categoryPath(categorySlug)} class="px-2 py-1 text-sm rounded-sm bg-primary/10 text-primary border-primary border flex items-center justify-center leading-none font-medium hover:bg-primary/20">
   {category}
 </a>

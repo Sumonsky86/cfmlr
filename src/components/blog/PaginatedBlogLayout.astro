@@ -1,92 +1,99 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import InstitutionalLayout from '../../layouts/InstitutionalLayout.astro';
 import BlogList from './BlogList.astro';
-import InnerHero from '../sections/InnerHero.astro';
-import Button from '../ui/Button.astro';
-import { ChevronLeft, ChevronRight } from 'lucide-astro';
+import PageIntro from '../institutional/PageIntro.astro';
+import type { CollectionEntry } from 'astro:content';
 import { siteConfig } from '@data/config';
-
-import blogHeroImage from '@assets/images/blog-hero-2.jpg';
+import { paginationPath } from '../../utils/public-routes';
 
 interface Props {
-    posts: any[];
+    posts: CollectionEntry<'blog'>[];
     currentPage: number;
     totalPages: number;
-    baseUrl: string;    
+    canonicalUrl?: string;
+    baseUrl: string;
     title: string;
     subtitle: string;
     currentCategory?: string;
 }
 
-const { 
-    posts: paginatedPosts, 
-    currentPage, 
-    totalPages, 
+const {
+    posts: paginatedPosts,
+    currentPage,
+    totalPages,
     baseUrl,
+    canonicalUrl,
     title,
     subtitle,
-    currentCategory 
+    currentCategory,
 } = Astro.props;
 
 const seoTitle = `${title} | ${siteConfig.companyName}`;
 const seoDescription = subtitle;
-      
-const nextPage = currentPage < totalPages ? `${baseUrl}/${currentPage + 1}` : null;
-const prevPage = currentPage > 1 
-? currentPage - 1 === 1 
-? baseUrl
-: `${baseUrl}/${currentPage - 1}`
-: null;
 
-const heroContent = {
-    title: title,
-    description: subtitle,
-    backgroundImage: blogHeroImage,
-    overlayOpacity: 0.2,
-    imageAlt: "Hero image for blog section"
-}
+const nextPage = currentPage < totalPages ? paginationPath(baseUrl, currentPage + 1, Boolean(canonicalUrl)) : null;
+const prevPage = currentPage > 1 ? paginationPath(baseUrl, currentPage - 1, Boolean(canonicalUrl)) : null;
 ---
-<Layout title={seoTitle} description={seoDescription}>
-    <main>
-    <InnerHero content={heroContent}/>
-    <BlogList posts={paginatedPosts} currentCategory={currentCategory} />
 
-    {totalPages > 1 && (
-        <nav class="pagination-nav" aria-label="Blog pagination" data-aos="fade-in">
-            <div class="container mx-auto px-4 py-12">
-                <div class="flex items-center justify-center gap-6">
-                    {prevPage && (
-                        <Button href={prevPage} variant="primary" class="flex items-center gap-2">
-                            <ChevronLeft size={20} />
-                            Previous
-                        </Button>
-                    )}
-                    
-                    <div class="flex items-center gap-2">
-                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-                            <a
-                                href={pageNum === 1 ? baseUrl : `${baseUrl}/${pageNum}`}
-                                class={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
-                                    currentPage === pageNum
-                                        ? 'bg-primary text-white'
-                                        : 'hover:bg-white hover:text-body-base'
-                                }`}
-                                aria-current={currentPage === pageNum ? 'page' : undefined}
-                            >
-                                {pageNum}
-                            </a>
-                        ))}
-                    </div>
+<InstitutionalLayout title={seoTitle} description={seoDescription} {canonicalUrl}>
+    <PageIntro {title} description={subtitle} />
+    <BlogList posts={paginatedPosts} {currentCategory} />
 
-                    {nextPage && (
-                        <Button href={nextPage} variant="primary">
-                            Next
-                            <ChevronRight size={20} />
-                        </Button>
-                    )}
-                </div>
-            </div>
-        </nav>
-    )}
-    </main>
-</Layout> 
+    {
+        totalPages > 1 && (
+            <nav class="blog-pagination wrap" aria-label="Paginación del blog">
+                {prevPage && (
+                    <a href={prevPage} rel="prev">
+                        ← Anterior
+                    </a>
+                )}
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                    <a
+                        href={paginationPath(baseUrl, pageNum, Boolean(canonicalUrl))}
+                        aria-label={`Página ${pageNum}`}
+                        aria-current={currentPage === pageNum ? 'page' : undefined}
+                    >
+                        {pageNum}
+                    </a>
+                ))}
+
+                {nextPage && (
+                    <a href={nextPage} rel="next">
+                        Siguiente →
+                    </a>
+                )}
+            </nav>
+        )
+    }
+</InstitutionalLayout>
+<style>
+    .blog-pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 48px;
+        font-size: 16px;
+    }
+    .blog-pagination a {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 44px;
+        min-width: 44px;
+        padding: 8px 13px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        color: var(--blue);
+    }
+    .blog-pagination a:hover {
+        border-color: var(--blue);
+    }
+    .blog-pagination a[aria-current] {
+        background: var(--blue);
+        border-color: var(--blue);
+        color: var(--paper);
+    }
+</style>

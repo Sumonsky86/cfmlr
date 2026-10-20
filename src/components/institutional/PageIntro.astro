@@ -1,0 +1,19 @@
+---
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+---
+<section class="page-intro">
+  <div class="wrap">
+    <a class="back-link" href="/">← Inicio</a>
+    <h1>{title}</h1>
+    <p>{description}</p>
+  </div>
+</section>
+<style>
+  .page-intro { padding: 36px 0 38px; }
+  .back-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--text); font-size: 14px; }
+  .back-link:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+  .page-intro h1 { font-size: clamp(36px, 4vw, 52px); line-height: 1.12; margin-top: 9px; }
+  .page-intro p { max-width: 680px; margin-top: 16px; color: var(--text); font-size: 17px; line-height: 1.75; }
+  @media (max-width: 650px) { .page-intro { padding: 22px 0 28px; } .page-intro p { font-size: 16px; } }
+</style>

@@ -1,0 +1,45 @@
+---
+import { siteConfig } from '../../data/config';
+import { serializeJsonLd } from '../../utils/article-seo';
+
+interface Props {
+    title: string;
+    description: string;
+    publishDate: Date;
+    canonicalUrl: string;
+    image?: string;
+    breadcrumbs: { name: string; href: string }[];
+}
+const { title, description, publishDate, canonicalUrl, image, breadcrumbs } = Astro.props;
+const article = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    datePublished: publishDate.toISOString(),
+    url: canonicalUrl,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+    inLanguage: 'es-AR',
+    ...(image ? { image } : {}),
+    publisher: {
+        '@type': 'Organization',
+        name: siteConfig.companyName,
+        url: siteConfig.siteUrl,
+    },
+};
+// Keep content data inert inside the raw-text script element.
+const schemaJson = serializeJsonLd(article);
+const breadcrumbJson = serializeJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((crumb, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: crumb.name,
+        item: new URL(crumb.href, siteConfig.siteUrl).href,
+    })),
+});
+---
+<meta property="article:published_time" content={publishDate.toISOString()} />
+<script is:inline type="application/ld+json" set:html={schemaJson}></script>
+<script is:inline type="application/ld+json" set:html={breadcrumbJson}></script>

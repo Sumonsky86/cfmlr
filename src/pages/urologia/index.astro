@@ -1,0 +1,6 @@
+---
+import AdditionalServicePage from '../../components/institutional/AdditionalServicePage.astro';
+import { additionalServices } from '../../data/additional-services';
+const service = additionalServices.find(service => service.slug === 'urologia')!;
+---
+<AdditionalServicePage service={service} />

@@ -1,0 +1,50 @@
+---
+import { appointmentLinks } from '../../data/appointments';
+import whatsappLogo from '../../assets/institutional/whatsapp-logo.png';
+---
+<div class="whatsapp-widget"><div id="whatsappPrompt" class="whatsapp-toast" aria-live="polite" hidden><span>¿Necesitás un turno? Escribinos.</span><button id="whatsapp-dismiss" class="toast-close" type="button" aria-label="Cerrar aviso de WhatsApp">×</button></div><a id="whatsappCta" class="whatsapp-button" href={appointmentLinks.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp"><span class="sr-only">Contactar por WhatsApp</span><img src={whatsappLogo.src} width="56" height="56" alt="" aria-hidden="true" decoding="async" /></a></div>
+
+<script is:inline>
+const prompt=document.querySelector('#whatsappPrompt');
+const whatsapp=document.querySelector('#whatsappCta');
+const dismiss=document.querySelector('#whatsapp-dismiss');
+let promptShown=false;
+let promptDismissed=false;
+function showWhatsappPrompt(){
+  if(promptShown||promptDismissed)return;
+  promptShown=true;
+  prompt.hidden=false;
+}
+const promptTimer=setTimeout(showWhatsappPrompt,8000);
+function checkPromptScroll(){
+  const distance=document.documentElement.scrollHeight-window.innerHeight;
+  if(distance>0&&window.scrollY/distance>=0.4){showWhatsappPrompt();window.removeEventListener('scroll',checkPromptScroll);}
+}
+window.addEventListener('scroll',checkPromptScroll,{passive:true});
+whatsapp.addEventListener('focus',showWhatsappPrompt);
+whatsapp.addEventListener('mouseenter',showWhatsappPrompt,{once:true});
+dismiss.addEventListener('click',()=>{
+  const focusWasInside=prompt.contains(document.activeElement);
+  promptDismissed=true;
+  prompt.hidden=true;
+  clearTimeout(promptTimer);
+  window.removeEventListener('scroll',checkPromptScroll);
+  if(focusWasInside)whatsapp.focus();
+});
+</script>
+<style>
+  .whatsapp-widget .whatsapp-button,
+  .whatsapp-widget .whatsapp-button:hover {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    filter: drop-shadow(0 3px 5px #173c2b33);
+  }
+  .whatsapp-button img { display: block; width: 100%; height: 100%; object-fit: contain; transition: filter .18s ease; }
+  @media (hover: hover) {
+    .whatsapp-widget .whatsapp-button:hover img { filter: brightness(.82); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .whatsapp-button img { transition: none; }
+  }
+</style>

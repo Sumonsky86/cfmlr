@@ -1,0 +1,45 @@
+---
+import InstitutionalLayout from '../../layouts/InstitutionalLayout.astro';
+import PageIntro from './PageIntro.astro';
+import { appointmentLinks } from '../../data/appointments';
+import type { additionalServices } from '../../data/additional-services';
+interface Props { service: (typeof additionalServices)[number]; }
+const { service } = Astro.props;
+const appointmentUrl = `/turnos/?especialidad=${service.appointmentId}`;
+---
+<InstitutionalLayout title={`${service.title} en Las Rosas | Cefem`} description={service.description} canonicalUrl={`/${service.slug}/`}>
+  <PageIntro title={service.title} description={service.description} />
+  <section class="additional-service wrap" aria-labelledby="service-information-title">
+    <div class="service-information">
+      <h2 id="service-information-title">Consultas y disponibilidad</h2>
+      <p>Para conocer los profesionales, días de atención y cobertura de esta especialidad, comunicate con recepción.</p>
+      <a class="service-information-link" href="/contacto/">Ver horarios y medios de contacto →</a>
+      <h2 class="service-request-title">Cómo solicitar tu consulta</h2>
+      <ol>
+        <li>Prepará la solicitud con tus datos de contacto.</li>
+        <li>Revisá el mensaje que se abre en WhatsApp y envialo.</li>
+        <li>Recepción confirma la disponibilidad y coordina el turno.</li>
+      </ol>
+      <a class="service-information-link" href="/especialidades/">← Ver todas las especialidades</a>
+    </div>
+    <aside class="service-appointment" aria-labelledby="service-appointment-title">
+      <h2 id="service-appointment-title">Solicitar turno</h2>
+      <p>El formulario tendrá seleccionada esta especialidad. Preparar la solicitud no confirma una reserva.</p>
+      <a class="button button-primary" href={appointmentUrl}>Preparar solicitud</a>
+      <a class="button button-outline" href={appointmentLinks.whatsapp} target="_blank" rel="noopener noreferrer">Consultar por WhatsApp</a>
+    </aside>
+  </section>
+</InstitutionalLayout>
+<style>
+  .additional-service { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 40px; padding-bottom: 48px; }
+  .additional-service h2 { font-size: 30px; line-height: 1.25; }
+  .additional-service p { color: var(--text); font-size: 16px; line-height: 1.8; margin-top: 16px; }
+  .service-information .service-request-title { margin-top: 30px; }
+  .service-information ol { list-style: decimal; margin-block: 18px; padding-left: 1.4em; color: var(--text); font-size: 16px; }
+  .service-information li { margin-block: 12px; }
+  .service-information-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 12px; color: var(--blue); }
+  .service-information-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .service-appointment { align-self: start; padding: 26px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+  .service-appointment .button { display: flex; margin-top: 16px; }
+  @media (max-width: 767px) { .additional-service { grid-template-columns: minmax(0,1fr); gap: 28px; padding-bottom: 34px; } .additional-service h2 { font-size: 28px; } .service-appointment { padding: 22px; } }
+</style>

@@ -6,6 +6,10 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 
 const site = 'https://www.cefem.ar/';
+const sitemapExcludedPaths = new Set([
+  '/404', '/404.html', '/prensa-entrevistas', '/contact', '/privacy-policy',
+  '/legal/privacy-policy', '/legal/terms-of-service',
+]);
 
 export default defineConfig({
   site,
@@ -35,12 +39,13 @@ export default defineConfig({
   integrations: [sitemap({
     changefreq: 'weekly',
     priority: 0.7,
-    lastmod: new Date(),
-    filter: (page) => !page.includes('/404')
-      && !page.includes('/prensa-entrevistas')
-      && !page.includes('/components')
-      && !page.includes('/theme-info')
-      && page !== '/privacy-policy/',
+    // A build is not evidence that every medical article was modified.
+    filter: (page) => {
+      const pathname = new URL(page, site).pathname.replace(/\/$/, '');
+      return !sitemapExcludedPaths.has(pathname)
+        && !/^\/(?:components|theme-info|category|api|auth)(?:\/|$)/.test(pathname)
+        && !pathname.startsWith('/mis-estudios/');
+    },
     entryLimit: 10000,
   }), mdx()],
   image: {

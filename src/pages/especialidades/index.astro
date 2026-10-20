@@ -1,52 +1,25 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import InnerHero from "@components/sections/InnerHero.astro";
-import Features from "@components/sections/Features.astro";
-import CtaBanner from "@components/sections/CtaBanner.astro";
-import { featureLists } from "@data/features";
-import heroImage from "../../assets/images/blog-hero-2.jpg";
-
-const heroContent = {
-    title: "Nuestras Especialidades",
-    description: "En Cefem, hemos reunido a un equipo de profesionales en diversas áreas para brindarte un cuidado integral y coordinado sin que tengas que desplazarte.",
-    imageAlt: "Equipo médico de Cefem", 
-    backgroundImage: heroImage,
-    overlayOpacity: 0.2 
-}
-
-const featuresSection = {
-  
-    features: featureLists.main.features,
-}
-
-const mainCta = {
-    title: "Agenda tu consulta",
-    description: "Contactate con nosotros por WhatsApp para solicitar un turno con el especialista que necesites.",
-    button: {
-        text: "Escribinos por WhatsApp",
-        link: "https://wa.me/5493471341461",
-        variant: "primary" as const,
-        target: "_blank" as const
-    }
-};
+import InstitutionalLayout from '../../layouts/InstitutionalLayout.astro';
+import PageIntro from '../../components/institutional/PageIntro.astro';
+import Services from '../../components/institutional/Services.astro';
+import { appointmentLinks } from '../../data/appointments';
 ---
-
-<Layout 
-    title="Pediatría, Ginecología, Traumatología y Más en Las Rosas | Cefem" 
-    description="Encontrá pediatras, ginecólogos, traumatólogos y más especialistas en Las Rosas, Santa Fe. Ofrecemos atención en clínica médica, nutrición y control de niño sano. Solicitá tu consulta."
-    footerCta={{
-        title: "",
-        description: "",
-        hideCta: true,
-        button: {
-            text: "",
-            link: "#"
-        }
-    }}
->
-    <InnerHero content={heroContent} />
-    <div class="py-12 md:py-20">
-        <Features content={featuresSection} />
-    </div>
-    <CtaBanner content={mainCta} variant="contained" background="light" paddingTop="base" paddingBottom="base" />
-</Layout>
+<InstitutionalLayout title="Pediatría, Ginecología, Traumatología y Más en Las Rosas | Cefem" description="Encontrá pediatras, ginecólogos, traumatólogos y más especialistas en Las Rosas, Santa Fe. Ofrecemos atención en clínica médica, nutrición y control de niño sano. Solicitá tu consulta." canonicalUrl="/especialidades/">
+  <PageIntro title="Nuestras especialidades" description="En Cefem, hemos reunido a un equipo de profesionales en diversas áreas para brindarte un cuidado integral y coordinado sin que tengas que desplazarte." />
+  <div class="specialty-catalog"><Services showHeading={false} /></div>
+  <section class="specialty-contact wrap" aria-labelledby="specialty-contact-title">
+    <div><h2 id="specialty-contact-title">Agendá tu consulta</h2><p>Contactate con nosotros por WhatsApp para solicitar un turno con el especialista que necesites.</p></div>
+    <div class="specialty-actions"><a class="button button-primary" href="/turnos/">Solicitar turno</a><a class="button button-outline" href={appointmentLinks.whatsapp} target="_blank" rel="noopener noreferrer">Escribinos por WhatsApp</a></div>
+  </section>
+</InstitutionalLayout>
+<style>
+  .specialty-catalog :global(.services) { padding-top: 0; padding-bottom: 28px; }
+  .specialty-catalog :global(.service h2) { font-family: var(--sans); font-size: 19px; font-weight: 600; line-height: 1.4; letter-spacing: -.025em; }
+  .specialty-catalog :global(.service h2 a) { display: flex; justify-content: space-between; align-items: center; gap: 18px; min-height: 44px; }
+  .specialty-catalog :global(.service h2 a:hover) { color: var(--blue); }
+  .specialty-contact { padding-block: 28px 48px; border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 32px; }
+  .specialty-contact h2 { font-size: 32px; line-height: 1.25; }
+  .specialty-contact p { max-width: 620px; margin-top: 12px; color: var(--text); font-size: 16px; }
+  .specialty-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  @media (max-width: 900px) { .specialty-contact { grid-template-columns: minmax(0,1fr); gap: 22px; } }
+</style>

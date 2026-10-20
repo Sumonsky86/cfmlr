@@ -1,0 +1,6 @@
+---
+import PageIntro from './PageIntro.astro';
+interface Props { content: { title: string; description: string; }; }
+const { content } = Astro.props;
+---
+<PageIntro title={content.title} description={content.description} />

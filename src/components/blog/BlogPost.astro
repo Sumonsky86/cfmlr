@@ -1,81 +1,145 @@
 ---
 import { categories } from '../../data/categories';
-import HashtagCategory from '../ui/HashtagCategory.astro';
-import Date from '../ui/Date.astro';
+import { categoryPath } from '../../utils/public-routes';
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
     title: string;
     excerpt: string;
-    featuredImage: any;   
+    featuredImage?: { src: ImageMetadata; alt: string } | '';
     publishDate: Date;
     categories: string[];
     slug?: string;
-    index: number;
+    index?: number;
+    headingLevel?: 'h2' | 'h3';
 }
 
-const { title, excerpt, featuredImage, publishDate, categories: postCategories, slug, index } = Astro.props;
-const resolvedSlug = slug ?? '';
-
-  
-const validCategories = postCategories.filter((categoryName: string) =>
-    categories.some((category) => category.name === categoryName),
-);
+const {
+    title,
+    excerpt,
+    featuredImage,
+    publishDate,
+    categories: postCategories,
+    slug = '',
+    headingLevel: Heading = 'h2',
+} = Astro.props;
+const href = `/blog/${slug}`;
+const validCategories = postCategories
+    .map((name) => categories.find((category) => category.name === name))
+    .filter((category) => category !== undefined);
+const formattedDate = publishDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<a
-    href={`/blog/${resolvedSlug}`}
-    class="group flex flex-col h-full overflow-hidden bg-white rounded-lg border border-black transition-all duration-300 hover:border-primary"
-    data-aos="fade-up"
-    data-aos-delay={index * 100}
->
-    <div
-        class="relative aspect-[16/9] overflow-hidden border-black border-b group-hover:border-primary transition-colors duration-300"
-    >
-        {
-            featuredImage && (
-                <Image
-                    src={featuredImage.src}
-                    alt={featuredImage.alt}
-                    width={600}
-                    height={338}
-                    class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                />
-            )
+<article class="blog-card">
+    {
+        featuredImage && (
+            <a class="blog-card-image" href={href} aria-label={`Leer: ${title}`}>
+                <Image src={featuredImage.src} alt={featuredImage.alt} width={600} height={338} loading="lazy" />
+            </a>
+        )
+    }
+    <div class="blog-card-body">
+        <time datetime={publishDate.toISOString()}>{formattedDate}</time>
+        <Heading class="blog-card-title"><a {href}>{title}</a></Heading>
+        <p class="blog-card-excerpt">{excerpt}</p>
+        <div class="blog-card-topics" aria-label="Temas del artículo">
+            {validCategories.map((category) => <a href={categoryPath(category.slug)}>{category.name}</a>)}
+        </div>
+        <a class="blog-card-read" {href} aria-label={`Leer artículo: ${title}`}>Leer artículo →</a>
+    </div>
+</article>
+<style>
+    .blog-card {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        height: 100%;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--paper);
+        font-family: var(--sans);
+        font-size: 16px;
+    }
+    .blog-card-image {
+        display: block;
+        border-radius: 9px 9px 0 0;
+        overflow: hidden;
+    }
+    .blog-card-image img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+    }
+    .blog-card-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 22px;
+    }
+    .blog-card time {
+        color: var(--text);
+        font-size: 16px;
+    }
+    .blog-card .blog-card-title {
+        font-family: var(--serif);
+        font-size: 27px;
+        font-weight: 400;
+        letter-spacing: -0.025em;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+    }
+    .blog-card h3.blog-card-title {
+        font-family: var(--sans);
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+    .blog-card-title a:hover {
+        color: var(--blue);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+    .blog-card-excerpt {
+        font-size: 16px;
+        line-height: 1.75;
+        color: var(--text);
+    }
+    .blog-card-topics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 14px;
+        margin-top: auto;
+    }
+    .blog-card-topics a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--blue);
+        font-size: 16px;
+    }
+    .blog-card-read {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--blue);
+        font-weight: 600;
+    }
+    .blog-card-topics a:hover,
+    .blog-card-read:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+    .blog-card a:focus-visible {
+        outline: 3px solid var(--blue);
+        outline-offset: 4px;
+    }
+    @media (max-width: 650px) {
+        .blog-card-body {
+            padding: 20px;
         }
-        <div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-    </div>
-
-    <div class="py-4 px-4 flex flex-col flex-grow relative">
-        {/* Date at the top */}
-        <div class="text-sm text-gray-600 mb-3 group-hover:text-primary/80 transition-colors duration-300">
-            <Date date={publishDate} />
-        </div>
-
-        <h2 class="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300">
-            {title}
-        </h2>
-
-        <p
-            class="mt-2 mb-8 text-body-base line-clamp-4 flex-grow text-small group-hover:text-gray-700 transition-colors duration-300"
-        >
-            {excerpt}
-        </p>
-
-        {/* Categories as hashtags at the bottom */}
-        <div class="absolute bottom-4 left-4 flex flex-wrap">
-            {
-                validCategories.map((categoryName) => (
-                    <div class="category-tag">
-                        <HashtagCategory category={categoryName} />
-                    </div>
-                ))
-            }
-        </div>
-    </div>
-</a>
-<script>
-    document
-        .querySelectorAll('div.category-tag')
-        .forEach((e) => e.addEventListener('click', (event) => event.stopPropagation()));
-</script>
+    }
+</style>

@@ -1,50 +1,27 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import InstitutionalLayout from '../../layouts/InstitutionalLayout.astro';
+import PageIntro from '../../components/institutional/PageIntro.astro';
 import { getCollection } from 'astro:content';
-import InnerHero from '../../components/sections/InnerHero.astro';
-
-const legalEntries = await getCollection('legal');
-
- 
-const sortedEntries = legalEntries.sort((a, b) => a.data.title.localeCompare(b.data.title));
-
- 
-const heroContent = {
-    title: 'Legal Information',
-    description: 'Important policies and terms governing the use of our services',
-    imageAlt: 'Documentos legales de Cefem',
-    overlayOpacity: 0.8,
-};
+import { legalPath } from '../../utils/public-routes';
+const entries = (await getCollection('legal')).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const dateLabel = (date: Date) => new Intl.DateTimeFormat('es-AR', { dateStyle: 'long', timeZone: 'UTC' }).format(date);
 ---
-
-<Layout title="Legal Information">
-    <InnerHero content={heroContent} />
-
-    <section class="py-small">
-        <div class="site-container px-8">
-            <div class="space-y-6">
-                {
-                    sortedEntries.map((entry) => {
-         
-                        const formattedDate = new Intl.DateTimeFormat('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                        }).format(entry.data.lastUpdated);
-
-                        return (
-                            <div class="border-b border-body-base/10 pb-6">
-                                <a href={`/legal/${entry.slug}`} class="group">
-                                    <h2 class="text-medium group-hover:text-accent transition-colors">
-                                        {entry.data.title}
-                                    </h2>
-                                    <p class="text-sm text-body-base/80 mt-2">Last updated: {formattedDate}</p>
-                                </a>
-                            </div>
-                        );
-                    })
-                }
-            </div>
-        </div>
-    </section>
-</Layout>
+<InstitutionalLayout title="Información legal | Cefem" description="Consultá la política de privacidad y los términos y condiciones del sitio de Cefem." canonicalUrl="/legal/">
+  <PageIntro title="Información legal" description="Políticas y condiciones de uso de nuestro sitio y sus servicios." />
+  <section class="legal-index wrap" aria-label="Documentos legales">
+    <div class="legal-list">{entries.map(entry => <a class="legal-document-link" href={legalPath(entry.slug)}>
+      <h2>{entry.data.title}<span aria-hidden="true">→</span></h2>
+      <p>Última actualización: <time datetime={entry.data.lastUpdated.toISOString()}>{dateLabel(entry.data.lastUpdated)}</time></p>
+    </a>)}</div>
+  </section>
+</InstitutionalLayout>
+<style>
+  .legal-index { padding-bottom: 48px; }
+  .legal-list { max-width: 780px; }
+  .legal-document-link { display: block; padding-block: 24px; border-top: 1px solid var(--line); }
+  .legal-document-link:last-child { border-bottom: 1px solid var(--line); }
+  .legal-document-link h2 { display: flex; align-items: center; justify-content: space-between; gap: 22px; font-size: 28px; line-height: 1.3; }
+  .legal-document-link:hover h2 { color: var(--blue); }
+  .legal-document-link span { color: var(--blue); font-family: var(--sans); font-size: 20px; }
+  .legal-document-link p { color: var(--text); margin-top: 12px; font-size: 16px; }
+</style>

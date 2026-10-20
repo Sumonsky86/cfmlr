@@ -1,0 +1,45 @@
+---
+interface Props { categories: string[]; }
+const { categories } = Astro.props;
+// Explicit public destinations, not inferred slugs or appointment promises.
+const specialtyPages: Record<string, string> = {
+    'Urología': '/urologia/',
+    'Pediatría': '/pediatria/',
+    'Ginecología': '/ginecologia/',
+    'Nutrición': '/nutricion/',
+};
+const links = categories.filter((category) => specialtyPages[category]);
+---
+{links.length > 0 && (
+    <aside class="article-context" aria-label="Especialidades relacionadas">
+        <p>Especialidades relacionadas</p>
+        <ul>
+            {links.map((name) => <li><a href={specialtyPages[name]}>Información de {name}</a></li>)}
+        </ul>
+    </aside>
+)}
+<style>
+    .article-context {
+        margin-top: 32px;
+        padding-block: 20px;
+        border-block: 1px solid var(--line);
+        font-size: 16px;
+    }
+    .article-context p { font-weight: 600; }
+    .article-context ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 24px;
+        margin: 8px 0 0;
+        padding: 0;
+        list-style: none;
+    }
+    .article-context a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--blue);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+</style>

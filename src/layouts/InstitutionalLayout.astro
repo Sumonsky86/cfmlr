@@ -1,0 +1,62 @@
+---
+import '../styles/institutional.css';
+import { institutionalSchema } from '../data/institutional-identity';
+import Header from '../components/institutional/Header.astro';
+import Footer from '../components/institutional/Footer.astro';
+import WhatsApp from '../components/institutional/WhatsApp.astro';
+import { SEO, siteConfig } from '../data/config';
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalUrl?: string;
+  ogType?: 'website' | 'article';
+  robots?: 'index, follow' | 'noindex, follow';
+}
+const { title = SEO.SiteName, description = SEO.defaultDescription, image, canonicalUrl = Astro.url.pathname, ogType = 'website', robots = 'index, follow' } = Astro.props;
+const normalizedSiteName = SEO.SiteName || siteConfig.companyName;
+const baseTitle = title || '';
+const shouldAppendSiteName = baseTitle
+  ? !baseTitle.toLowerCase().includes('cefem') && !baseTitle.toLowerCase().includes(normalizedSiteName.toLowerCase())
+  : false;
+const pageTitle = baseTitle
+  ? shouldAppendSiteName
+    ? `${baseTitle} ${SEO.Separator} ${normalizedSiteName}`
+    : baseTitle
+  : normalizedSiteName;
+const canonical = new URL(canonicalUrl, siteConfig.siteUrl).href;
+const socialImage = image ? new URL(image, siteConfig.siteUrl).href : undefined;
+---
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content={siteConfig.companyName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    <script type="application/ld+json" set:html={JSON.stringify(institutionalSchema).replace(/</g, '\\u003c')} />
+    <slot name="head" />
+  </head>
+  <body class="institutional-surface">
+    <a class="skip" href="#main-content">Saltar al contenido principal</a>
+    <Header />
+    <main id="main-content"><slot /></main>
+    <Footer />
+    <WhatsApp />
+    <slot name="overlays" />
+  </body>
+</html>

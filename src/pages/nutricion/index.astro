@@ -1,17 +1,13 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import InnerHero from "@components/sections/InnerHero.astro";
-import CtaBanner from "@components/sections/CtaBanner.astro";
-import Faqs from "@components/sections/Faqs.astro";
+import Layout from "@layouts/ClinicalLayout.astro";
+import InnerHero from "@components/institutional/ClinicalIntro.astro";
+import CtaBanner from "@components/institutional/ClinicalCta.astro";
+import Faqs from "@components/institutional/ClinicalFaqs.astro";
 import type { FaqItem } from "@data/faqs";
-import heroImage from "../../assets/images/blog-hero-2.jpg";
 
 const heroContent = {
     title: "Nutrición y hábitos saludables en Las Rosas",
     description: "Planes personalizados para todas las etapas de la vida: control de peso, patologías crónicas y nutrición en el embarazo.",
-    imageAlt: "Consulta de nutrición en Cefem Las Rosas",
-    backgroundImage: heroImage,
-    overlayOpacity: 0.35,
 };
 
 const nutritionApproach = [
@@ -117,5 +113,5 @@ const ctaContent = {
         paddingBottom="large"
     />
 
-    <CtaBanner content={ctaContent} variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
+    <CtaBanner content={ctaContent} service="nutrition" variant="contained" background="dark" paddingTop="large" paddingBottom="large" />
 </Layout>
